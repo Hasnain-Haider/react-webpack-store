@@ -5,6 +5,7 @@ import MuiThemeProvider  from 'material-ui';
 import { Row, Col, Button, Paper, TextField, Divider } from 'react-bootstrap';
 // Styles
 import Head from './head.jsx';
+
 export default class Home extends React.Component {
 
   constructor(props) {

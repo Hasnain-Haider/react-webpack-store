@@ -4,11 +4,9 @@
   "description": "My project!",
   "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bundler": "webpack webpack.production.config.js && nodemon app/server.js",
     "webserver": "nodemon api/server.js --ignore 'folder1 '",
     "dev-server": "nodemon api/server.js",
-    "dev-web": "node_modules/.bin/webpack-dev-server --inline --progress --watch",
+    "dev-web": "node_modules/.bin/webpack-dev-server --inline --progress --hot --watch",
     "build": "node_modules/.bin/webpack"
   },
   "keywords": [
@@ -51,6 +49,12 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.4",
+    "eslint": "^4.4.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-react": "^7.1.0",
     "node-sass": "^4.5.3",
     "react-hot-loader": "^3.0.0-beta.7",
     "sass-loader": "^6.0.6",

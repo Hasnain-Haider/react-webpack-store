@@ -1,0 +1,4 @@
+node_modules
+docs
+e2e-tests/build
+app/public/build/
