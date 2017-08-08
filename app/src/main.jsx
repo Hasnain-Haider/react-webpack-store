@@ -1,18 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, IndexRoute } from 'react-router-dom'
-import config from 'config';
+// import config from 'config';
 
-import App from './app.jsx';
+import App from './app';
 
-// import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-// injectTapEventPlugin();
+injectTapEventPlugin();
 
   ReactDOM.render(
-
-    <Router >
-
-      <App></App>
-    </Router>,
+      <App />,
      document.getElementById('app'));

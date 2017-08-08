@@ -5,6 +5,7 @@
   "main": "entry.js",
   "scripts": {
     "webserver": "nodemon api/server.js --ignore 'folder1 '",
+    "webpack-watch": "./node_modules/.bin/webpack --watch",
     "dev-server": "nodemon api/server.js",
     "dev-web": "node_modules/.bin/webpack-dev-server --inline --progress --hot --watch",
     "build": "node_modules/.bin/webpack"

@@ -27,9 +27,6 @@ module.exports = {
       exclude: [/node_modules/, buildPath],
       include: path.resolve(ROOT_PATH, 'app'),
       loader: 'babel-loader'
-    }, {
-      test: /.scss/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
     },
     {
       test: /.json$/,
@@ -37,7 +34,6 @@ module.exports = {
     }]
   },
   devServer: {
-    historyApiFallback: true,
     hot: true,
     host: config.app.host,
     port: config.app.port

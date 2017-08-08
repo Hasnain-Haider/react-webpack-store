@@ -1,24 +1,27 @@
-import React from 'react';
-import { Router, Route } from 'react-router';
-import {MuiThemeProvider, Drawer, Paper, TextField, Divider }  from 'material-ui';
-import { Row, Col} from 'react-bootstrap';
-export default class App extends React.Component {
-
+import React, { Component } from 'react';
+import { Drawer, MenuItem }  from 'material-ui';
+import { Row, Col } from 'react-bootstrap';
+import Auth from './auth';
+export default class SideBar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      open: props.open
+    }
   }
-  componentWillMount(){
 
-  }
+componentWillReceiveProps() {}
+
   render() {
     return (
       <Drawer
-        width={210}
-        docked={true}
-        >
-
+        {...this.props}
+        open={this.props.open}
+        width={ 210 }
+        docked={ true }
+      >
+        <MenuItem onTouchTap={ this.props.onRequestChange } primaryText={"Login/Logout!"} />
       </Drawer>
-
     );
-  };
+  }
 }
