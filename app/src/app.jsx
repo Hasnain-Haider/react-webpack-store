@@ -1,10 +1,11 @@
 // Modules
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import history from '../lib/history';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from 'material-ui';
-import Home from './home';
-import SignUp from './signup';
+
+import history from '../lib/history';
+import Home from './screens/home';
+import SignUp from './screens/signup';
 // Styles
 
 export default class App extends React.Component {
@@ -19,11 +20,14 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <Router history={ history }>
+    <MuiThemeProvider>
+      <Router history={ history }>
+        <Switch>
           <Route exact path='/' component={ Home } />
           <Route path='/signup' component={ SignUp }/>
-        </Router>
+          <Route path='/monkeys' />
+        </Switch>
+      </Router>
     </MuiThemeProvider>
     );
   }

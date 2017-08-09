@@ -20,14 +20,6 @@ export default class Head extends Component {
     }
   }
 
-  toggleDrawer() {
-    this.setState( (prevState, props) => {
-        return {
-          drawerOpen: !prevState.drawerOpen
-        }
-      }
-    );
-  }
 
   renderIconMenu() {
     return(
@@ -41,17 +33,10 @@ export default class Head extends Component {
 
   render() {
     return (
-      <div id="app-bar">
         <AppBar
-          title="Best-Store"
+          {...this.props}
           iconElementRight={ this.renderIconMenu() }
-          onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
         />
-      <SideBar
-        onRequestChange={ this.toggleDrawer.bind(this) }
-        open={ this.state.drawerOpen }
-      />
-      </div>
     );
   }
 }

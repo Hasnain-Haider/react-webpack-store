@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Drawer, MenuItem }  from 'material-ui';
+import { Link } from 'react-router-dom';
+import history from '../../lib/history';
+
 import { Row, Col } from 'react-bootstrap';
-import Auth from './auth';
 export default class SideBar extends Component {
   constructor(props) {
     super(props)
@@ -10,17 +12,16 @@ export default class SideBar extends Component {
     }
   }
 
-componentWillReceiveProps() {}
-
   render() {
     return (
       <Drawer
         {...this.props}
-        open={this.props.open}
         width={ 210 }
         docked={ true }
       >
-        <MenuItem onTouchTap={ this.props.onRequestChange } primaryText={"Login/Logout!"} />
+        <Link to='/signup'>
+          <MenuItem primaryText='SignUp!'/>
+        </Link>
       </Drawer>
     );
   }
