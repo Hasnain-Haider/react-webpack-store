@@ -6,5 +6,8 @@
   "app": {
     "host": "localhost",
     "port": 4500
+  },
+  "db": {
+    "url": "mongodb://localhost/react-store"
   }
 }
