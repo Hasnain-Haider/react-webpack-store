@@ -1,4 +1,5 @@
 // Modules
+import config from 'config';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from 'material-ui';
@@ -6,7 +7,7 @@ import { MuiThemeProvider } from 'material-ui';
 import history from '../lib/history';
 import Home from './screens/home';
 import SignUp from './screens/signup';
-// Styles
+import Login from './screens/login';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class App extends React.Component {
           <Switch>
             <Route exact path={ '/' } component={ Home } />
             <Route path={ '/signup' } component={ SignUp } />
-            <Route path={ '/monkeys' } />
+            <Route path={ '/login' } component={ Login } />
           </Switch>
         </Router>
       </MuiThemeProvider>

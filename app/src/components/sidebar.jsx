@@ -8,28 +8,30 @@ import { Row, Col } from 'react-bootstrap';
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    console.log('SideBar mounted with', props);
+
     this.state = {
       open: props.open
     };
   }
 
   componentDidMount() {
-    // console.log('SideBar props!', console.log(this.props));
-    console.log('SideBar state!', console.log(this.state));
+    console.log('SideBar state!', this.state);
+    console.log('SideBar props!    <', this.props, '>');
   }
 
   render() {
-    console.log('SideBar props!    <', console.log(this.props), '>');
     return (
       <Drawer
         { ...this.props }
-
         width={ 210 }
         docked={ false }
       >
-        <Link to="/signup">
-          <MenuItem primaryText="SignUp!" onTouchTap={ this.props.onRequestChange } />
+        <Link to={ "/signup" }>
+          <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
+        </Link>
+        <Divider />
+        <Link to={ "login" }>
+          <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
         </Link>
       </Drawer>
     );
