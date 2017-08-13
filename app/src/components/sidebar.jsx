@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Drawer, MenuItem, Divider }  from 'material-ui';
+import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
 import history from '../../lib/history';
 
 import { Row, Col } from 'react-bootstrap';
+
 export default class SideBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     console.log('SideBar mounted with', props);
     this.state = {
       open: props.open
-    }
+    };
   }
 
   componentDidMount() {
@@ -27,8 +28,8 @@ export default class SideBar extends Component {
         width={ 210 }
         docked={ false }
       >
-        <Link to='/signup'>
-          <MenuItem primaryText='SignUp!' onTouchTap={ this.props.onRequestChange } />
+        <Link to="/signup">
+          <MenuItem primaryText="SignUp!" onTouchTap={ this.props.onRequestChange } />
         </Link>
       </Drawer>
     );

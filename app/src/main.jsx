@@ -8,6 +8,6 @@ import App from './app';
 
 injectTapEventPlugin();
 
-  ReactDOM.render(
-      <App />,
-     document.getElementById('app'));
+ReactDOM.render(
+  <App />,
+  document.getElementById('app'));

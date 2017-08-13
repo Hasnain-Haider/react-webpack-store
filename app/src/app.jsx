@@ -9,26 +9,25 @@ import SignUp from './screens/signup';
 // Styles
 
 export default class App extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
-  componentWillMount(){
+  componentWillMount() {
 
   }
 
   render() {
     return (
-    <MuiThemeProvider>
-      <Router history={ history }>
-        <Switch>
-          <Route exact path={ '/' } component={ Home } />
-          <Route path={ '/signup' } component={ SignUp } />
-          <Route path={ '/monkeys' } />
-        </Switch>
-      </Router>
-    </MuiThemeProvider>
+      <MuiThemeProvider>
+        <Router history={ history }>
+          <Switch>
+            <Route exact path={ '/' } component={ Home } />
+            <Route path={ '/signup' } component={ SignUp } />
+            <Route path={ '/monkeys' } />
+          </Switch>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }

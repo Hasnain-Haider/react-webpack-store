@@ -1,8 +1,9 @@
-var webpack = require('webpack');
-var path = require('path');
-var ROOT_PATH = path.resolve(__dirname);
-var buildPath = path.resolve(ROOT_PATH, 'app', 'build');
-var config = require('./config');
+const webpack = require('webpack');
+const path = require('path');
+
+const ROOT_PATH = path.resolve(__dirname);
+const buildPath = path.resolve(ROOT_PATH, 'app', 'build');
+const config = require('./config');
 
 module.exports = {
   entry: [

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // import IconMenu from 'material-ui/IconMenu';
 // import MenuItem from 'material-ui/MenuItem';
 // import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import {FlatButton, IconButton, IconMenu, MenuItem, MoreVertIcon, AppBar } from 'material-ui';
+import { FlatButton, IconButton, IconMenu, MenuItem, MoreVertIcon, AppBar } from 'material-ui';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { Row, Col, Button, Paper, TextField, Divider } from 'react-bootstrap';
 import SideBar from './sidebar';
@@ -13,30 +13,30 @@ import SideBar from './sidebar';
  * to render different components depending on the application state.
  */
 export default class Head extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       drawerOpen: false
-    }
+    };
   }
 
 
   renderIconMenu() {
-    return(
-    <IconMenu
-      iconButtonElement={ <IconButton><ArrowDropDown /></IconButton> }
-    >
-      <MenuItem value={ "27" } primaryText="thisis27"></MenuItem>
-    </IconMenu>
-    )
+    return (
+      <IconMenu
+        iconButtonElement={ <IconButton><ArrowDropDown /></IconButton> }
+      >
+        <MenuItem value={ "27" } primaryText="thisis27" />
+      </IconMenu>
+    );
   }
 
   render() {
     return (
-        <AppBar
-          {...this.props}
-          iconElementRight={ this.renderIconMenu() }
-        />
+      <AppBar
+        { ...this.props }
+        iconElementRight={ this.renderIconMenu() }
+      />
     );
   }
 }

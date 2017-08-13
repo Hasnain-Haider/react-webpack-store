@@ -16,9 +16,9 @@ passport.use(new Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-var router = new Router();
+const router = new Router();
 router.all('/', async (ctx, next) => {
-  var u = await User.findOne();
+  const u = await User.findOne();
   console.log('localhost users', u);
   await next();
 });
@@ -26,7 +26,7 @@ router.all('/', async (ctx, next) => {
 router.post('/register', async (ctx, next) => {
   const body = ctx.request.body;
   console.log('hit register --------', body);
-  var user = {
+  const user = {
     username: body.username,
     email: body.email
   };
@@ -41,10 +41,10 @@ router.post('/register', async (ctx, next) => {
   });
 });
 
-router.get('/allUsers', async(ctx, next) => {
-  var user = await User.find({});
+router.get('/allUsers', async (ctx, next) => {
+  const user = await User.find({});
 
-  ctx.body = user
-})
+  ctx.body = user;
+});
 
 module.exports = router;
