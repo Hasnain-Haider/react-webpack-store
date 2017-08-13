@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { Drawer, MenuItem }  from 'material-ui';
-import { Row, Col } from 'react-bootstrap';
 import SideBar from './sidebar';
 import Head from './head';
 
-export default class Auth extends Component {
+export default class Core extends Component {
   constructor(props){
     super(props)
     this.state = {
-      drawerOpen: false
+      open: false
     }
   }
 
   toggleDrawer() {
-    this.setState( (prevState, props) => {
+    this.setState((prevState, props) => {
         return {
-          drawerOpen: !prevState.drawerOpen
-        }
+          open: !prevState.open
+        };
       }
     );
   }
+
   render() {
     return (
       <div>
@@ -28,8 +28,8 @@ export default class Auth extends Component {
           onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
           />
         <SideBar
-          onRequestChange={ this.toggleDrawer.bind(this) }
-          open={ this.state.drawerOpen }
+          onRequestChange={ (open) => this.setState({ open: open }) }
+          open={ this.state.open }
           />
       </div>
     );

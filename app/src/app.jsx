@@ -23,9 +23,9 @@ export default class App extends React.Component {
     <MuiThemeProvider>
       <Router history={ history }>
         <Switch>
-          <Route exact path='/' component={ Home } />
-          <Route path='/signup' component={ SignUp }/>
-          <Route path='/monkeys' />
+          <Route exact path={ '/' } component={ Home } />
+          <Route path={ '/signup' } component={ SignUp } />
+          <Route path={ '/monkeys' } />
         </Switch>
       </Router>
     </MuiThemeProvider>

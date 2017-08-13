@@ -26,19 +26,23 @@ router.all('/', async (ctx, next) => {
 router.post('/register', async (ctx, next) => {
   const body = ctx.request.body;
   console.log('hit register --------', body);
-
-  await User.register(new User({ username: body.username }), body.password, async (err) => {
+  var user = {
+    username: body.username,
+    email: body.email
+  };
+  await User.register(new User(user), body.password, async (err) => {
     if (err) {
       console.error(err);
+      ctx.throw(501, 'bad one');
     } else {
       console.log('User Created');
+      ctx.status = 201;
     }
-    await next();
   });
 });
 
 router.get('/allUsers', async(ctx, next) => {
-  var user = await User.findOne({});
+  var user = await User.find({});
 
   ctx.body = user
 })
