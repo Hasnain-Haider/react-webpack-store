@@ -1,5 +1,5 @@
 app/build
 node_modules
 bundle.js
-config.json
+config.js
 .secret.js

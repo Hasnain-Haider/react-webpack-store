@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
 import Core from '../components/core';
+import request from 'superagent';
+import config from 'config';
+const apiUrl = `http://${config.api.host}/:${config.api.port}`;
+
 
 const centerStyle = {
   margin: 'auto',
@@ -16,12 +20,13 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      submitDisabled: true
+      submitOk: false,
+      loading: false
     }
   }
 
   validUsername = () => {
-
+    return this.state.username.length;
   }
 
   validPassword() {
@@ -29,11 +34,27 @@ export default class Login extends Component {
   }
 
   validValues() {
-    return this.validUsername() && this.validPassword()
+    return this.validUsername() && this.validPassword();
   }
 
-  handleChange = (e) => {
-    console.log(e.target);
+  handleChangeUser = (e) => {
+    this.setState({
+      username: e.target.value,
+      submitOk: this.validValues()
+    });
+
+  }
+
+  handleChangePassword = (e) => {
+    this.setState({
+      password: e.target.value,
+      submitOk: this.validValues()
+    });
+  }
+
+  submit = (event) => {
+    request
+    .post(`${apiUrl}/login`)
   }
 
   render() {
@@ -49,14 +70,13 @@ export default class Login extends Component {
                   padding: 40,
                 } }
               >
-
                   <Row>
                     <TextField
                       hintText={ 'Username' }
                       errorText={ 'Enter a valid Username' }
                       style={ centerStyle }
                       value={ this.state.username }
-                      onChange={ this.handleChange }
+                      onChange={ this.handleChangeUser }
                     />
                   </Row>
                   <Row>
@@ -64,13 +84,15 @@ export default class Login extends Component {
                       style={ centerStyle }
                       hintText={ "Password" }
                       type={ "password" }
+                      onChange={ this.handleChangePassword }
                       value={ this.state.password }
                     />
                   </Row>
                   <RaisedButton
                     style={ Object.assign( { width : 60 }, centerStyle) }
                     label={ 'login' }
-                    disabled={ this.state.submitDisabled }
+                    disabled={ !this.state.submitOk }
+                    onTouchTap={ this.submit }
                     secondary
                    />
                 </Paper>

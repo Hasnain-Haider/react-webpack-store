@@ -4,8 +4,7 @@
   "description": "My project!",
   "main": "entry.js",
   "scripts": {
-    "webserver": "nodemon api/server.js --ignore 'folder1 '",
-    "webpack-watch": "./node_modules/.bin/webpack --watch",
+    "dev-watch": "./node_modules/.bin/webpack --watch",
     "dev-server": "nodemon api/server.js",
     "dev-web": "node_modules/.bin/webpack-dev-server --inline --progress --hot --watch",
     "build": "node_modules/.bin/webpack"
@@ -23,7 +22,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-passport": "^3.0.0",
     "koa-router": "^7.2.1",
-    "koa-session": "^5.3.0",
+    "koa-session": "^5.5.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "mongoose": "^4.11.6",
@@ -40,6 +39,7 @@
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.0",
+    "superagent": "^3.5.2",
     "webpack-dev-server": "^2.5.0"
   },
   "devDependencies": {

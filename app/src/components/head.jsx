@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 // import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { FlatButton, IconButton, IconMenu, MenuItem, MoreVertIcon, AppBar } from 'material-ui';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import history from 'lib/history';
 import { Row, Col, Button, Paper, TextField, Divider } from 'react-bootstrap';
 import SideBar from './sidebar';
 /**

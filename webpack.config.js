@@ -16,8 +16,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
-      config: path.resolve(ROOT_PATH, 'config.json'),
-      lib: path.resolve(ROOT_PATH, 'lib')
+      config: path.resolve(ROOT_PATH, 'config.js'),
+      lib: path.resolve(ROOT_PATH, 'app', 'lib')
     },
     enforceExtension: false
   },
