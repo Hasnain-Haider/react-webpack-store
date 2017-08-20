@@ -1,27 +1,38 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const autoIncrement = require('mongoose-auto-increment');
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
+import bcrypt from 'bcrypt-nodejs';
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: {
     type: String,
+    unique: true,
     required: true
   },
   email: {
     type: String,
+    unique: true,
     required: false
   },
-  password: {
+  hash: {
     type: String,
+    bcrypt: true,
     required: false
   }
 });
 
+
 autoIncrement.initialize(mongoose.connection);
 userSchema.plugin(autoIncrement.plugin, 'users');
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.statics.generateHash = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.validPassword = function (password) {
+  console.log('validPassword ==================', password, this.hash);
+  return bcrypt.compareSync(password, this.hash);
+};
 
 module.exports = mongoose.model('users', userSchema);
