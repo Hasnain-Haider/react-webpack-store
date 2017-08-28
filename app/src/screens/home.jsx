@@ -1,7 +1,7 @@
 // Modules
 import React from 'react';
 import { Paper } from 'material-ui';
-import { Row, Col, Button, TextField, Divider } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 // Styles
 // import Head from '../head';
 import Core from '../components/core';

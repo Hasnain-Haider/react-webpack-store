@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import passport from 'passport';
+import passport from 'koa-passport';
 import config from '../../config';
 import User from '../db/user';
 
@@ -8,43 +8,53 @@ const Strategy = require('passport-local').Strategy;
 const router = new Router();
 
 module.exports = (app) => {
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   passport.serializeUser((user, done) => {
+    console.log('serializeUser');
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
-      done(err, user);
+      console.log('deserializeUser');
+      if (err) {
+        done(err, null)
+      } else {
+        done(null, user);
+      }
     });
   });
 
   passport.use(new Strategy(async (username, password, done) => {
-    await User.findOne({ username: username }, (err, user) => {
+    // console.log('using Strategy', username, password);
+    User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
       }
       if (!user) {
         return done(null, false);
       }
-      try {
-        if (!user.validPassword(password)) {
-          console.log('pass invalid');
-          return done(null, false);
-        }
-        console.error('pass valid');
-        return done(null, user);
-      } catch (e) {
-        return done(null, user);
-        console.error(e);
+      if (!user.validPassword(password)) {
+        console.log('pass invalid');
+        return done(null, false);
       }
+      console.log('pass valid, user =>', user, err);
+      return done(null, user);
     });
   }));
 
-  router.all('/', async (ctx, next) => {
-    const u = await User.findOne();
-    console.log('local users', u);
-    await next();
-  });
+
+  router.get('/logout', async (ctx, next) => {
+    console.log('lonelyness');
+    // for (v of ctx.req) {
+    // console.log(Object.values(ctx));
+    console.log('ctx.state       -', ctx.state);
+    // }
+    ctx.status = 200;
+    ctx.logout();
+  })
 
   router.post('/register', async (ctx, next) => {
     const body = ctx.request.body;
@@ -64,16 +74,45 @@ module.exports = (app) => {
     await next();
   });
 
-  router.post('/login', passport.authenticate('local'), async (ctx, next) => {
-    const body = ctx.request.body;
-    console.log('hit login -------->', body);
-    await next();
-  });
+  router.post('/login', passport.authenticate('local', {
+    successRedirect: '/good',
+    failureRedirect: '/bad'
+  }), function (ctx, err)  {
+    if (err) {
+      console.error(err);
+    }
+    console.log('end login');
+  }
+);
 
-  router.get('/allUsers', async (ctx, next) => {
-    const user = await User.find({});
-    ctx.body = user;
-  });
+router.get('/', async (ctx, next) => {
+  console.log(router);
+});
 
-  app.use(router.routes());
+
+router.get('/good', async (ctx, next) => {
+  ctx.status = 200;
+  ctx.body = ctx.state.user;
+  console.log('in good');
+});
+router.get('/bad', async (ctx, next) => {
+  ctx.status = 500;
+  console.log('in bad');
+})
+
+router.get('/allUsers', async (ctx, next) => {
+  const user = await User.find({});
+  ctx.body = user;
+});
+
+router.post('/', async (ctx, next) => {
+  // const u = await User.findOne();
+  console.log('post / ');
+  console.log('ctx.envelope', ctx.session );
+
+  console.log('ctx.envelope', ctx.envelope );
+  await next();
+});
+app.use(router.allowedMethods());
+app.use(router.routes());
 };

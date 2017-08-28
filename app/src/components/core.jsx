@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Drawer, MenuItem } from 'material-ui';
 import SideBar from './sidebar';
 import Head from './head';
 

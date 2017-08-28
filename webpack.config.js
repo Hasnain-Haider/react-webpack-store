@@ -35,6 +35,7 @@ module.exports = {
   },
   devServer: {
     hot: true,
+    historyApiFallback: true,
     host: config.app.host,
     port: config.app.port
   }

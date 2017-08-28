@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
-import history from '../../lib/history';
-
-import { Row, Col } from 'react-bootstrap';
 
 export default class SideBar extends Component {
   constructor(props) {
@@ -12,18 +9,16 @@ export default class SideBar extends Component {
     this.state = {
       open: props.open
     };
-  }
 
-  componentDidMount() {
-    console.log('SideBar state!', this.state);
-    console.log('SideBar props!    <', this.props, '>');
+    console.log('popin', props.open);
   }
 
   render() {
     return (
       <Drawer
-        { ...this.props }
+        open={ this.props.open }
         width={ 210 }
+        onRequestChange={ this.props.onRequestChange }
         docked={ false }
       >
         <Link to={ "/signup" }>
