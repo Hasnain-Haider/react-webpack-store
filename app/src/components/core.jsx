@@ -15,16 +15,16 @@ export default class Core extends Component {
       return {
         open: !prevState.open
       };
-    }
-    );
+    });
   }
 
   render() {
     return (
       <div>
         <Head
-          title={ "Hassu-Store" }
+          title={ "Hasnains React Store" }
           onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
+          style={ this.props.headStyle }
         />
         <SideBar
           onRequestChange={ open => this.setState({ open: open }) }

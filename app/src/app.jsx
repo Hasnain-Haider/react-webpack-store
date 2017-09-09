@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from 'material-ui';
 
 import history from '../lib/history';
-import Home from './screens/home';
+import Home from './screens/home/home';
 import SignUp from './screens/signup';
 import Login from './screens/login';
 

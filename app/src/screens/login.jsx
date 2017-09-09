@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
-import Core from '../components/core';
 import request from 'superagent';
 import config from 'config';
+import Core from '../components/core';
+import authRedux from '../../lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 const centerStyle = {
@@ -21,6 +22,7 @@ export default class Login extends Component {
       submitOk: false,
       loading: false
     }
+    console.log(this);
   }
 
   validUsername = () => {
@@ -39,7 +41,7 @@ export default class Login extends Component {
   }
 
   handleChangePassword = async (e) => {
-    await this.setStateAsync({password: e.target.value });
+    await this.setStateAsync({ password: e.target.value });
     this.setState({ submitOk: this.validValues() });
   }
 
@@ -55,20 +57,21 @@ export default class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    console.log('hit submit ', loginBody);
 
     request
     .post(`${apiUrl}/login`)
-    // .set('Access-Control-Allow-Origin', '*')
-    // .set('Content-Type','text/javascript')
-    .set('WWW-Authenticate', 'Basic')
     .send(loginBody)
     .withCredentials()
     .end((err, res) => {
       if (err) {
         console.error('therewas an error    ,', err, 'res ', res);
       } else {
-        console.log('login res , ', res);
+        authRedux.dispatch({
+          type: 'LOGIN',
+          user: res
+        });
+        this.props.history.push('/');
+        console.log('redux ', authRedux.getState());
       }
     });
 
@@ -85,10 +88,11 @@ export default class Login extends Component {
               <Paper style={ {
                   margin: 40,
                   padding: 40,
-                  justifyContents: 'center',
+                  textAlign: 'center',
                   alignSelf: 'center'
                 } }
                 >
+                <div>
                 <Row>
                   <TextField
                     hintText={ 'Username' }
@@ -113,6 +117,7 @@ export default class Login extends Component {
                   onTouchTap={ this.submit }
                   secondary
                   />
+                </div>
               </Paper>
             </Col>
             <Col sm={ 0 } md={ 2 } lg={ 3 } />

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       open: props.open
     };
-
-    console.log('popin', props.open);
   }
 
   render() {
@@ -32,3 +30,12 @@ export default class SideBar extends Component {
     );
   }
 }
+
+SideBar.propTypes = {
+  onRequestChange: PropTypes.func.isRequired,
+  open: PropTypes.bool
+};
+
+SideBar.defaultProps = {
+  open: false
+};

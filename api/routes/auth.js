@@ -12,15 +12,13 @@ module.exports = (app) => {
   app.use(passport.session());
 
   passport.serializeUser((user, done) => {
-    console.log('serializeUser');
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
-      console.log('deserializeUser');
       if (err) {
-        done(err, null)
+        done(err, null);
       } else {
         done(null, user);
       }
@@ -28,7 +26,6 @@ module.exports = (app) => {
   });
 
   passport.use(new Strategy(async (username, password, done) => {
-    // console.log('using Strategy', username, password);
     User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
@@ -47,23 +44,18 @@ module.exports = (app) => {
 
 
   router.get('/logout', async (ctx, next) => {
-    console.log('lonelyness');
-    // for (v of ctx.req) {
-    // console.log(Object.values(ctx));
-    console.log('ctx.state       -', ctx.state);
-    // }
     ctx.status = 200;
     ctx.logout();
-  })
+  });
 
   router.post('/register', async (ctx, next) => {
     const body = ctx.request.body;
-    console.log('hit register -------->', body);
+
     const user = {
       username: body.username,
       email: body.email
     };
-    console.log('user', user);
+
     await User.create({
       hash: User.generateHash(body.password),
       username: user.username,
@@ -77,42 +69,40 @@ module.exports = (app) => {
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/good',
     failureRedirect: '/bad'
-  }), function (ctx, err)  {
+  }), (ctx, err) => {
     if (err) {
       console.error(err);
     }
-    console.log('end login');
   }
-);
+  );
 
-router.get('/', async (ctx, next) => {
-  console.log(router);
-});
+  router.get('/', async (ctx, next) => {
+    console.log(router);
+    await next();
+  });
 
 
-router.get('/good', async (ctx, next) => {
-  ctx.status = 200;
-  ctx.body = ctx.state.user;
-  console.log('in good');
-});
-router.get('/bad', async (ctx, next) => {
-  ctx.status = 500;
-  console.log('in bad');
-})
+  router.get('/good', async (ctx) => {
+    console.log('ctx user ', ctx.state.user);
+    ctx.status = 200;
+    ctx.body = ctx.state.user
+  });
 
-router.get('/allUsers', async (ctx, next) => {
-  const user = await User.find({});
-  ctx.body = user;
-});
+  router.get('/bad', async (ctx) => {
+    ctx.status = 500;
+    console.log('bad');
+  });
 
-router.post('/', async (ctx, next) => {
-  // const u = await User.findOne();
-  console.log('post / ');
-  console.log('ctx.envelope', ctx.session );
+  router.get('/allUsers', async (ctx, next) => {
+    const user = await User.find({});
+    ctx.body = user;
+    await next();
+  });
 
-  console.log('ctx.envelope', ctx.envelope );
-  await next();
-});
-app.use(router.allowedMethods());
-app.use(router.routes());
+  router.post('/', async (ctx, next) => {
+    await next();
+  });
+
+  app.use(router.allowedMethods());
+  app.use(router.routes());
 };
