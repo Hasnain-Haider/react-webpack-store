@@ -6,6 +6,8 @@ import request from 'superagent';
 import config from 'config';
 import Core from '../components/core';
 import authRedux from '../../lib/reduxes/auth';
+import PropTypes from 'prop-types';
+
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 const centerStyle = {
@@ -52,7 +54,6 @@ export default class Login extends Component {
   }
 
   submit = (event) => {
-
     const loginBody = {
       username: this.state.username,
       password: this.state.password
@@ -64,7 +65,7 @@ export default class Login extends Component {
     .withCredentials()
     .end((err, res) => {
       if (err) {
-        console.error('therewas an error    ,', err, 'res ', res);
+        console.error('therewas an error    ,', err);
       } else {
         authRedux.dispatch({
           type: 'LOGIN',
@@ -74,7 +75,6 @@ export default class Login extends Component {
         console.log('redux ', authRedux.getState());
       }
     });
-
   }
 
   render() {

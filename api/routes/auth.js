@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import passport from 'koa-passport';
 import config from '../../config';
 import User from '../db/user';
-
+import authRedux from '../../app/lib/reduxes/auth';
 const Strategy = require('passport-local').Strategy;
 
 const router = new Router();
@@ -45,6 +45,7 @@ module.exports = (app) => {
 
   router.get('/logout', async (ctx, next) => {
     ctx.status = 200;
+    authRedux.dispatch({ type: 'LOGOUT' });
     ctx.logout();
   });
 
@@ -85,7 +86,7 @@ module.exports = (app) => {
   router.get('/good', async (ctx) => {
     console.log('ctx user ', ctx.state.user);
     ctx.status = 200;
-    ctx.body = ctx.state.user
+    ctx.body = ctx.state.user;
   });
 
   router.get('/bad', async (ctx) => {

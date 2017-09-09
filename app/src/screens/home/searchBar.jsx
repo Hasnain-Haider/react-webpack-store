@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import ArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
-
+import PropTypes from 'prop-types';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -37,9 +37,8 @@ export default class SearchBar extends Component {
                 width: '80%'
               }}
               hintText={ 'Search' }
-              >
+            />
 
-            </TextField>
             <IconButton tooltip={ 'Search' } >
               <SearchIcon />
             </IconButton>

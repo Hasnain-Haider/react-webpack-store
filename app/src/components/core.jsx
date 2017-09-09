@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SideBar from './sidebar';
 import Head from './head';
+import PropTypes from 'prop-types';
 
 export default class Core extends Component {
   constructor(props) {

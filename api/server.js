@@ -24,6 +24,7 @@ app.use(cors({
 }));
 
 require('./routes/auth')(app);
+require('./routes/post')(app);
 
 app.listen(config.api.port);
 console.log("listening on PORT ", config.api.port);
