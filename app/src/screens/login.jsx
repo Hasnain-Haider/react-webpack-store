@@ -80,7 +80,7 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <Core />
+        <Core history={ this.props.history } />
         <Paper zDepth={ 2 }>
           <Row>
             <Col sm={ 0 } md={ 2 } lg={ 3 } />

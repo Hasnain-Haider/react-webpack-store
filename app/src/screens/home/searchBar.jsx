@@ -11,7 +11,8 @@ export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false
+      menuOpen: false,
+      term: ''
     };
   }
 
@@ -21,6 +22,16 @@ export default class SearchBar extends Component {
         menuOpen: !prevState.menuOpen
       };
     });
+  }
+
+  changeSearchTerm = (event) => {
+    this.setState({
+      term: event.target.value
+    });
+  }
+
+  validTerm = () => {
+    return !this.state.term;
   }
 
   render() {
@@ -37,9 +48,15 @@ export default class SearchBar extends Component {
                 width: '80%'
               }}
               hintText={ 'Search' }
+              onChange={ this.changeSearchTerm }
+              onKeyPress={ event => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
             />
 
-            <IconButton tooltip={ 'Search' } >
+          <IconButton disabled={ this.validTerm() } tooltip={ 'Search' } >
               <SearchIcon />
             </IconButton>
             <IconButton onTouchTap={ this.toggleMenu }>

@@ -19,7 +19,10 @@ export default class SideBar extends Component {
         onRequestChange={ this.props.onRequestChange }
         docked={ false }
       >
-        <Link to={ "/signup" }>
+      <Link to={ "/" }>
+        <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
+      </Link>
+        <Link to={ "signup" }>
           <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
         </Link>
         <Divider />

@@ -3,6 +3,7 @@ import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile
 import { Row, Col } from 'react-bootstrap';
 import Core from '../../components/core';
 import SearchBar from './searchBar';
+import history from '../../../lib/history';
 import Post from './post';
 
 export default class Home extends Component {
@@ -42,7 +43,7 @@ componentWillMount () {
   render () {
     return (
       <div>
-        <Core headStyle={ { margin: 10 } } />
+        <Core headStyle={ { margin: 10 } } history={ this.props.history } />
         <SearchBar style={ { textAlign: 'center', margin: 10 } } />
         { this.renderPosts() }
       </div>

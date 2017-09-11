@@ -17,7 +17,7 @@ export default class SignUp extends Component {
   render() {
     return (
       <div>
-        <Core />
+        <Core history={ this.props.history } />
         <Paper>
           YELLOW!
         </Paper>
