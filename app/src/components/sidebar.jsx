@@ -22,6 +22,9 @@ export default class SideBar extends Component {
       <Link to={ "/" }>
         <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
       </Link>
+      <Link to={ "createPost" }>
+        <MenuItem primaryText={ "CreatePost!" } onTouchTap={ this.props.onRequestChange } />
+      </Link>
       <Link to={ "signup" }>
         <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
       </Link>

@@ -12,8 +12,6 @@ export default class SignUp extends Component {
     };
   }
 
-  componentWillReceiveProps() {}
-
   render = () =>
     <div>
       <Core history={ this.props.history } />
