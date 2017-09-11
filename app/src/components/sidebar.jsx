@@ -11,27 +11,25 @@ export default class SideBar extends Component {
     };
   }
 
-  render() {
-    return (
-      <Drawer
-        open={ this.props.open }
-        width={ 210 }
-        onRequestChange={ this.props.onRequestChange }
-        docked={ false }
-      >
+  render = () =>
+    <Drawer
+      open={ this.props.open }
+      width={ 210 }
+      onRequestChange={ this.props.onRequestChange }
+      docked={ false }
+      className={ 'sidebar' }
+    >
       <Link to={ "/" }>
         <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
       </Link>
-        <Link to={ "signup" }>
-          <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
-        </Link>
-        <Divider />
-        <Link to={ "login" }>
-          <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
-        </Link>
-      </Drawer>
-    );
-  }
+      <Link to={ "signup" }>
+        <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
+      </Link>
+      <Divider />
+      <Link to={ "login" }>
+        <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
+      </Link>
+    </Drawer>
 }
 
 SideBar.propTypes = {

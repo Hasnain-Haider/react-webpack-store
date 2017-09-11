@@ -36,16 +36,14 @@ export default class Head extends Component {
     });
   }
 
-  render() {
-    return (
-      <AppBar
-        title={ this.props.title }
-        style={ this.props.style }
-        onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
-        iconElementRight={ this.renderButton() }
-      />
-    );
-  }
+  render = () =>
+    <AppBar
+      title={ this.props.title }
+      style={ this.props.style }
+      onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
+      iconElementRight={ this.renderButton() }
+      className={ 'head' }
+    />
 }
 
 Head.propTypes = {

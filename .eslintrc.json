@@ -21,7 +21,7 @@
     },
     "plugins": [
         "mocha"
-    ],    
+    ],
     "rules": {
         "react/jsx-uses-vars": ["error"],
         "jsx-a11y/no-static-element-interactions": "off",
@@ -39,6 +39,7 @@
         "no-trailing-spaces": ["warn"],
         "no-plusplus": "off",
         "camelcase": "off",
+        "func-style": ["warn", "expression", { "allowArrowFunctions": true }],
         "arrow-body-style": "off",
         "indent": [
             "error",
@@ -52,11 +53,11 @@
                 "object": "arguments",
                 "property": "callee",
                 "message": "arguments.callee is deprecated"
-            }, 
+            },
             {
                 "property": "__defineGetter__",
                 "message": "Please use Object.defineProperty instead."
-            }, 
+            },
             {
                 "property": "__defineSetter__",
                 "message": "Please use Object.defineProperty instead."

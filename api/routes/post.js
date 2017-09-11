@@ -13,6 +13,24 @@ module.exports = (app) => {
     ctx.body = Post.find();
   });
 
+  router.post('/post', async (ctx, next) => {
+    let newPost = null;
+    const body = ctx.body;
+    const post = {
+      price: body.price,
+      title: body.title,
+      description: body.description,
+      imgSrc: body.imgSrc,
+    }
+    try {
+      newPost = await Post.create(post);
+    } catch (e) {
+      ctx.throw(e)
+    }
+    ctx.status = 201;
+    ctx.body = newPost;
+  });
+
   app.use(router.allowedMethods());
   app.use(router.routes());
 };

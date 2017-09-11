@@ -14,14 +14,11 @@ export default class SignUp extends Component {
 
   componentWillReceiveProps() {}
 
-  render() {
-    return (
-      <div>
-        <Core history={ this.props.history } />
-        <Paper>
-          YELLOW!
-        </Paper>
-      </div>
-    );
-  }
+  render = () =>
+    <div>
+      <Core history={ this.props.history } />
+      <Paper>
+        YELLOW!
+      </Paper>
+    </div>
 }

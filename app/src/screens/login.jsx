@@ -1,6 +1,6 @@
 // Modules
 import React, { Component } from 'react';
-import { Paper, TextField, RaisedButton } from 'material-ui';
+import { Paper, TextField, RaisedButton, CircularProgress } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config';
@@ -27,12 +27,8 @@ export default class Login extends Component {
     console.log(this);
   }
 
-  validUsername = () => {
-    return this.state.username.length;
-  }
-
+  validUsername = () => this.state.username.length;
   validPassword = () => { return this.state.password.length >= 3 }
-
   validValues   = () => { return this.validUsername() && this.validPassword() }
 
   handleChangeUser = (e) => {
@@ -77,8 +73,7 @@ export default class Login extends Component {
     });
   }
 
-  render() {
-    return (
+  render = () =>
       <div>
         <Core history={ this.props.history } />
         <Paper zDepth={ 2 }>
@@ -99,7 +94,7 @@ export default class Login extends Component {
                     style={ centerStyle }
                     value={ this.state.username }
                     onChange={ this.handleChangeUser }
-                    />
+                  />
                 </Row>
                 <Row>
                   <TextField
@@ -108,15 +103,15 @@ export default class Login extends Component {
                     type={ "password" }
                     onChange={ this.handleChangePassword }
                     value={ this.state.password }
-                    />
+                  />
                 </Row>
                 <RaisedButton
-                  style={ Object.assign( { width : 60 }, centerStyle) }
+                  style={ {  width : 60, ...centerStyle } }
                   label={ 'login' }
                   disabled={ !this.state.submitOk }
                   onTouchTap={ this.submit }
                   secondary
-                  />
+                />
                 </div>
               </Paper>
             </Col>
@@ -124,6 +119,4 @@ export default class Login extends Component {
           </Row>
         </Paper>
       </div>
-    );
-  }
 }

@@ -1,16 +1,16 @@
 const path = require('path');
 
 const ROOT_PATH = path.resolve(__dirname);
-const buildPath = path.resolve(ROOT_PATH, 'app', 'build');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'app', 'build');
 const config = require('./config');
 
 module.exports = {
   entry: [
-    path.resolve(ROOT_PATH, 'app', 'src', 'main.jsx'),
+    path.resolve(ROOT_PATH, 'app', 'src', 'app.jsx'),
   ],
   context: path.resolve(ROOT_PATH, 'app'),
   output: {
-    path: buildPath,
+    path: BUILD_PATH,
     filename: 'bundle.js'
   },
   resolve: {
@@ -24,7 +24,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
-      exclude: [/node_modules/, buildPath],
+      exclude: [/node_modules/, BUILD_PATH],
       include: path.resolve(ROOT_PATH, 'app'),
       loader: 'babel-loader'
     },

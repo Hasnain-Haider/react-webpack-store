@@ -28,7 +28,7 @@ componentWillMount () {
   renderPosts = () => {
     return this.state.posts.map((post, idx) => {
       return(
-        <Paper key={ idx }>
+        <Paper key={ idx } style={ { margin: 10 } }>
           <Post
             title={ post.title }
             description={ post.description }
@@ -43,7 +43,7 @@ componentWillMount () {
   render () {
     return (
       <div>
-        <Core headStyle={ { margin: 10 } } history={ this.props.history } />
+        <Core history={ this.props.history } />
         <SearchBar style={ { textAlign: 'center', margin: 10 } } />
         { this.renderPosts() }
       </div>

@@ -19,19 +19,16 @@ export default class Core extends Component {
     });
   }
 
-  render() {
-    return (
-      <div>
-        <Head
-          title={ "Hasnains React Store" }
-          onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
-          style={ this.props.headStyle }
-        />
-        <SideBar
-          onRequestChange={ open => this.setState({ open: open }) }
-          open={ this.state.open }
-        />
-      </div>
-    );
-  }
+  render = () =>
+    <div>
+      <Head
+        title={ "Hasnains React Store" }
+        onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
+        style={ { ...this.props.headStyle, margin: 10 } }
+      />
+      <SideBar
+        onRequestChange={ open => this.setState({ open: open }) }
+        open={ this.state.open }
+      />
+    </div>
 }
