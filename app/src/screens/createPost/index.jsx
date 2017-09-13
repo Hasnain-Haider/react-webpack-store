@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, FlatButton, RaisedButton, SelectField, MenuItem } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
-// import { Form } from 'formsy-react';
 import Core from '../../components/core';
-
+import categories from 'lib/categories';
 
 export default class CreatePost extends Component {
   componentWillMount = () => console.log(window, document);
+
+  validate = () => {  }
+
+  renderMenuItems = () =>
+      <div>
+      </div>
 
   renderForm = () =>
   <div>
     <Paper style={ {
       margin: 40,
-      padding: 40
+      padding: 40,
     } }>
       <form
         onSubmit={ (event) => {
           event.preventDefault();
           console.log(event.target.title.value)
         } }
-        >
+      >
 
         <Row>
           <TextField
@@ -45,21 +50,22 @@ export default class CreatePost extends Component {
           <SelectField
             name={ 'category' }
           >
-          <MenuItem value={null} primaryText="" />
-          <MenuItem value={false} primaryText="No" />
-          <MenuItem value={true} primaryText="Yes" />
-        </SelectField>
+            { categories.map( category => <MenuItem value={ category } primaryText={ category } /> ) }
+          </SelectField>
         </Row>
-
+        <Row>
+          <RaisedButton primary onTouchTap={ () => {} } label={ 'submit post' } />
+        </Row>
       </form>
     </Paper>
   </div>
 
   render = () =>
-  <div style={ { margin: 10 } }>
+  <div>
     <Core history={ this.props.history } />
     <Paper zDepth={ 2 } style={ {
-        textAlign: 'center'
+        textAlign: 'center',
+        margin: 10
       } }>
       <Row>
         <Col sm={ 0 } md={ 2 } lg={ 3 } />
@@ -67,6 +73,7 @@ export default class CreatePost extends Component {
         <Col md={ 8 } lg={ 6 } >
           { this.renderForm() }
         </Col>
+
         <Col sm={ 0 } md={ 2 } lg={ 3 } />
       </Row>
     </Paper>

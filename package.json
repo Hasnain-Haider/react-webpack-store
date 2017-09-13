@@ -23,6 +23,7 @@
     "babel-preset-es2017": "^6.24.1",
     "bcrypt-nodejs": "0.0.3",
     "formsy-react": "^0.19.5",
+    "history": "^4.7.2",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-cors": "0.0.16",

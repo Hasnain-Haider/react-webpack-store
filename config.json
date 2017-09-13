@@ -1,0 +1,24 @@
+{
+  "api": {
+    "host": "localhost",
+    "port": 4501
+  },
+  "app": {
+    "host": "localhost",
+    "port": 4500
+  },
+  "db": {
+    "url": "mongodb://localhost/react-store"
+  },
+  "auth": {
+    "google": {
+      "clientID": "303149315992-h90n71qasg8s4cogmihcl3rjqt5ur615.apps.googleusercontent.com",
+      "clientSecret": "UTITtNDUwTNKt_0ZcXMtjQhy"
+    },
+    "imgur": {
+      "clientID": "204c9b21ff6d87b",
+      "clientSecret": "1ad66df59e39021e32449565adab44543a1f78c3"
+    }
+  },
+  "sessionSecret": ["om@gthis1lishu4i&ri3oqniemahpr%esceret"]
+}

@@ -74,49 +74,49 @@ export default class Login extends Component {
   }
 
   render = () =>
-      <div>
-        <Core history={ this.props.history } />
-        <Paper zDepth={ 2 }>
-          <Row>
-            <Col sm={ 0 } md={ 2 } lg={ 3 } />
-            <Col md={ 8 } lg={ 6 } >
-              <Paper style={ {
-                  margin: 40,
-                  padding: 40,
-                  textAlign: 'center',
-                  alignSelf: 'center'
-                } }
-                >
-                <div>
-                <Row>
-                  <TextField
-                    hintText={ 'Username' }
-                    style={ centerStyle }
-                    value={ this.state.username }
-                    onChange={ this.handleChangeUser }
-                  />
-                </Row>
-                <Row>
-                  <TextField
-                    style={ centerStyle }
-                    hintText={ "Password" }
-                    type={ "password" }
-                    onChange={ this.handleChangePassword }
-                    value={ this.state.password }
-                  />
-                </Row>
-                <RaisedButton
-                  style={ {  width : 60, ...centerStyle } }
-                  label={ 'login' }
-                  disabled={ !this.state.submitOk }
-                  onTouchTap={ this.submit }
-                  secondary
+    <div>
+      <Core history={ this.props.history } />
+      <Paper zDepth={ 2 }>
+        <Row>
+          <Col sm={ 0 } md={ 2 } lg={ 3 } />
+          <Col md={ 8 } lg={ 6 } >
+            <Paper style={ {
+                margin: 40,
+                padding: 40,
+                textAlign: 'center',
+                alignSelf: 'center'
+              } }
+              >
+              <div>
+              <Row>
+                <TextField
+                  hintText={ 'Username' }
+                  style={ centerStyle }
+                  value={ this.state.username }
+                  onChange={ this.handleChangeUser }
                 />
-                </div>
-              </Paper>
-            </Col>
-            <Col sm={ 0 } md={ 2 } lg={ 3 } />
-          </Row>
-        </Paper>
-      </div>
+              </Row>
+              <Row>
+                <TextField
+                  style={ centerStyle }
+                  hintText={ "Password" }
+                  type={ "password" }
+                  onChange={ this.handleChangePassword }
+                  value={ this.state.password }
+                />
+              </Row>
+              <RaisedButton
+                style={ {  width : 60, ...centerStyle } }
+                label={ 'login' }
+                disabled={ !this.state.submitOk }
+                onTouchTap={ this.submit }
+                secondary
+              />
+              </div>
+            </Paper>
+          </Col>
+          <Col sm={ 0 } md={ 2 } lg={ 3 } />
+        </Row>
+      </Paper>
+    </div>
 }

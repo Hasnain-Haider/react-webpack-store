@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Core from '../components/core';
 import { Paper } from 'material-ui';
 import PropTypes from 'prop-types';
+import request from 'superagent';
+import config from 'config';
+import Core from '../components/core';
+import authRedux from '../../lib/reduxes/auth';
+const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -16,7 +20,7 @@ export default class SignUp extends Component {
     <div>
       <Core history={ this.props.history } />
       <Paper>
-        YELLOW!
+
       </Paper>
     </div>
 }

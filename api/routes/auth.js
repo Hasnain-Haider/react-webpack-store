@@ -49,19 +49,24 @@ module.exports = (app) => {
     ctx.logout();
   });
 
-  router.post('/register', async (ctx, next) => {
+  router.post('/signup', async (ctx, next) => {
     const body = ctx.request.body;
 
     const user = {
       username: body.username,
-      email: body.email
+      email: body.email,
     };
 
-    await User.create({
-      hash: User.generateHash(body.password),
-      username: user.username,
-      email: user.email
-    });
+    try {
+      await User.create({
+        hash: User.generateHash(body.password),
+        username: user.username,
+        email: user.email
+      });
+    } catch (e) {
+      throw(e);
+    }
+
     console.log('User Created');
     ctx.status = 201;
     await next();

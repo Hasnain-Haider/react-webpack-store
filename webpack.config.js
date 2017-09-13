@@ -14,9 +14,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
-      config: path.resolve(ROOT_PATH, 'config.js'),
+      config: path.resolve(ROOT_PATH, 'config.json'),
       lib: path.resolve(ROOT_PATH, 'app', 'lib')
     },
     enforceExtension: false
