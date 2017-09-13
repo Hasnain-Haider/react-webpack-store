@@ -54,9 +54,9 @@ export default class SearchBar extends Component {
                   event.preventDefault();
                 }
               }}
-            />
+              />
 
-          <IconButton disabled={ this.validTerm() } tooltip={ 'Search' } >
+            <IconButton disabled={ this.validTerm() } tooltip={ 'Search' } >
               <SearchIcon />
             </IconButton>
             <IconButton onTouchTap={ this.toggleMenu }>

@@ -12,27 +12,27 @@ export default class SideBar extends Component {
   }
 
   render = () =>
-    <Drawer
-      open={ this.props.open }
-      width={ 210 }
-      onRequestChange={ this.props.onRequestChange }
-      docked={ false }
-      className={ 'sidebar' }
+  <Drawer
+    open={ this.props.open }
+    width={ 210 }
+    onRequestChange={ this.props.onRequestChange }
+    docked={ false }
+    className={ 'sidebar' }
     >
-      <Link to={ "/" }>
-        <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
-      </Link>
-      <Link to={ "createPost" }>
-        <MenuItem primaryText={ "CreatePost!" } onTouchTap={ this.props.onRequestChange } />
-      </Link>
-      <Link to={ "signup" }>
-        <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
-      </Link>
-      <Divider />
-      <Link to={ "login" }>
-        <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
-      </Link>
-    </Drawer>
+    <Link to={ "/" }>
+      <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
+    </Link>
+    <Link to={ "createPost" }>
+      <MenuItem primaryText={ "CreatePost!" } onTouchTap={ this.props.onRequestChange } />
+    </Link>
+    <Link to={ "signup" }>
+      <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
+    </Link>
+    <Divider />
+    <Link to={ "login" }>
+      <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
+    </Link>
+  </Drawer>
 }
 
 SideBar.propTypes = {

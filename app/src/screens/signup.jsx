@@ -17,10 +17,10 @@ export default class SignUp extends Component {
   }
 
   render = () =>
-    <div>
-      <Core history={ this.props.history } />
-      <Paper>
+  <div>
+    <Core history={ this.props.history } />
+    <Paper>
 
-      </Paper>
-    </div>
+    </Paper>
+  </div>
 }

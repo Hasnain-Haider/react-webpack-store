@@ -13,16 +13,16 @@ export default class Home extends Component {
     };
   }
 
-componentWillMount () {
-  this.setState({
-    posts:  [{
-      title: 'sample title',
-      description: 'Hello there this is a great subtitle',
-      text: 'The text is great tho',
-      price: 41
-    }]
-  });
-}
+  componentWillMount () {
+    this.setState({
+      posts:  [{
+        title: 'sample title',
+        description: 'Hello there this is a great subtitle',
+        text: 'The text is great tho',
+        price: 41
+      }]
+    });
+  }
 
   renderPosts = () => {
     return this.state.posts.map((post, idx) => {
@@ -33,7 +33,7 @@ componentWillMount () {
             description={ post.description }
             text={ post.text }
             price={ post.price }
-          />
+            />
         </Paper>
       )
     })

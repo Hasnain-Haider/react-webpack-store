@@ -20,15 +20,15 @@ export default class Core extends Component {
   }
 
   render = () =>
-    <div>
-      <Head
-        title={ "Hasnains React Store" }
-        onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
-        style={ { ...this.props.headStyle, margin: 10 } }
+  <div>
+    <Head
+      title={ "Hasnains React Store" }
+      onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
+      style={ { ...this.props.headStyle, margin: 10 } }
       />
-      <SideBar
-        onRequestChange={ open => this.setState({ open: open }) }
-        open={ this.state.open }
+    <SideBar
+      onRequestChange={ open => this.setState({ open: open }) }
+      open={ this.state.open }
       />
-    </div>
+  </div>
 }

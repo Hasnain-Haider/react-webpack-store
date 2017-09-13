@@ -24,6 +24,13 @@ const postSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  owner: {
+    type: Schema.Types.ObjectId, ref: 'User'
+  },
+  category: {
+    type: [String],
+    default: ['other']
   }
 });
 

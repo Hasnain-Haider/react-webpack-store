@@ -1,6 +1,6 @@
 app/build
 node_modules
 bundle.js
-config.js
+config.json
 .secret.js
 package-lock.json

@@ -1,62 +1,89 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, FlatButton, RaisedButton, SelectField, MenuItem } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
-import Core from '../../components/core';
 import categories from 'lib/categories';
+import request from 'superagent';
+import config from 'config';
+import PropTypes from 'prop-types'
+import Core from '../../components/core';
+import authRedux from 'lib/reduxes/auth';
+const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 export default class CreatePost extends Component {
   componentWillMount = () => console.log(window, document);
 
   validate = () => {  }
 
-  renderMenuItems = () =>
-      <div>
-      </div>
+  submit = (event) => {
+    console.log(event.target);
+    // return request
+    // .post(`${apiUrl}/signup`)
+    // .withCredentials()
+  }
+
+  renderMenuItems = () => categories.map( category => <MenuItem value={ category } primaryText={ category } />)
+  selectionRenderer = (vals) => {
+    switch (vals.length) {
+      case 0:
+      return '';
+      case 1:
+      return vals[0];
+      default:
+      return `${vals.length} selected`
+    }
+  }
+  handleSelect = (event, index, value) => {
+    this.setState({
+      categories: value
+    });
+  }
 
   renderForm = () =>
   <div>
     <Paper style={ {
-      margin: 40,
-      padding: 40,
-    } }>
-      <form
-        onSubmit={ (event) => {
-          event.preventDefault();
-          console.log(event.target.title.value)
-        } }
-      >
+        padding: 40,
+      } }>
 
-        <Row>
-          <TextField
-            name={ 'title' }
+      <Row>
+        <TextField
+          name={ 'title' }
+          ref={ title => this.title = title}
           />
-        </Row>
-        <Row>
-          <TextField
-            name={ 'description' }
+      </Row>
+      <Row>
+        <TextField
+          name={ 'description' }
+          ref={ description => this.description = description}
           />
-        </Row>
-        <Row>
-          <TextField
-            name={ 'imgSrc' }
+      </Row>
+      <Row>
+        <TextField
+          name={ 'imgSrc' }
+          ref={ imgSrc => this.imgSrc = imgSrc}
           />
-        </Row>
-        <Row>
-          <TextField
-            name={ 'price' }
+      </Row>
+      <Row>
+        <TextField
+          name={ 'price' }
+          ref={ price => this.price = price}
           />
-        </Row>
-        <Row>
-          <SelectField
-            name={ 'category' }
+      </Row>
+      <Row>
+        <SelectField
+          name={ 'category' }
+          ref={ category => this.category = category }
+          value={ this.state.categories }
+          selectionRenderer={ this.selectionRenderer }
+          onChange={ this.handleSelect }
+          multiple
           >
-            { categories.map( category => <MenuItem value={ category } primaryText={ category } /> ) }
-          </SelectField>
-        </Row>
-        <Row>
-          <RaisedButton primary onTouchTap={ () => {} } label={ 'submit post' } />
-        </Row>
-      </form>
+          { this.renderMenuItems() }
+        </SelectField>
+      </Row>
+      <Row>
+        <RaisedButton primary onTouchTap={ event => { this.submit(event) } } label={ 'submit post' } />
+      </Row>
+
     </Paper>
   </div>
 
@@ -65,7 +92,10 @@ export default class CreatePost extends Component {
     <Core history={ this.props.history } />
     <Paper zDepth={ 2 } style={ {
         textAlign: 'center',
-        margin: 10
+        marginLeft: 10,
+        marginRight: 10,
+        height: '85%',
+        padding: '10%'
       } }>
       <Row>
         <Col sm={ 0 } md={ 2 } lg={ 3 } />
@@ -78,4 +108,6 @@ export default class CreatePost extends Component {
       </Row>
     </Paper>
   </div>
+
+
 }

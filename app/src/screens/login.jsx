@@ -24,12 +24,12 @@ export default class Login extends Component {
       submitOk: false,
       loading: false
     }
-    console.log(this);
+
   }
 
   validUsername = () => this.state.username.length;
-  validPassword = () => { return this.state.password.length >= 3 }
-  validValues   = () => { return this.validUsername() && this.validPassword() }
+  validPassword = () => this.state.password.length >= 3;
+  validValues   = () => this.validUsername() && this.validPassword();
 
   handleChangeUser = (e) => {
     this.setState({

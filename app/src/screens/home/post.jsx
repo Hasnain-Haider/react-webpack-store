@@ -22,13 +22,13 @@ export default class Post extends Component {
         expandable={ false }
         onExpandChange={ this.expandChange }
         expanded={ this.state.expanded }
-      >
+        >
         <CardHeader
           title={ this.state.title }
           subtitle={ this.state.subtitle }
           actAsExpander={ true }
           showExpandableButton={ true }
-        />
+          />
         <CardText>
           { this.state.text }
         </CardText>

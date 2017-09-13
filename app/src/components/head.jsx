@@ -18,8 +18,8 @@ export default class Head extends Component {
 
   renderButton() {
     return authRedux.getState() ?
-      (<FlatButton onTouchTap={ this.logout }> { 'Logout' } </FlatButton> ) :
-      (<FlatButton label='login' labelStyle={ { fontWeight: 'bold', fontSize: 16 } }>  </FlatButton>)
+    (<FlatButton onTouchTap={ this.logout }> { 'Logout' } </FlatButton> ) :
+    (<FlatButton label='login' labelStyle={ { fontWeight: 'bold', fontSize: 16 } }>  </FlatButton>)
   }
 
   logout = () => {
@@ -37,12 +37,12 @@ export default class Head extends Component {
   }
 
   render = () =>
-    <AppBar
-      title={ this.props.title }
-      style={ this.props.style }
-      onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
-      iconElementRight={ this.renderButton() }
-      className={ 'head' }
+  <AppBar
+    title={ this.props.title }
+    style={ this.props.style }
+    onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
+    iconElementRight={ this.renderButton() }
+    className={ 'head' }
     />
 }
 
