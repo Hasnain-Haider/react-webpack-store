@@ -3,6 +3,7 @@ import passport from 'koa-passport';
 import config from '../../config';
 import User from '../db/user';
 import authRedux from '../../app/lib/reduxes/auth';
+
 const Strategy = require('passport-local').Strategy;
 
 const router = new Router();
@@ -61,10 +62,10 @@ module.exports = (app) => {
       await User.create({
         hash: User.generateHash(body.password),
         username: user.username,
-        email: user.email
+        email: user.email,
       });
     } catch (e) {
-      throw(e);
+      throw (e);
     }
 
     console.log('User Created');
@@ -74,7 +75,7 @@ module.exports = (app) => {
 
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/good',
-    failureRedirect: '/bad'
+    failureRedirect: '/bad',
   }), (ctx, err) => {
     if (err) {
       console.error(err);

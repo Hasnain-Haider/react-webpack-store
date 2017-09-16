@@ -10,6 +10,13 @@ import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 export default class CreatePost extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      categories: []
+    }
+  }
+
   componentWillMount = () => console.log(window, document);
 
   validate = () => {  }

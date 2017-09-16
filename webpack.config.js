@@ -11,32 +11,32 @@ module.exports = {
   context: path.resolve(ROOT_PATH, 'app'),
   output: {
     path: BUILD_PATH,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
       config: path.resolve(ROOT_PATH, 'config.json'),
-      lib: path.resolve(ROOT_PATH, 'app', 'lib')
+      lib: path.resolve(ROOT_PATH, 'app', 'lib'),
     },
-    enforceExtension: false
+    enforceExtension: false,
   },
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: [/node_modules/, BUILD_PATH],
       include: path.resolve(ROOT_PATH, 'app'),
-      loader: 'babel-loader'
+      loader: 'babel-loader',
     },
     {
       test: /.json$/,
-      use: ['json-loader']
-    }]
+      use: ['json-loader'],
+    }],
   },
   devServer: {
     hot: true,
     historyApiFallback: true,
     host: config.app.host,
-    port: config.app.port
-  }
+    port: config.app.port,
+  },
 };

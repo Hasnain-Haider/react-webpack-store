@@ -1,0 +1,30 @@
+{
+    "title": {
+      "type": "String",
+      "required": true
+    },
+    "description": {
+      "type": "String",
+      "required": false
+    },
+    "imgSrc": {
+      "type": "String",
+      "required": false
+    },
+    "price": {
+      "type": "Number",
+      "required": true
+    },
+    "created": {
+      "type": "Date",
+      "required": true
+    },
+    "owner": {
+      "type": "ObjectId",
+      "required": false
+    },
+    "category": {
+      "type": "[String]",
+      "default": "['other']"
+    }
+}
