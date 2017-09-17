@@ -2,54 +2,68 @@ import Koa from 'koa';
 import koaRouter from 'koa-router';
 import koaBody from 'koa-bodyparser';
 import session from 'koa-session';
-import genModels from './db/genMongoModels';
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 import passport from 'koa-passport';
 import mongoose from 'mongoose';
 import cors from 'koa-cors';
-import config from '../config';
+import bluebird from 'bluebird';
 import fs from 'fs';
+import genMongooseModels from './db/genMongooseModels';
+import config from '../config';
+var DEBUG = true;
+console.debug = (...args) => DEBUG ? console.log(...args) : null;
 
 
+mongoose.Promise = bluebird;
 const resources = {
-  http: [  ],
-  mongo: [ 'post'],
+  http: [],
+  mongo: [ 'post', 'user'],
   postgres: []
 };
-const port = 3007;
-mongoose.connect(config.db.url);
+
+mongoose.connect(config.db.url, {
+  useMongoClient: true
+});
 mongoose.connection.on('connected', async() => {
-  var res = await mongoose.models.post.find();
+if (DEBUG) {
   for (var model in mongoose.models) {
     var mod = await mongoose.models[model].findOne();
-    console.log(model, { mod });
+    console.debug(model, { mod });
   }
-  // console.log({res});
-  // console.log( (await mongoose.models.post.findOne()));
+}
   console.log('Mongoose has connected to the db');
 });
 
 const mountRoutes = app => {
   let routes = fs.readdirSync('api/routes');
   routes.forEach(route => {
-    require(`./routes/${route}`)(app, resources);
+    try {
+      require(`./routes/${route}`)(app, resources);
+    } catch (e) {
+      console.error(e);
+    }
   });
 }
 
 const start = async app => {
   app.keys = config.sessionSecret;
-  genModels(resources);
-  mountRoutes(app);
+  try {
+    genMongooseModels(resources.mongo.filter(el => el !== 'user'));
+    mountRoutes(app);
+  } catch (e) {
+    console.error(e);
+  }
   return app
   .use(session(app))
-  .use(koaBody())
-  .use(router.routes())
-  .use(router.allowedMethods());
+  .use(koaBody());
 }
 
 if (require.main === module) {
   const app = new Koa();
+  const port = config.api.port || 4501;
   start(app);
+
+  console.log(`listening on ${port}`);
   app.listen(port);
 }
 

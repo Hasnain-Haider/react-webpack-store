@@ -1,4 +1,8 @@
 {
+  "_id": {
+    "type": "ObjectId",
+    "required": true
+    },
     "title": {
       "type": "String",
       "required": true
@@ -25,6 +29,6 @@
     },
     "category": {
       "type": "[String]",
-      "default": "['other']"
+      "required": false
     }
 }

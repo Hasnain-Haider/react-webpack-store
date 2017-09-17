@@ -1,29 +1,26 @@
-import graphql, { GraphQLString, GraphQLInt, GraphQLObjectType, GraphQLSchema } from 'graphql';
+import graphql, {
+  GraphQLString,
+  GraphQLFloat,
+  GraphQLID,
+  GraphQLObjectType,
+  GraphQLSchema
+} from 'graphql';
 import request from 'superagent';
-import genType from './genGQLType';
-
-const fetchResourceHTTP = async(args, uri) => {
-  const key = args.key || "_id";
-  const value = args.value;
-
-  const resourceResponse = await request
-  .get(`${url}/${uri}`)
-  .withCredentials()
-  .catch(e => console.error('error', e));
-
-  const data = resourceResponse.body.data;
-
-  for (let resource of data) {
-    if (resource[key] === value) {
-      return resource;
-    }
-  }
-
-  return null;
-}
+import mongoose from 'mongoose';
+import genGQLType from './genGQLType';
 
 const fetchResourceMongo = async (args, name) => {
-  return (await mongoose.models[name].findOne());
+  let result;
+  var mongooseQuery = {};
+  var { key, value } = args;
+  name = name.endsWith('s') ? name : `${name}s`;
+  if (!key || key === '_id') {
+    key = '_id';
+    value = mongoose.Types.ObjectId(value)
+  }
+  mongooseQuery[key] = value;
+  result = await mongoose.models[name].findOne(mongooseQuery);
+  return result;
 }
 
 const genQuery = resources => {
@@ -34,15 +31,18 @@ const genQuery = resources => {
 
   resources.mongo.forEach(resource => {
     queryObj.fields[resource] = {
-      type: genType(resource),
+      type: genGQLType(resource),
       args:{
-        value: { type: GraphQLString },
-        key: { type: GraphQLString }
+        value: {
+          type: GraphQLString
+        },
+        key: {
+          type: GraphQLString
+        }
       },
       resolve: (obj, args, ctx) => fetchResourceMongo(args, resource)
     }
   });
-
    return new GraphQLObjectType(queryObj);
 }
 

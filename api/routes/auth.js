@@ -8,7 +8,7 @@ const Strategy = require('passport-local').Strategy;
 
 const router = new Router();
 
-module.exports = (app) => {
+module.exports = app => {
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -43,8 +43,14 @@ module.exports = (app) => {
     });
   }));
 
+  router.get('/user/:_id', async ctx => {
+    const { _id } = ctx.params;
+    console.log(_id);
+    var user = await User.findById(_id)
+    console.log(user);
+  });
 
-  router.get('/logout', async (ctx, next) => {
+  router.get('/logout', async ctx => {
     ctx.status = 200;
     authRedux.dispatch({ type: 'LOGOUT' });
     ctx.logout();

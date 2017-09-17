@@ -1,0 +1,23 @@
+{
+  "_id": {
+    "type": "ObjectId",
+    "required": false
+    },
+  "username": {
+    "type": "String",
+    "required": true
+  },
+  "email": {
+    "type": "String",
+    "required": false
+  },
+  "posts" : {
+    "type": "[ObjectId]",
+    "required": false
+  },
+  "hash": {
+    "type": "String",
+    "required": true,
+    "bcrypt": true
+  }
+}

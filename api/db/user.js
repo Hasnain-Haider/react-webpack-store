@@ -1,10 +1,12 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import bcrypt from 'bcrypt-nodejs';
 
-const Schema = mongoose.Schema;
-
 const userSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
   username: {
     type: String,
     unique: true,
@@ -20,11 +22,21 @@ const userSchema = new Schema({
     bcrypt: true,
     required: false,
   },
+  posts: {
+    type: [String]
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 
-autoIncrement.initialize(mongoose.connection);
-userSchema.plugin(autoIncrement.plugin, 'users');
+// autoIncrement.initialize(mongoose.connection);
+// userSchema.plugin(autoIncrement.plugin, {
+//   model: 'users',
+//   field: '_id'
+// });
 
 userSchema.statics.generateHash = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

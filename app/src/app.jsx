@@ -11,8 +11,10 @@ import SignUp from './screens/signup';
 import Login from './screens/login';
 import CreatePost from './screens/createPost/'
 require("babel-polyfill");
-
 injectTapEventPlugin();
+const DEBUG = true;
+console.debug = (...args) => DEBUG ? console.log(...args) : null;
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
