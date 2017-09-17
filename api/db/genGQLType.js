@@ -9,7 +9,7 @@ import graphql, {
   GraphQLBoolean
 } from 'graphql';
 
-const schemaPath = './schemas';
+const schemaPath = './JSONschemas';
 
 const genType = name => {
   const schema = require(`${schemaPath}/${name}`);
@@ -41,6 +41,8 @@ const genType = name => {
         break;
       case 'ObjectId':
         type = GraphQLID;
+      case '[ObjectId]':
+        type = new GraphQLList(GraphQLID);
         break;
       default:
         type = GraphQLString;

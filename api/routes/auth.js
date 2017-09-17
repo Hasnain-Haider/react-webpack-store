@@ -51,6 +51,7 @@ module.exports = app => {
   });
 
   router.get('/logout', async ctx => {
+    console.log(ctx.req.headers);
     ctx.status = 200;
     authRedux.dispatch({ type: 'LOGOUT' });
     ctx.logout();

@@ -17,9 +17,13 @@ export default class Head extends Component {
 
 
   renderButton() {
-    return authRedux.getState() ?
-    (<FlatButton onTouchTap={ this.logout }> { 'Logout' } </FlatButton> ) :
-    (<FlatButton label='login' labelStyle={ { fontWeight: 'bold', fontSize: 16 } }>  </FlatButton>)
+    let element = null;
+    if (authRedux.getState()) {
+      element = <FlatButton onTouchTap={ this.logout }> { 'Logout' } </FlatButton>
+    } else {
+      element = <FlatButton label='login' labelStyle={ { fontWeight: 'bold', fontSize: 16 } }>  </FlatButton>
+    }
+    return element
   }
 
   logout = () => {
@@ -27,22 +31,24 @@ export default class Head extends Component {
     request
     .get(`${apiUrl}/logout`)
     .withCredentials()
+    .set('Access-Control-Allow-Origin', 'http://localhost:3000')
+    .set('Access-Control-Allow-Credentials', true)
     .end((err, res) => {
       if (err) {
         console.error(err)
       } else {
-        console.log('leanr', res, authRedux.getState());
+        console.log('logged out result', res, authRedux.getState());
       }
     });
   }
 
   render = () =>
-  <AppBar
-    title={ this.props.title }
-    style={ this.props.style }
-    onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
-    iconElementRight={ this.renderButton() }
-    className={ 'head' }
+    <AppBar
+      title={ this.props.title }
+      style={ this.props.style }
+      onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
+      iconElementRight={ this.renderButton() }
+      className={ 'head' }
     />
 }
 

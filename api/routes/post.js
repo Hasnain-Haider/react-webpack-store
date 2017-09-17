@@ -4,7 +4,7 @@ import config from '../../config';
 import User from '../db/user';
 import mongoose from 'mongoose';
 import authRedux from '../../app/lib/reduxes/auth';
-var Post = mongoose.models.post;
+var Post = mongoose.models.posts;
 const router = new Router();
 
 module.exports = app => {

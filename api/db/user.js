@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt-nodejs';
 const userSchema = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
+    auto: true,
     required: true
   },
   username: {

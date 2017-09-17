@@ -3,13 +3,13 @@ import User from './user';
 import fs from 'fs';
 import path from 'path';
 const ObjectId = Schema.Types.ObjectId;
-const schemaDir = './schemas';
+const schemaDir = './JSONschemas';
 
 const getModelName = name => name.endsWith('s') ? name : `${name}s`;
 
 const genMongooseSchema = name => {
   const schema = require(`${schemaDir}/${name}`);
-  var schemaObj = { /* _id: Schema.Types.ObjectId */ };
+  var schemaObj = { };
   for (let field in schema) {
     let type;
     let targetField = schema[field];
