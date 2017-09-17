@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import sideLinks from './links.json';
+
 
 export default class SideBar extends Component {
   constructor(props) {
@@ -9,30 +11,30 @@ export default class SideBar extends Component {
     this.state = {
       open: props.open
     };
+    console.log(sideLinks);
   }
 
+  renderLinks = () =>
+    sideLinks.map((link, idx) =>
+      <Link to={link.destination}>
+        <MenuItem
+          primaryText={ link.text}
+          onTouchTap={ this.props.onRequestChange }
+          key={ idx }
+        />
+      </Link>
+    )
+
   render = () =>
-  <Drawer
-    open={ this.props.open }
-    width={ 210 }
-    onRequestChange={ this.props.onRequestChange }
-    docked={ false }
-    className={ 'sidebar' }
+    <Drawer
+      open={ this.props.open }
+      width={ 210 }
+      onRequestChange={ this.props.onRequestChange }
+      docked={ false }
+      className={ 'sidebar' }
     >
-    <Link to={ "/" }>
-      <MenuItem primaryText={ "Home!" } onTouchTap={ this.props.onRequestChange } />
-    </Link>
-    <Link to={ "createPost" }>
-      <MenuItem primaryText={ "CreatePost!" } onTouchTap={ this.props.onRequestChange } />
-    </Link>
-    <Link to={ "signup" }>
-      <MenuItem primaryText={ "SignUp!" } onTouchTap={ this.props.onRequestChange } />
-    </Link>
-    <Divider />
-    <Link to={ "login" }>
-      <MenuItem primaryText={ "Login!" } onTouchTap={ this.props.onRequestChange } />
-    </Link>
-  </Drawer>
+      { this.renderLinks() }
+    </Drawer>
 }
 
 SideBar.propTypes = {

@@ -41,6 +41,7 @@ const genType = name => {
         break;
       case 'ObjectId':
         type = GraphQLID;
+        break;
       case '[ObjectId]':
         type = new GraphQLList(GraphQLID);
         break;

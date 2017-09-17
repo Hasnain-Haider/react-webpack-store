@@ -1,0 +1,22 @@
+[
+  {
+    "destination": "/",
+    "text": "Home!",
+    "authed": false
+  },
+  {
+    "destination": "createPost",
+    "text": "Post a new Item",
+    "authed": true
+  },
+  {
+    "destination": "signup",
+    "text": "Sign Up!",
+    "authed": false
+  },
+  {
+    "destination": "login",
+    "text": "Login!!!",
+    "authed": false
+  }
+]

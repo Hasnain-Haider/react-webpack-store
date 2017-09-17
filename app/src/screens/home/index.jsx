@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
+
 import Core from '../../components/core';
 import SearchBar from './searchBar';
 import Post from './post';
+import authRedux from '../../../lib/reduxes/auth';
 
 export default class Home extends Component {
   constructor(props) {
@@ -22,6 +24,7 @@ export default class Home extends Component {
         price: 41
       }]
     });
+    console.log('AR', authRedux.getState());
   }
 
   renderPosts = () => {
@@ -33,7 +36,7 @@ export default class Home extends Component {
             description={ post.description }
             text={ post.text }
             price={ post.price }
-            />
+          />
         </Paper>
       )
     })

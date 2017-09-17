@@ -45,13 +45,10 @@ module.exports = app => {
 
   router.get('/user/:_id', async ctx => {
     const { _id } = ctx.params;
-    console.log(_id);
     var user = await User.findById(_id)
-    console.log(user);
   });
 
   router.get('/logout', async ctx => {
-    console.log(ctx.req.headers);
     ctx.status = 200;
     authRedux.dispatch({ type: 'LOGOUT' });
     ctx.logout();

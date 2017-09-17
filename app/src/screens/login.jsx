@@ -65,7 +65,7 @@ export default class Login extends Component {
       } else {
         authRedux.dispatch({
           type: 'LOGIN',
-          user: res
+          user: res.body
         });
         this.props.history.push('/');
         console.log('redux ', authRedux.getState());
@@ -73,18 +73,27 @@ export default class Login extends Component {
     });
   }
 
+  renderLoginForm = () => {
+    return (
+      <div />
+    );
+  }
+
   render = () =>
     <div>
       <Core history={ this.props.history } />
-      <Paper zDepth={ 2 }>
+      <Paper zDepth={ 2 } style={ {
+        textAlign: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        height: '85%',
+        padding: '10%'
+       } }>
         <Row>
           <Col sm={ 0 } md={ 2 } lg={ 3 } />
           <Col md={ 8 } lg={ 6 } >
             <Paper style={ {
-                margin: 40,
-                padding: 40,
-                textAlign: 'center',
-                alignSelf: 'center'
+                padding: 20
               } }
               >
               <div>

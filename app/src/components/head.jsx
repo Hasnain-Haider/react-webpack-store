@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { IconButton, IconMenu, MenuItem, AppBar, FlatButton } from 'material-ui';
 import config from 'config';
-
 import PropTypes from 'prop-types';
 import authRedux from '../../lib/reduxes/auth';
 import request from 'superagent';
+
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 export default class Head extends Component {
@@ -17,13 +17,28 @@ export default class Head extends Component {
 
 
   renderButton() {
-    let element = null;
-    if (authRedux.getState()) {
-      element = <FlatButton onTouchTap={ this.logout }> { 'Logout' } </FlatButton>
-    } else {
-      element = <FlatButton label='login' labelStyle={ { fontWeight: 'bold', fontSize: 16 } }>  </FlatButton>
+    let labelStyle = {
+      fontWeight: 'bold',
+      fontSize: 16,
+      color: 'white'
     }
-    return element
+    if (authRedux.getState().username) {
+      return <FlatButton
+        label={'logout'}
+        labelStyle={ labelStyle }
+        onTouchTap={ this.logout }
+        />
+    } else {
+      return <FlatButton
+        label={'login'}
+        labelStyle={ labelStyle }
+        onTouchTap={ () => this.navigateTo('login') }
+        />
+    }
+  }
+
+  navigateTo = (route) => {
+    this.props.history.push(route);
   }
 
   logout = () => {
@@ -31,13 +46,11 @@ export default class Head extends Component {
     request
     .get(`${apiUrl}/logout`)
     .withCredentials()
-    .set('Access-Control-Allow-Origin', 'http://localhost:3000')
-    .set('Access-Control-Allow-Credentials', true)
     .end((err, res) => {
       if (err) {
         console.error(err)
       } else {
-        console.log('logged out result', res, authRedux.getState());
+        this.navigateTo('/');
       }
     });
   }

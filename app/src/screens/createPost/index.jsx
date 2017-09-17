@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Core from '../../components/core';
 import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
+const textFields = ['title', 'description', 'imgSrc', 'price'];
 
 export default class CreatePost extends Component {
   constructor(props) {
@@ -22,63 +23,52 @@ export default class CreatePost extends Component {
   validate = () => {  }
 
   submit = (event) => {
-    console.log(event.target);
-    // return request
-    // .post(`${apiUrl}/signup`)
-    // .withCredentials()
-  }
-
-  renderMenuItems = () => categories.map( category => <MenuItem value={ category } primaryText={ category } />)
-  selectionRenderer = (vals) => {
-    switch (vals.length) {
-      case 0:
-      return '';
-      case 1:
-      return vals[0];
-      default:
-      return `${vals.length} selected`
+    for (var key in this.refs) {
+      console.log(this.refs[key].getValue());
     }
   }
+
+  renderMenuItems = () => categories.map(
+    category => <MenuItem value={ category } primaryText={ category } />
+  )
+
+  selectionRenderer = (vals) =>
+    switch (vals.length) {
+      case 0:
+        return 'Select Category(s)';
+      case 1:
+        return vals[0];
+      default:
+        return `${vals.length} selected`
+    }
+
   handleSelect = (event, index, value) => {
     this.setState({
       categories: value
     });
   }
 
+  renderTextFields = fields =>
+    fields.map(field =>
+      <Row>
+        <TextField
+          name={ field }
+          ref={ field }
+          hintText={ field }
+        />
+      </Row>
+    )
+
   renderForm = () =>
   <div>
     <Paper style={ {
         padding: 40,
       } }>
-
-      <Row>
-        <TextField
-          name={ 'title' }
-          ref={ title => this.title = title}
-          />
-      </Row>
-      <Row>
-        <TextField
-          name={ 'description' }
-          ref={ description => this.description = description}
-          />
-      </Row>
-      <Row>
-        <TextField
-          name={ 'imgSrc' }
-          ref={ imgSrc => this.imgSrc = imgSrc}
-          />
-      </Row>
-      <Row>
-        <TextField
-          name={ 'price' }
-          ref={ price => this.price = price}
-          />
-      </Row>
+        { this.renderTextFields(textFields) }
       <Row>
         <SelectField
           name={ 'category' }
-          ref={ category => this.category = category }
+          ref={ 'category' }
           value={ this.state.categories }
           selectionRenderer={ this.selectionRenderer }
           onChange={ this.handleSelect }
@@ -95,26 +85,25 @@ export default class CreatePost extends Component {
   </div>
 
   render = () =>
-  <div>
-    <Core history={ this.props.history } />
-    <Paper zDepth={ 2 } style={ {
-        textAlign: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-        height: '85%',
-        padding: '10%'
-      } }>
-      <Row>
-        <Col sm={ 0 } md={ 2 } lg={ 3 } />
+    <div>
+      <Core history={ this.props.history } />
+      <Paper zDepth={ 2 } style={ {
+          textAlign: 'center',
+          marginLeft: 10,
+          marginRight: 10,
+          height: '85%',
+          padding: '10%'
+        } }>
+        <Row>
+          <Col sm={ 0 } md={ 2 } lg={ 3 } />
 
-        <Col md={ 8 } lg={ 6 } >
-          { this.renderForm() }
-        </Col>
+          <Col md={ 8 } lg={ 6 } >
+            { this.renderForm() }
+          </Col>
 
-        <Col sm={ 0 } md={ 2 } lg={ 3 } />
-      </Row>
-    </Paper>
-  </div>
-
+          <Col sm={ 0 } md={ 2 } lg={ 3 } />
+        </Row>
+      </Paper>
+    </div>
 
 }
