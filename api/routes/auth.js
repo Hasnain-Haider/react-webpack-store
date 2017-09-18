@@ -45,7 +45,7 @@ module.exports = app => {
 
   router.get('/user/:_id', async ctx => {
     const { _id } = ctx.params;
-    var user = await User.findById(_id)
+    const user = await User.findById(_id);
   });
 
   router.get('/logout', async ctx => {
@@ -69,7 +69,7 @@ module.exports = app => {
         email: user.email,
       });
     } catch (e) {
-      throw (e);
+      console.error(e);
     }
 
     console.log('User Created');
@@ -92,17 +92,6 @@ module.exports = app => {
     await next();
   });
 
-
-  router.get('/good', async (ctx) => {
-    console.log('ctx user ', ctx.state.user);
-    ctx.status = 200;
-    ctx.body = ctx.state.user;
-  });
-
-  router.get('/bad', async (ctx) => {
-    ctx.status = 500;
-    console.log('bad');
-  });
 
   router.get('/allUsers', async (ctx, next) => {
     const user = await User.find({});

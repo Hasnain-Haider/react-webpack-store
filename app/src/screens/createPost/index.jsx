@@ -22,7 +22,7 @@ export default class CreatePost extends Component {
 
   validate = () => {  }
 
-  submit = (event) => {
+  submit = event => {
     for (var key in this.refs) {
       console.log(this.refs[key].getValue());
     }
@@ -32,7 +32,7 @@ export default class CreatePost extends Component {
     category => <MenuItem value={ category } primaryText={ category } />
   )
 
-  selectionRenderer = (vals) =>
+  selectionRenderer = vals => {
     switch (vals.length) {
       case 0:
         return 'Select Category(s)';
@@ -40,7 +40,7 @@ export default class CreatePost extends Component {
         return vals[0];
       default:
         return `${vals.length} selected`
-    }
+    }}
 
   handleSelect = (event, index, value) => {
     this.setState({

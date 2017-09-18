@@ -37,9 +37,8 @@ export default class Head extends Component {
     }
   }
 
-  navigateTo = (route) => {
-    this.props.history.push(route);
-  }
+  navigateTo = route => this.props.history.push(route)
+
 
   logout = () => {
     const self = this;

@@ -6,7 +6,7 @@ const userSchema = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
     auto: true,
-    required: true
+    required: true,
   },
   username: {
     type: String,
@@ -24,12 +24,12 @@ const userSchema = new Schema({
     required: false,
   },
   posts: {
-    type: [String]
+    type: [String],
   },
   created: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 

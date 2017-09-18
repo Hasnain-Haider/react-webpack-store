@@ -11,34 +11,35 @@ import fs from 'fs';
 import genMongooseModels from './db/genMongooseModels';
 import config from '../config';
 
-var DEBUG = true;
-console.debug = (...args) => DEBUG ? console.log(...args) : null;
+const DEBUG = true;
+console.debug = (...args) => (DEBUG ? console.log(...args) : null);
 mongoose.Promise = bluebird;
-const origin =`http://${config.app.host}:${config.app.port}`;
+const origin = `http://${config.app.host}:${config.app.port}`;
+
 const resources = {
   http: [],
-  mongo: [ 'post', 'user'],
-  postgres: []
+  mongo: ['post', 'user'],
+  postgres: [],
 };
 const corsOptions = {
   origin,
-  credentials: true
-}
+  credentials: true,
+};
 
 mongoose.connect(config.db.url, { useMongoClient: true });
-mongoose.connection.on('connected', async() => {
+mongoose.connection.on('connected', async () => {
   console.log('Mongoose has connected to the db');
   testMongo();
 });
 
 const mountRoutes = app =>
-  fs.readdirSync('api/routes').forEach(route => {
+  fs.readdirSync('api/routes').forEach((route) => {
     try {
       require(`./routes/${route}`)(app, resources);
     } catch (e) {
       console.error(e);
     }
-  })
+  });
 
 const start = async app => {
   try {
@@ -48,16 +49,16 @@ const start = async app => {
     console.error(e);
   }
   return app;
-}
+};
 
 const testMongo = async () => {
   if (DEBUG) {
-    for (var model in mongoose.models) {
-      var mod = await mongoose.models[model].findOne();
+    for (const model in mongoose.models) {
+      const mod = await mongoose.models[model].findOne();
       console.debug(model, { mod });
     }
   }
-}
+};
 
 if (require.main === module) {
   const app = new Koa();
@@ -65,9 +66,9 @@ if (require.main === module) {
 
   app.keys = config.sessionSecret;
   app
-  .use(cors(corsOptions))
-  .use(koaBody())
-  .use(session(app));
+    .use(cors(corsOptions))
+    .use(koaBody())
+    .use(session(app));
 
   start(app);
   console.debug(`listening on ${port}`);
