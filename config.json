@@ -20,5 +20,6 @@
       "clientSecret": "1ad66df59e39021e32449565adab44543a1f78c3"
     }
   },
-  "sessionSecret": ["om@gthis1lishu4i&ri3oqniemahpr%esceret"]
+  "sessionSecret": ["om@gthis1lishu4i&ri3oqniemahpr%esceret"],
+  "resources": ["post", "user"]
 }

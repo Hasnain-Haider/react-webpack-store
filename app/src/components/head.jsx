@@ -6,7 +6,6 @@ import authRedux from '../../lib/reduxes/auth';
 import request from 'superagent';
 
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
-
 export default class Head extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +14,7 @@ export default class Head extends Component {
     };
   }
 
-
-  renderButton() {
+  renderButton = () => {
     let labelStyle = {
       fontWeight: 'bold',
       fontSize: 16,
@@ -39,7 +37,6 @@ export default class Head extends Component {
 
   navigateTo = route => this.props.history.push(route)
 
-
   logout = () => {
     const self = this;
     request
@@ -49,7 +46,9 @@ export default class Head extends Component {
       if (err) {
         console.error(err)
       } else {
-        this.navigateTo('/');
+        console.debug('logout');
+        authRedux.dispatch('LOGOUT');
+        this.props.history.push('/');
       }
     });
   }
@@ -62,7 +61,7 @@ export default class Head extends Component {
       iconElementRight={ this.renderButton() }
       className={ 'head' }
     />
-}
+  }
 
 Head.propTypes = {
   title: PropTypes.string.isRequired,

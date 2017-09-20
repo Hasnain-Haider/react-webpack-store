@@ -24,7 +24,6 @@ export default class Login extends Component {
       submitOk: false,
       loading: false
     }
-
   }
 
   validUsername = () => this.state.username.length;
@@ -68,7 +67,7 @@ export default class Login extends Component {
           user: res.body
         });
         this.props.history.push('/');
-        console.log('redux ', authRedux.getState());
+        console.debug('redux ', authRedux.getState());
       }
     });
   }

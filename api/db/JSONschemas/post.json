@@ -1,11 +1,7 @@
 {
-  "_id": {
-    "type": "ObjectId",
-    "required": true
-    },
     "title": {
       "type": "String",
-      "required": true
+      "required": false
     },
     "description": {
       "type": "String",
@@ -17,11 +13,11 @@
     },
     "price": {
       "type": "Number",
-      "required": true
+      "required": false
     },
     "created": {
       "type": "Date",
-      "required": true
+      "required": false
     },
     "owner": {
       "type": "ObjectId",

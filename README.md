@@ -11,7 +11,6 @@ This app demonstrates my ability to use various JavaScript libraries to build a 
 
 ### Backend
 * Koa.js
-* Autogenerates GraphQL and Mongoose schemas and queries
+* Autogenerates Mongoose schema based on JSON
 * MongoDB
-* Serves a GraphQL server (not currently utilized by Frontend)
 * REST API

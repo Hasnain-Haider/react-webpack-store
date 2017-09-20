@@ -11,7 +11,6 @@ const router = new Router();
 module.exports = app => {
   app.use(passport.initialize());
   app.use(passport.session());
-
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -38,20 +37,14 @@ module.exports = app => {
         console.log('pass invalid');
         return done(null, false);
       }
-      console.log('pass valid, user =>', user, err);
+      console.debug('pass valid, user =>', user, err);
       return done(null, user);
     });
   }));
 
-  router.get('/user/:_id', async ctx => {
-    const { _id } = ctx.params;
-    const user = await User.findById(_id);
-  });
-
   router.get('/logout', async ctx => {
-    ctx.status = 200;
-    authRedux.dispatch({ type: 'LOGOUT' });
     ctx.logout();
+    ctx.status = 200;
   });
 
   router.post('/signup', async (ctx, next) => {
@@ -68,8 +61,8 @@ module.exports = app => {
         username: user.username,
         email: user.email,
       });
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
 
     console.log('User Created');
@@ -84,23 +77,17 @@ module.exports = app => {
     if (err) {
       console.error(err);
     }
-  }
-  );
-
-  router.get('/', async (ctx, next) => {
-    console.log(router);
-    await next();
   });
 
-
-  router.get('/allUsers', async (ctx, next) => {
-    const user = await User.find({});
-    ctx.body = user;
-    await next();
+  router.get('/good', async ctx => {
+    console.log('ctx user ', ctx.state.user);
+    ctx.status = 200;
+    ctx.body = ctx.state.user;
   });
 
-  router.post('/', async (ctx, next) => {
-    await next();
+  router.get('/bad', async ctx => {
+    ctx.status = 500;
+    console.log('bad');
   });
 
   app.use(router.allowedMethods());

@@ -1,52 +1,41 @@
 import Koa from 'koa';
 import koaRouter from 'koa-router';
 import koaBody from 'koa-bodyparser';
+import mount from 'koa-mount';
 import session from 'koa-session';
-import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 import passport from 'koa-passport';
 import mongoose from 'mongoose';
 import cors from 'koa-cors';
 import bluebird from 'bluebird';
 import fs from 'fs';
-import genMongooseModels from './db/genMongooseModels';
-import config from '../config';
+import createModels from './db/';
+import config, { resources } from '../config';
 
-const DEBUG = true;
-console.debug = (...args) => (DEBUG ? console.log(...args) : null);
-mongoose.Promise = bluebird;
 const origin = `http://${config.app.host}:${config.app.port}`;
-
-const resources = {
-  http: [],
-  mongo: ['post', 'user'],
-  postgres: [],
-};
 const corsOptions = {
   origin,
   credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS']
 };
+const DEBUG = process.env.DEBUG || true;
+console.debug = (...args) => (DEBUG ? console.log(...args) : null);
 
+mongoose.Promise = bluebird;
 mongoose.connect(config.db.url, { useMongoClient: true });
 mongoose.connection.on('connected', async () => {
   console.log('Mongoose has connected to the db');
-  testMongo();
 });
 
-const mountRoutes = app =>
-  fs.readdirSync('api/routes').forEach((route) => {
-    try {
-      require(`./routes/${route}`)(app, resources);
-    } catch (e) {
-      console.error(e);
-    }
-  });
+const mountRoutes = app => app.use( mount('/api', require('./routes/')(resources)) )
 
+const useAuthentication = app =>  require('./routes/auth.js')(app)
 const start = async app => {
   try {
-    genMongooseModels(resources.mongo.filter(el => el !== 'user'));
+    await createModels(resources.filter(el => el !== 'user'));
+    await testMongo();
     mountRoutes(app);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
   }
   return app;
 };
@@ -63,12 +52,13 @@ const testMongo = async () => {
 if (require.main === module) {
   const app = new Koa();
   const port = config.api.port || 4501;
-
   app.keys = config.sessionSecret;
+
   app
     .use(cors(corsOptions))
     .use(koaBody())
     .use(session(app));
+  useAuthentication(app);
 
   start(app);
   console.debug(`listening on ${port}`);

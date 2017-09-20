@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     path.resolve(ROOT_PATH, 'app', 'src', 'app.jsx'),
   ],
-  context: path.resolve(ROOT_PATH, 'app'),
+  context: path.resolve(ROOT_PATH),
   output: {
     path: BUILD_PATH,
     filename: 'bundle.js',
