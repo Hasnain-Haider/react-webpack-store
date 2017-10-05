@@ -23,13 +23,11 @@ export default class App extends React.Component {
     super(props);
   }
 
-  createRoutes = () => {
-    return this.props.routes.map(route =>
-      <Route exact path={ route.path } key={ route.path }>
-        <Page children={ React.createElement(screens[route.screen]) } />
-      </Route>
-    );
-  }
+  createRoutes = () => this.props.routes.map(route =>
+    <Route exact path={ route.path } key={ route.path }>
+      <Page children={ React.createElement(screens[route.screen]) } />
+    </Route>
+  );
 
   render = () => (
     <MuiThemeProvider>

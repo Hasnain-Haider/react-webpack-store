@@ -16,11 +16,10 @@ export default class SideBar extends Component {
 
   renderLinks = () =>
     sideLinks.map((link, idx) =>
-      <Link to={link.destination}>
+      <Link to={link.destination} key={ idx }>
         <MenuItem
           primaryText={ link.text}
           onTouchTap={ this.props.onRequestChange }
-          key={ idx }
         />
       </Link>
     )

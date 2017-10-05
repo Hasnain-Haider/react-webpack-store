@@ -18,7 +18,7 @@ export default class SignUp extends Component {
   render = () =>
   <div>
     <Paper>
-
+      <h1 style={ centerStyle }>Signup</h1>
     </Paper>
   </div>
 }
