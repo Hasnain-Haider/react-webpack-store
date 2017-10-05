@@ -4,7 +4,6 @@ import { Paper, TextField, RaisedButton, CircularProgress } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config';
-import Core from '../coreComponents/core';
 import authRedux from '../../lib/reduxes/auth';
 import PropTypes from 'prop-types';
 
@@ -80,7 +79,6 @@ export default class Login extends Component {
 
   render = () =>
     <div>
-      <Core history={ this.props.history } />
       <Paper zDepth={ 2 } style={ {
         textAlign: 'center',
         marginLeft: 10,

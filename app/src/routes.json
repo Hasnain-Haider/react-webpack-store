@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/",
+    "screen": "Home"
+  },
+  {
+    "path": "/signup",
+    "screen": "SignUp"
+  },
+  {
+    "path": "/login",
+    "screen": "Login"
+  },
+  {
+    "path": "/createPost",
+    "screen": "createPost"
+  }
+]

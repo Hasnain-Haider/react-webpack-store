@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
-import config from '../../../../config'
-import Core from '../../coreComponents/core';
+import config from 'config'
 import SearchBar from './searchBar';
 import Post from './post';
-import authRedux from '../../../lib/reduxes/auth';
+import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 export default class Home extends Component {
@@ -30,7 +29,7 @@ export default class Home extends Component {
 
   renderPosts = () => {
     return this.state.posts.map((post, idx) => (
-        <Col sm={ 12 } md={ 6 } lg={ 4 }>
+        <Col sm={ 12 } md={ 6 } lg={ 4 } key={ idx }>
         <Paper key={ idx } style={ { margin: 10 } }>
           <Post
             title={ post.title }
@@ -47,7 +46,6 @@ export default class Home extends Component {
   render () {
     return (
       <div>
-        <Core history={ this.props.history } />
         <SearchBar style={ { textAlign: 'center', margin: 10 } } />
         <Row>
           { this.renderPosts() }

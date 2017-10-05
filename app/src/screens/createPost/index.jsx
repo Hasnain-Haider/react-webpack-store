@@ -5,7 +5,6 @@ import categories from 'lib/categories';
 import request from 'superagent';
 import config from 'config';
 import PropTypes from 'prop-types'
-import Core from '../../coreComponents/core';
 import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 const textFields = ['title', 'description', 'imgSrc', 'price'];

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SideBar from './coreComponents/sidebar';
-import Head from './coreComponents/head';
+import SideBar from './sidebar';
+import Head from './head';
 
 export default class Page extends Component {
   constructor(props) {
