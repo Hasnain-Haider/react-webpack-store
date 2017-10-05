@@ -18,7 +18,7 @@ export default class Post extends Component {
 
   componentWillReceiveProps(props){
     const { expanded, title, subtitle, text, price, imgSrc } = props;
-    this.setState({ expanded, title, subtitle, text, price });
+    this.setState({ expanded, title, subtitle, text, price, imgSrc });
   }
 
   expandChange = (expanded) => { this.setState({ expanded }) }

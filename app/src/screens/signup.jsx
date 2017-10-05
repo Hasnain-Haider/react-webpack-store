@@ -3,7 +3,7 @@ import { Paper } from 'material-ui';
 import PropTypes from 'prop-types';
 import request from 'superagent';
 import config from 'config';
-import authRedux from '../../lib/reduxes/auth';
+import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
 export default class SignUp extends Component {

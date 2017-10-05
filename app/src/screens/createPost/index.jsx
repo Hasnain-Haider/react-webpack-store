@@ -38,9 +38,7 @@ export default class CreatePost extends Component {
     console.debug({body});
   }
 
-  renderMenuItems = () => categories.map(
-    category => <MenuItem value={ category } primaryText={ category } />
-  )
+
 
   selectionRenderer = vals => {
     switch (vals.length) {
@@ -58,39 +56,39 @@ export default class CreatePost extends Component {
     });
   }
 
-  renderTextFields = fields =>
-    fields.map(field =>
-      <Row>
-        <TextField
-          name={ field }
-          ref={ field }
-          hintText={ field }
-        />
-      </Row>
-    )
+  renderTextFields = fields => fields.map(field =>
+    <Row>
+      <TextField
+        name={ field }
+        ref={ field }
+        hintText={ field }
+      />
+    </Row>
+  )
 
-  renderForm = () =>
-  <div>
-    <Paper style={ {
-        padding: 40,
-      } }>
-        { this.renderTextFields(textFields) }
-      <Row>
-        <SelectField
-          name={ 'category' }
-          value={ this.state.categories }
-          selectionRenderer={ this.selectionRenderer }
-          onChange={ this.handleSelect }
-          multiple
-          >
-          { this.renderMenuItems() }
-        </SelectField>
-      </Row>
-      <Row>
-        <RaisedButton primary onTouchTap={ event => { this.submit(event) } } label={ 'submit post' } />
-      </Row>
-    </Paper>
-  </div>
+  renderForm = () => (
+    <div>
+      <Paper style={ {
+          padding: 40,
+        } }>
+          { this.renderTextFields(textFields) }
+        <Row>
+          <SelectField
+            name={ 'category' }
+            value={ this.state.categories }
+            selectionRenderer={ this.selectionRenderer }
+            onChange={ this.handleSelect }
+            multiple
+            >
+            { this.renderMenuItems() }
+          </SelectField>
+        </Row>
+        <Row>
+          <RaisedButton primary onTouchTap={ event => { this.submit(event) } } label={ 'submit post' } />
+        </Row>
+      </Paper>
+    </div>
+  )
 
   render = () =>
     <div>
@@ -103,11 +101,9 @@ export default class CreatePost extends Component {
         } }>
         <Row>
           <Col sm={ 0 } md={ 2 } lg={ 3 } />
-
           <Col md={ 8 } lg={ 6 } >
             { this.renderForm() }
           </Col>
-
           <Col sm={ 0 } md={ 2 } lg={ 3 } />
         </Row>
       </Paper>

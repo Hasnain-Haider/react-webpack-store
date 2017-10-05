@@ -17,7 +17,7 @@ export default class Page extends Component {
     }));
   }
 
-  render = () =>
+  render = () => (
     <div>
       <Head
         title={ "Hasnains React Store" }
@@ -32,4 +32,5 @@ export default class Page extends Component {
       />
     { this.props.children }
   </div>
+);
 }

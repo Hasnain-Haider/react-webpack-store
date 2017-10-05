@@ -34,6 +34,10 @@ export default class SearchBar extends Component {
     return !this.state.term;
   }
 
+  submit() {
+
+  }
+
   render() {
     return (
       <div style={ this.props.style }>
@@ -52,6 +56,7 @@ export default class SearchBar extends Component {
               onKeyPress={ event => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
+                  this.submit();
                 }
               }}
               />

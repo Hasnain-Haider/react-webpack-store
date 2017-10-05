@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { IconButton, IconMenu, MenuItem, AppBar, FlatButton } from 'material-ui';
-import config from 'config';
 import PropTypes from 'prop-types';
-import authRedux from '../../lib/reduxes/auth';
 import request from 'superagent';
+import config from 'config';
+import authRedux from 'lib/reduxes/auth';
 
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 export default class Head extends Component {

@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Paper, TextField, RaisedButton, CircularProgress } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
 import request from 'superagent';
-import config from 'config';
-import authRedux from '../../lib/reduxes/auth';
 import PropTypes from 'prop-types';
+import config from 'config';
+import authRedux from 'lib/reduxes/auth';
 
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
@@ -52,7 +52,6 @@ export default class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    console.log({loginBody});
     request
     .post(`${apiUrl}/login`)
     .send(loginBody)
