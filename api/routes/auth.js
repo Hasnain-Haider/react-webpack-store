@@ -2,8 +2,6 @@ import Router from 'koa-router';
 import passport from 'koa-passport';
 import config from '../../config';
 import User from '../db/user';
-import authRedux from '../../app/lib/reduxes/auth';
-
 const Strategy = require('passport-local').Strategy;
 
 const router = new Router();
@@ -26,7 +24,7 @@ module.exports = app => {
   });
 
   passport.use(new Strategy(async (username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
+    User.findOne({ username }, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -34,7 +32,7 @@ module.exports = app => {
         return done(null, false);
       }
       if (!user.validPassword(password)) {
-        console.log('pass invalid');
+        console.debug('pass invalid');
         return done(null, false);
       }
       console.debug('pass valid, user =>', user, err);
@@ -42,21 +40,21 @@ module.exports = app => {
     });
   }));
 
-  router.get('/logout', async ctx => {
+  router.get('/api/logout', async ctx => {
     ctx.logout();
     ctx.status = 200;
   });
 
-  router.post('/signup', async (ctx, next) => {
+  router.post('/api/signup', async (ctx, next) => {
     const body = ctx.request.body;
-
+    let result = null;
     const user = {
       username: body.username,
       email: body.email,
     };
 
     try {
-      await User.create({
+      result = await User.create({
         hash: User.generateHash(body.password),
         username: user.username,
         email: user.email,
@@ -64,30 +62,29 @@ module.exports = app => {
     } catch (err) {
       console.error(err);
     }
-
     console.log('User Created');
     ctx.status = 201;
+    ctx.body = result;
     await next();
   });
 
-  router.post('/login', passport.authenticate('local', {
-    successRedirect: '/good',
-    failureRedirect: '/bad',
+  router.post('/api/login', passport.authenticate('local', {
+    successRedirect: '/api/validPass',
+    failureRedirect: '/api/badPass',
   }), (ctx, err) => {
     if (err) {
       console.error(err);
     }
   });
 
-  router.get('/good', async ctx => {
+  router.get('/api/validPass', async ctx => {
     console.log('ctx user ', ctx.state.user);
     ctx.status = 200;
     ctx.body = ctx.state.user;
   });
 
-  router.get('/bad', async ctx => {
+  router.get('/api/badPass', async ctx => {
     ctx.status = 500;
-    console.log('bad');
   });
 
   app.use(router.allowedMethods());

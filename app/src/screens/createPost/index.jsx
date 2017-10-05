@@ -5,7 +5,7 @@ import categories from 'lib/categories';
 import request from 'superagent';
 import config from 'config';
 import PropTypes from 'prop-types'
-import Core from '../../components/core';
+import Core from '../../coreComponents/core';
 import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 const textFields = ['title', 'description', 'imgSrc', 'price'];
@@ -20,12 +20,23 @@ export default class CreatePost extends Component {
 
   componentWillMount = () => console.log(window, document);
 
-  validate = () => {  }
+  isString = (str) => typeof str === 'string'
+  isNumber = (num) => typeof num === 'number'
+  isType = (val, type) => typeof val === type
+
+  validate = () => {
+    for (let key in fields) {
+
+    }
+  }
 
   submit = event => {
+    const body ={};
     for (var key in this.refs) {
-      console.log(this.refs[key].getValue());
+      body[key] = this.refs[key].getValue();
     }
+    body.categories = this.state.categories;
+    console.debug({body});
   }
 
   renderMenuItems = () => categories.map(
@@ -68,7 +79,6 @@ export default class CreatePost extends Component {
       <Row>
         <SelectField
           name={ 'category' }
-          ref={ 'category' }
           value={ this.state.categories }
           selectionRenderer={ this.selectionRenderer }
           onChange={ this.handleSelect }
@@ -80,13 +90,11 @@ export default class CreatePost extends Component {
       <Row>
         <RaisedButton primary onTouchTap={ event => { this.submit(event) } } label={ 'submit post' } />
       </Row>
-
     </Paper>
   </div>
 
   render = () =>
     <div>
-      <Core history={ this.props.history } />
       <Paper zDepth={ 2 } style={ {
           textAlign: 'center',
           marginLeft: 10,

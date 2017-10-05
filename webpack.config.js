@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     path.resolve(ROOT_PATH, 'app', 'src', 'app.jsx'),
   ],
-  context: path.resolve(ROOT_PATH),
+  context: path.resolve(ROOT_PATH, 'app'),
   output: {
     path: BUILD_PATH,
     filename: 'bundle.js',
@@ -39,4 +39,8 @@ module.exports = {
     host: config.app.host,
     port: config.app.port,
   },
+  node: {
+   fs: "empty",
+   console: true
+  }
 };

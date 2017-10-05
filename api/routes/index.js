@@ -11,9 +11,25 @@ module.exports = resources => {
   resources.forEach(resource => {
     const model = models[resource];
 
+    router.get(`/${resource}/:id`, async ctx => {
+      console.log('getone');
+      const id =  ctx.params.id;
+      const result = await model.findOneById(id);
+      ctx.body = result;
+    });
+
     router.get(`/${resource}`, async ctx => {
-      const query =  ctx.query ;
-      const result = await model.findOne(query);
+      console.log('get many');
+      const query =  ctx.query || {};
+      let limit = query.limit || 10;
+      let skip = query.skip || 0;
+      limit = JSON.parse(limit);
+      skip = JSON.parse(skip);
+      const result = await model
+      .find({})
+      .limit(limit)
+      .skip(skip);
+      console.log(result);
       ctx.body = result;
     });
 
@@ -40,8 +56,8 @@ module.exports = resources => {
     });
 
     router.delete(`${resource}/:id`, async ctx => {
-      console.log({_id});
       const _id = ctx.params.id;
+
       try {
         ctx.body = await model.deleteOne({_id });
       } catch (err) {

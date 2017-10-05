@@ -4,11 +4,11 @@ import { Paper, TextField, RaisedButton, CircularProgress } from 'material-ui';
 import { Col, Row } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config';
-import Core from '../components/core';
+import Core from '../coreComponents/core';
 import authRedux from '../../lib/reduxes/auth';
 import PropTypes from 'prop-types';
 
-const apiUrl = `http://${config.api.host}:${config.api.port}`;
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 const centerStyle = {
   margin: 'auto',
@@ -53,7 +53,7 @@ export default class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-
+    console.log({loginBody});
     request
     .post(`${apiUrl}/login`)
     .send(loginBody)

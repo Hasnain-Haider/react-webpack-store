@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SideBar from './sidebar';
-import Head from './head';
 import PropTypes from 'prop-types';
+import SideBar from './coreComponents/sidebar';
+import Head from './coreComponents/head';
 
-export default class Core extends Component {
+export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,11 +12,9 @@ export default class Core extends Component {
   }
 
   toggleDrawer() {
-    this.setState((prevState, props) => {
-      return {
+    this.setState((prevState, props) => ({
         open: !prevState.open
-      };
-    });
+    }));
   }
 
   render = () =>
@@ -28,9 +26,10 @@ export default class Core extends Component {
         history={ this.props.history }
       />
       <SideBar
-        onRequestChange={ open => this.setState({ open: open }) }
+        onRequestChange={ open => this.setState({ open }) }
         open={ this.state.open }
         history={ this.props.history }
       />
-    </div>
+    { this.props.children }
+  </div>
 }

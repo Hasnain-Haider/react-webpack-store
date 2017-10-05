@@ -1,45 +1,47 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
-
-import Core from '../../components/core';
+import request from 'superagent';
+import config from '../../../../config'
+import Core from '../../coreComponents/core';
 import SearchBar from './searchBar';
 import Post from './post';
 import authRedux from '../../../lib/reduxes/auth';
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      posts: [],
-    };
+    this.state = { posts: [] };
   }
 
-  componentWillMount () {
-    this.setState({
-      posts:  [{
-        title: 'sample title',
-        description: 'Hello there this is a great subtitle',
-        text: 'The text is great tho',
-        price: 41
-      }]
-    });
-    console.log('AR', authRedux.getState());
+  componentWillMount = async () => {
+    var posts = await this.fetchPosts();
+    this.setState({ posts });
+    console.debug({posts});
+  }
+
+  fetchPosts = async () => {
+    var postings = await request
+    .get(`${apiUrl}/post?limit=5&skip=0`)
+    .withCredentials()
+    return postings.body;
   }
 
   renderPosts = () => {
-    return this.state.posts.map((post, idx) => {
-      return(
+    return this.state.posts.map((post, idx) => (
+        <Col sm={ 12 } md={ 6 } lg={ 4 }>
         <Paper key={ idx } style={ { margin: 10 } }>
           <Post
             title={ post.title }
+            imgSrc={ post.imgSrc }
             description={ post.description }
             text={ post.text }
             price={ post.price }
           />
         </Paper>
-      )
-    })
+      </Col>
+    ));
   }
 
   render () {
@@ -47,7 +49,9 @@ export default class Home extends Component {
       <div>
         <Core history={ this.props.history } />
         <SearchBar style={ { textAlign: 'center', margin: 10 } } />
-        { this.renderPosts() }
+        <Row>
+          { this.renderPosts() }
+        </Row>
       </div>
     );
   }

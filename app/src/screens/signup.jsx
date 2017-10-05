@@ -3,7 +3,7 @@ import { Paper } from 'material-ui';
 import PropTypes from 'prop-types';
 import request from 'superagent';
 import config from 'config';
-import Core from '../components/core';
+import Core from '../coreComponents/core';
 import authRedux from '../../lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 

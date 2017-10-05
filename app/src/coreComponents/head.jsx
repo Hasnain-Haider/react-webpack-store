@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import authRedux from '../../lib/reduxes/auth';
 import request from 'superagent';
 
-const apiUrl = `http://${config.api.host}:${config.api.port}`;
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 export default class Head extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +21,21 @@ export default class Head extends Component {
       color: 'white'
     }
     if (authRedux.getState().username) {
-      return <FlatButton
-        label={'logout'}
-        labelStyle={ labelStyle }
-        onTouchTap={ this.logout }
+      return(
+        <FlatButton
+          label={ 'logout' }
+          labelStyle={ labelStyle }
+          onTouchTap={ this.logout }
         />
+      );
     } else {
-      return <FlatButton
-        label={'login'}
-        labelStyle={ labelStyle }
-        onTouchTap={ () => this.navigateTo('login') }
+      return (
+        <FlatButton
+          label={ 'login' }
+          labelStyle={ labelStyle }
+          onTouchTap={ () => this.navigateTo('login') }
         />
+      );
     }
   }
 
@@ -47,20 +51,21 @@ export default class Head extends Component {
         console.error(err)
       } else {
         console.debug('logout');
-        authRedux.dispatch('LOGOUT');
+        authRedux.dispatch({type: 'LOGOUT'});
         this.props.history.push('/');
       }
     });
   }
 
-  render = () =>
-    <AppBar
-      title={ this.props.title }
-      style={ this.props.style }
-      onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
-      iconElementRight={ this.renderButton() }
-      className={ 'head' }
-    />
+  render = () => (
+        <AppBar
+          title={ this.props.title }
+          style={ this.props.style }
+          onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
+          iconElementRight={ this.renderButton() }
+          className={ 'head' }
+        />
+    )
   }
 
 Head.propTypes = {
