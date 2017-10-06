@@ -9,12 +9,13 @@ export default class Page extends Component {
     this.state = {
       open: false
     };
+    this.config = props.config;
   }
 
   toggleDrawer() {
     this.setState((prevState, props) => ({
         open: !prevState.open
-    }));
+    }) );
   }
 
   render = () => (
@@ -22,7 +23,7 @@ export default class Page extends Component {
       <Head
         title={ "Hasnains React Store" }
         onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
-        style={ { ...this.props.headStyle, margin: 10 } }
+        style={ { margin: 10 } }
         history={ this.props.history }
       />
       <SideBar

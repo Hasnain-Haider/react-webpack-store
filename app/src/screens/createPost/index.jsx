@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, FlatButton, RaisedButton, SelectField, MenuItem } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
-import categories from 'lib/categories';
 import request from 'superagent';
 import config from 'config';
 import PropTypes from 'prop-types'
 import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
-const textFields = ['title', 'description', 'imgSrc', 'price'];
 
 export default class CreatePost extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      categories: []
     }
+    this.config = props.config;
   }
 
-  componentWillMount = () => console.log(window, document);
+  componentWillMount = () => {  }
 
   isString = (str) => typeof str === 'string'
   isNumber = (num) => typeof num === 'number'
@@ -34,11 +32,8 @@ export default class CreatePost extends Component {
     for (var key in this.refs) {
       body[key] = this.refs[key].getValue();
     }
-    body.categories = this.state.categories;
     console.debug({body});
   }
-
-
 
   selectionRenderer = vals => {
     switch (vals.length) {
@@ -47,7 +42,7 @@ export default class CreatePost extends Component {
       case 1:
         return vals[0];
       default:
-        return `${vals.length} selected`
+        return `${vals.length} selected`;
     }}
 
   handleSelect = (event, index, value) => {
@@ -56,7 +51,7 @@ export default class CreatePost extends Component {
     });
   }
 
-  renderTextFields = fields => fields.map(field =>
+  renderTextFields = fields => fields.map(field => (
     <Row>
       <TextField
         name={ field }
@@ -64,22 +59,26 @@ export default class CreatePost extends Component {
         hintText={ field }
       />
     </Row>
-  )
+  ))
+
+  renderMenuItems() {
+    return this.config.menuItems.map(x => x);
+  }
 
   renderForm = () => (
     <div>
       <Paper style={ {
           padding: 40,
         } }>
-          { this.renderTextFields(textFields) }
+          { this.renderTextFields(this.config.textFields) }
         <Row>
           <SelectField
             name={ 'category' }
-            value={ this.state.categories }
+            value={ this.config.categories }
             selectionRenderer={ this.selectionRenderer }
             onChange={ this.handleSelect }
             multiple
-            >
+          >
             { this.renderMenuItems() }
           </SelectField>
         </Row>
@@ -90,7 +89,7 @@ export default class CreatePost extends Component {
     </div>
   )
 
-  render = () =>
+  render = () => (
     <div>
       <Paper zDepth={ 2 } style={ {
           textAlign: 'center',
@@ -108,5 +107,6 @@ export default class CreatePost extends Component {
         </Row>
       </Paper>
     </div>
+  )
 
 }

@@ -1,18 +1,18 @@
 [
   {
-    "path": "/",
+    "path": "",
     "screen": "Home"
   },
   {
-    "path": "/signup",
+    "path": "signup",
     "screen": "SignUp"
   },
   {
-    "path": "/login",
+    "path": "login",
     "screen": "Login"
   },
   {
-    "path": "/createPost",
+    "path": "createPost",
     "screen": "CreatePost"
   }
 ]

@@ -5,6 +5,10 @@ import request from 'superagent';
 import config from 'config';
 import authRedux from 'lib/reduxes/auth';
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
+const centerStyle = {
+  margin: 'auto',
+  margin: 20,
+}
 
 export default class SignUp extends Component {
   constructor(props) {
