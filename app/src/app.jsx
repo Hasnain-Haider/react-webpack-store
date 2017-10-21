@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import screens from './screens/';
-import Page from './page/';
+import Core from './core/';
 import routes from './routes'
 import _config from './conf';
 import {
@@ -27,25 +27,21 @@ export default class App extends React.Component {
   }
 
   createRoutes = () => this.props.routes.map(route => {
-      const { path, screen } = route;
-      const component = screens[screen];
-      return(
-        <Route exact path={ `/${path}` } key={ path }>
-          <Page
-            config={ _config[screen] }
-            children={ React.createElement(component, { config: _config[screen] }) } 
-            />
-        </Route>
-      );
-    }
-  );
+    const { path, screen } = route;
+    const Screen = screens[screen];
+    return(
+      <Route exact path={ path } key={ screen } component={ Screen } />
+    );
+});
 
   render = () => (
     <MuiThemeProvider>
       <Router>
-        <Switch>
-          { this.createRoutes() }
-        </Switch>
+        <Core>
+          <Switch>
+            { this.createRoutes() }
+          </Switch>
+        </Core>
       </Router>
     </MuiThemeProvider>
   )

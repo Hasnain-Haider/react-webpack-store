@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SideBar from './sidebar';
 import Head from './head';
 
-export default class Page extends Component {
+export default class Core extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +17,11 @@ export default class Page extends Component {
         open: !prevState.open
     }) );
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.children);
+  }
+
 
   render = () => (
     <div>

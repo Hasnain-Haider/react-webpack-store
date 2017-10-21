@@ -40,7 +40,7 @@ module.exports = {
     port: config.app.port,
   },
   node: {
-   fs: "empty",
+   fs: 'empty',
    console: true
   }
 };
