@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import sideLinks from './links.json';
 
 
 export default class SideBar extends Component {
@@ -13,15 +12,18 @@ export default class SideBar extends Component {
     };
   }
 
-  renderLinks = () =>
-    sideLinks.map((link, idx) =>
-      <Link to={ link.destination } key={ idx }>
+  renderLinks = () =>{
+    return this.props.routes.map((link, idx) => (
         <MenuItem
-          primaryText={ link.text}
-          onTouchTap={ this.props.onRequestChange }
-        />
-      </Link>
+          primaryText={ link.text }
+          name={ link.path }
+          onTouchTap={()=>this.props.navigateTo(link.path)}
+        >
+          <Link to={ link.path } />
+        </MenuItem>
+      )
     )
+  }
 
   render = () =>
     <Drawer

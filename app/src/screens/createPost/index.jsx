@@ -10,8 +10,7 @@ const apiUrl = `http://${config.api.host}:${config.api.port}`;
 export default class CreatePost extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
     this.config = props.config;
   }
 

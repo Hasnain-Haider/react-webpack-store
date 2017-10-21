@@ -1,18 +1,22 @@
 [
   {
-    "path": "",
+    "path": "/home",
+    "text": "Home!",
     "screen": "Home"
   },
   {
-    "path": "signup",
+    "path": "/signup",
+    "text": "Sign Up!",
     "screen": "SignUp"
   },
   {
-    "path": "login",
+    "path": "/login",
+    "text": "Login!!!",
     "screen": "Login"
   },
   {
-    "path": "createPost",
+    "path": "/createPost",
+    "text": "Post a new Item",
     "screen": "CreatePost"
   }
 ]

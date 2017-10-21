@@ -33,13 +33,11 @@ export default class Head extends Component {
         <FlatButton
           label={ 'login' }
           labelStyle={ labelStyle }
-          onTouchTap={ () => this.navigateTo('login') }
+          onTouchTap={ () => this.props.navigateTo('login') }
         />
       );
     }
   }
-
-  navigateTo = route => this.props.history.push(route)
 
   logout = () => {
     const self = this;
@@ -58,13 +56,13 @@ export default class Head extends Component {
   }
 
   render = () => (
-        <AppBar
-          title={ this.props.title }
-          style={ this.props.style }
-          onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
-          iconElementRight={ this.renderButton() }
-          className={ 'head' }
-        />
+      <AppBar
+        title={ this.props.title }
+        style={ this.props.style }
+        onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
+        iconElementRight={ this.renderButton() }
+        className={ 'head' }
+      />
     )
   }
 

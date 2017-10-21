@@ -11,7 +11,7 @@ const centerStyle = {
   margin: "3%",
   textAlign: 'center'
 }
-export default class Auth extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {

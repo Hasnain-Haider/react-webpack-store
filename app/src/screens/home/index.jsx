@@ -14,10 +14,15 @@ export default class Home extends Component {
     this.state = { posts: [] };
   }
 
+  componentWillUnmount() {
+    this.setState({
+      posts: []
+    });
+  }
+
   componentWillMount = async () => {
     var posts = await this.fetchPosts();
     this.setState({ posts });
-    console.debug({posts});
   }
 
   fetchPosts = async () => {

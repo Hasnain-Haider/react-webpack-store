@@ -7,36 +7,43 @@ export default class Core extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
-    this.config = props.config;
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.navigateTo = this.navigateTo.bind(this);
+  }
+
+  navigateTo(path) {
+    this.props.history.push(path);
+    this.setState({
+      open: false
+    });
   }
 
   toggleDrawer() {
     this.setState((prevState, props) => ({
         open: !prevState.open
-    }) );
+    }));
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.children);
-  }
-
-
-  render = () => (
-    <div>
-      <Head
-        title={ "Hasnains React Store" }
-        onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
-        style={ { margin: 10 } }
-        history={ this.props.history }
-      />
-      <SideBar
-        onRequestChange={ open => this.setState({ open }) }
-        open={ this.state.open }
-        history={ this.props.history }
-      />
-    { this.props.children }
-  </div>
-);
+  render = () => {
+    const { history, routes, children } = this.props;
+    const { open } = this.state;
+    return(
+      <div>
+        <Head
+          title={ "Hasnains React Store" }
+          onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
+          style={ { margin: 10 } }
+        />
+        { children }
+        <SideBar
+          onRequestChange={ open => this.setState({ open }) }
+          open={ open }
+          routes={ routes }
+          navigateTo={ this.navigateTo }
+        />
+      </div>
+    )}
 }
