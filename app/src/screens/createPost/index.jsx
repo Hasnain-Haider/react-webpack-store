@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
-import { Paper, TextField, Chip, Dialog, FlatButton, RaisedButton, SelectField, MenuItem } from 'material-ui';
+import {
+  Paper,
+  TextField,
+  Chip,
+  Dialog,
+  FlatButton,
+  RaisedButton,
+  SelectField,
+   MenuItem
+} from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config';
 import PropTypes from 'prop-types'
 import authRedux from 'lib/reduxes/auth';
+import Screen from '../screen';
+
 const apiUrl = `http://${config.api.host}:${config.api.port}`;
 
-export default class CreatePost extends Component {
+export default class CreatePost extends Screen {
   constructor(props) {
     super(props)
-    this.state = {}
-    this.config = props.config;
+
+    this.state = {
+      categories: []
+    }
   }
 
   componentWillMount = () => {  }
-
   isString = (str) => typeof str === 'string'
   isNumber = (num) => typeof num === 'number'
   isType = (val, type) => typeof val === type
@@ -31,7 +43,6 @@ export default class CreatePost extends Component {
     for (var key in this.refs) {
       body[key] = this.refs[key].getValue();
     }
-    console.debug({body});
   }
 
   selectionRenderer = vals => {
@@ -45,6 +56,7 @@ export default class CreatePost extends Component {
     }}
 
   handleSelect = (event, index, value) => {
+    console.log(value, index);
     this.setState({
       categories: value
     });
@@ -60,25 +72,23 @@ export default class CreatePost extends Component {
     </Row>
   ))
 
-  renderMenuItems() {
-    return this.config.menuItems.map(x => x);
-  }
+  renderMenuItems = categories => categories.map(x => <MenuItem >{x}</MenuItem>);
 
   renderForm = () => (
     <div>
       <Paper style={ {
           padding: 40,
         } }>
-          { this.renderTextFields(this.config.textFields) }
+          { this.renderTextFields(this.stew.textFields) }
         <Row>
           <SelectField
             name={ 'category' }
-            value={ this.config.categories }
+            value={ this.state.categories }
             selectionRenderer={ this.selectionRenderer }
             onChange={ this.handleSelect }
             multiple
           >
-            { this.renderMenuItems() }
+            { this.renderMenuItems(this.stew.categories) }
           </SelectField>
         </Row>
         <Row>
@@ -107,5 +117,4 @@ export default class CreatePost extends Component {
       </Paper>
     </div>
   )
-
 }

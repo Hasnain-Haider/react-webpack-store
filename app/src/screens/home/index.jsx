@@ -3,12 +3,13 @@ import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config'
+import authRedux from 'lib/reduxes/auth';
 import SearchBar from './searchBar';
 import Post from './post';
-import authRedux from 'lib/reduxes/auth';
+import Screen from '../screen';
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
-export default class Home extends Component {
+export default class Home extends Screen {
   constructor(props) {
     super(props);
     this.state = { posts: [] };

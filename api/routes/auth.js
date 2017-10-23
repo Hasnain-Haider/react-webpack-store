@@ -46,12 +46,13 @@ module.exports = app => {
   });
 
   router.post('/api/signup', async (ctx, next) => {
-    const body = ctx.request.body;
     let result = null;
+    const body = ctx.request.body;
     const user = {
       username: body.username,
       email: body.email,
     };
+    user.username = user.username || user.email;
 
     try {
       result = await User.create({

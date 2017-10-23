@@ -1,0 +1,34 @@
+{
+  "screens": {
+   "Home": {
+     "name": "Home"
+   },
+   "SignUp": {
+     "name": "SignUp"
+   },
+   "Login": {
+     "name": "Login"
+   },
+   "CreatePost": {
+     "textFields" : [
+       "title",
+       "description",
+       "imgSrc",
+       "price"
+     ],
+     "menuItems": [
+     ],
+     "categories": [
+       "electronics",
+       "fashion",
+       "autos",
+       "tools",
+       "motorcycles",
+       "real estate",
+       "books",
+       "computers",
+       "other"
+     ]
+   }
+  }
+}

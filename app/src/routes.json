@@ -15,7 +15,7 @@
     "screen": "Login"
   },
   {
-    "path": "/createPost",
+    "path": "/createpost",
     "text": "Post a new Item",
     "screen": "CreatePost"
   }

@@ -6,6 +6,7 @@ import request from 'superagent';
 import PropTypes from 'prop-types';
 import config from 'config';
 import authRedux from 'lib/reduxes/auth';
+import Screen from '../screen';
 
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
@@ -14,7 +15,7 @@ const centerStyle = {
   margin: 20,
 }
 
-export default class Login extends Component {
+export default class Login extends Screen {
   constructor(props) {
     super(props);
     this.state = {

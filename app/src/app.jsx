@@ -5,17 +5,19 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import screens from './screens/';
 import Core from './core/';
+import stew from './appStew';
 import routes from './routes'
-import _config from './conf';
+import { toLower, each, keys } from 'lodash';
 import {
   BrowserRouter as Router,
   Route,
   withRouter,
+  Redirect,
   Switch,
 } from 'react-router-dom';
-const Corex = withRouter(Core);
 require("babel-polyfill");
 
+const Corex = withRouter(Core);
 const DEBUG = true;
 console.debug = (...args) => DEBUG ? console.log(...args) : null;
 injectTapEventPlugin();
@@ -23,16 +25,18 @@ injectTapEventPlugin();
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.stew = props.stew;
+    this.routes = keys(this.stew.screens);
   }
 
-  createRoutes = () => routes.map(route => {
-    const { path, screen } = route;
-    const Screen = screens[screen];
+  createRoutes = x => this.routes.map(sName => {
+    const Screen = screens[sName];
+    console.log(this.stew[sName]);
     return(
       <Route
-        path={ path }
-        key={ screen }
-        component={ () => <Screen /> }
+        path={ `/${toLower(sName)}` }
+        key={ sName }
+        component={ () => <Screen stew={ this.stew.screens[sName] } /> }
       />
     );
   });
@@ -41,22 +45,19 @@ export default class App extends Component {
     <MuiThemeProvider>
       <Router>
         <Switch>
-
           <div>
-            <div>
-              <Route component={ () =>
-                  <Corex routes={ routes } />
-                 } />
+            <Redirect exact from='/' to='/home'/>
+            <Route component={ () =>
+                <Corex routes={ routes } />
+              } />
+              { this.createRoutes() }
             </div>
-            { this.createRoutes() }
-          </div>
-
-        </Switch>
-      </Router>
-    </MuiThemeProvider>
-  )
-}
+          </Switch>
+        </Router>
+      </MuiThemeProvider>
+    )
+  }
 
   ReactDOM.render(
-    <App />,
+    <App stew={ stew } />,
   document.getElementById('app'));
