@@ -1,34 +1,69 @@
 {
   "screens": {
-   "Home": {
-     "name": "Home"
-   },
-   "SignUp": {
-     "name": "SignUp"
-   },
-   "Login": {
-     "name": "Login"
-   },
-   "CreatePost": {
-     "textFields" : [
-       "title",
-       "description",
-       "imgSrc",
-       "price"
-     ],
-     "menuItems": [
-     ],
-     "categories": [
-       "electronics",
-       "fashion",
-       "autos",
-       "tools",
-       "motorcycles",
-       "real estate",
-       "books",
-       "computers",
-       "other"
-     ]
-   }
+    "Account": {
+
+    },
+    "Home": {
+      "name": "Home"
+    },
+    "SignUp": {
+      "name": "SignUp"
+    },
+    "Login": {
+      "name": "Login"
+    },
+    "CreatePost": {
+      "textFields": [
+        "title",
+        "description",
+        "imgSrc",
+        "price"
+      ],
+      "menuItems": [
+
+      ],
+      "categories": [
+        "electronics",
+        "fashion",
+        "autos",
+        "tools",
+        "motorcycles",
+        "real estate",
+        "books",
+        "computers",
+        "other"
+      ]
+    }
+  },
+  "Core": {
+    "SideBar": {
+      "routes": [
+        {
+          "path": "/home",
+          "text": "Home!",
+          "screen": "Home"
+        },
+        {
+          "path": "/signup",
+          "text": "Sign Up!",
+          "screen": "SignUp"
+        },
+        {
+          "path": "/account",
+          "text": "Acount page !",
+          "screen": "Account"
+        },
+        {
+          "path": "/login",
+          "text": "Login!!!",
+          "screen": "Login"
+        },
+        {
+          "path": "/createpost",
+          "text": "Post a new Item",
+          "screen": "CreatePost"
+        }
+      ]
+    }
   }
 }

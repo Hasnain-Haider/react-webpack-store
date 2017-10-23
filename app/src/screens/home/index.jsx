@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile } from 'material-ui';
+import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile, RaisedButton } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
 import config from 'config'
@@ -12,7 +12,10 @@ const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 export default class Home extends Screen {
   constructor(props) {
     super(props);
-    this.state = { posts: [] };
+    this.state = {
+      posts: [],
+      skip: 0
+    };
   }
 
   componentWillUnmount() {
@@ -23,14 +26,32 @@ export default class Home extends Screen {
 
   componentWillMount = async () => {
     var posts = await this.fetchPosts();
-    this.setState({ posts });
   }
 
-  fetchPosts = async () => {
+  fetchPosts = async (skip=0) => {
     var postings = await request
-    .get(`${apiUrl}/post?limit=5&skip=0`)
-    .withCredentials()
+    .get(`${apiUrl}/post?limit=5&skip=${skip}`)
+    .withCredentials();
+
+    this.setState({ posts: postings.body });
     return postings.body;
+  }
+
+  changePage = async back => {
+    this.setState(prevstate => {
+      let { skip } = prevstate;
+      console.log('this.state.posts === []', this.state.posts.length === 0);
+
+      const increment = back ? -5 : 5;
+      skip += increment;
+      if (skip <  0) {
+        skip = 0;
+      } else if (this.state.posts.length === 0 && !back) {
+        skip -= increment;
+      }
+      this.fetchPosts(skip);
+      return { skip }
+    });
   }
 
   renderPosts = () => {
@@ -55,6 +76,20 @@ export default class Home extends Screen {
         <SearchBar style={ { textAlign: 'center', margin: 10 } } />
         <Row>
           { this.renderPosts() }
+        </Row>
+        <Row>
+          <RaisedButton
+            secondary
+            name={'prev'}
+            label={'prev page'}
+            onTouchTap={ ()=>{this.changePage(true)} }
+          />
+        <RaisedButton
+          secondary
+          name={'next'}
+          label={'next page'}
+          onTouchTap={ ()=>{this.changePage(false)} }
+        />
         </Row>
       </div>
     );

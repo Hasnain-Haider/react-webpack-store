@@ -19,8 +19,8 @@ export default class Login extends Screen {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'myuser',
+      password: 'mypass',
       submitOk: false,
       loading: false
     }
@@ -53,19 +53,20 @@ export default class Login extends Screen {
       username: this.state.username,
       password: this.state.password
     };
+
     request
     .post(`${apiUrl}/login`)
     .send(loginBody)
     .withCredentials()
     .end((err, res) => {
       if (err) {
-        console.error('therewas an error    ,', err);
+        console.error('therewas an error,', err);
       } else {
         authRedux.dispatch({
           type: 'LOGIN',
           user: res.body
         });
-        this.props.history.push('/');
+        this.props.history.push('/home');
         console.debug('redux ', authRedux.getState());
       }
     });

@@ -34,12 +34,15 @@ export default class Core extends Component {
       <div>
         <Head
           title={ "Hasnains React Store" }
+          stew={ this.props.stew.Head }
           onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) }
           style={ { margin: 10 } }
+          navigateTo={ this.navigateTo }
         />
         { children }
         <SideBar
           onRequestChange={ open => this.setState({ open }) }
+          stew={ this.props.stew.SideBar }
           open={ open }
           routes={ routes }
           navigateTo={ this.navigateTo }

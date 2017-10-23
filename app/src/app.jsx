@@ -26,12 +26,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.stew = props.stew;
-    this.routes = keys(this.stew.screens);
   }
 
-  createRoutes = x => this.routes.map(sName => {
-    const Screen = screens[sName];
-    console.log(this.stew[sName]);
+  createRoutes = x => keys(this.stew.screens).map(sName => {
+    const Screen = withRouter(screens[sName]);
+    console.log(sName, `/${toLower(sName)}`);
     return(
       <Route
         path={ `/${toLower(sName)}` }
@@ -48,7 +47,7 @@ export default class App extends Component {
           <div>
             <Redirect exact from='/' to='/home'/>
             <Route component={ () =>
-                <Corex routes={ routes } />
+                <Corex stew={ this.stew.Core } routes={ routes } />
               } />
               { this.createRoutes() }
             </div>

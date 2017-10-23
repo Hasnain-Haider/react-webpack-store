@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { IconButton, IconMenu, MenuItem, AppBar, FlatButton } from 'material-ui';
+import {
+  IconButton,
+  IconMenu,
+  MenuItem,
+  AppBar,
+  FlatButton,
+  Paper,
+  RaisedButton,
+  ToolbarGroup,
+  CircularProgress
+} from 'material-ui';
+
 import PropTypes from 'prop-types';
 import request from 'superagent';
 import config from 'config';
@@ -14,29 +25,61 @@ export default class Head extends Component {
     };
   }
 
-  renderButton = () => {
+  getUsername() {
+    let username = authRedux.getState().username;
     let labelStyle = {
       fontWeight: 'bold',
+      fontSize: 16,
+      borderRadius: '5px',
+      border: 'dashed 1px black',
+      padding: 8,
+      color: 'black'
+    }
+
+      return (
+        <FlatButton
+          label={ username || 'Not Signed in' }
+          labelStyle={ labelStyle }
+          color={ 'orange' }
+          onTouchTap={ ()=> {
+            username ?
+            this.props.navigateTo('/account') :
+            null
+          } }
+        />
+      )
+  }
+
+  renderButton = () => {
+    let text = '';
+    let Button;
+    let labelStyle = {
+      fontWeight: 'bold',
+      borderRadius: '5px',
       fontSize: 16,
       color: 'white'
     }
     if (authRedux.getState().username) {
-      return(
-        <FlatButton
+        Button = <RaisedButton
           label={ 'logout' }
+          secondary
           labelStyle={ labelStyle }
           onTouchTap={ this.logout }
         />
-      );
     } else {
-      return (
-        <FlatButton
+        Button = <RaisedButton
           label={ 'login' }
+          secondary
           labelStyle={ labelStyle }
-          onTouchTap={ () => this.props.navigateTo('login') }
+          onTouchTap={ () => this.props.navigateTo('/login') }
         />
-      );
     }
+    return(
+      <ToolbarGroup>
+        { this.getUsername() }
+        { Button }
+      </ToolbarGroup>
+    )
   }
 
   logout = () => {
@@ -50,7 +93,7 @@ export default class Head extends Component {
       } else {
         console.debug('logout');
         authRedux.dispatch({type: 'LOGOUT'});
-        this.props.history.push('/');
+        this.props.history.push('/home');
       }
     });
   }

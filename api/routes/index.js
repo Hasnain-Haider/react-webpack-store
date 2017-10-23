@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import Koa from 'koa';
 import mongoose from 'mongoose';
 import config from '../../config';
-import authRedux from '../../app/lib/reduxes/auth';
+
 const router = new Router();
 const app = new Koa();
 const models = mongoose.models;
@@ -10,34 +10,45 @@ const models = mongoose.models;
 module.exports = resources => {
   resources.forEach(resource => {
     const model = models[resource];
-
     router.get(`/${resource}/:id`, async ctx => {
-      console.log('getone');
       const id =  ctx.params.id;
       const result = await model.findOneById(id);
       ctx.body = result;
     });
 
     router.get(`/${resource}`, async ctx => {
-      console.log('get many');
       const query =  ctx.query || {};
       let limit = query.limit || 10;
       let skip = query.skip || 0;
+      console.debug(query);
       limit = JSON.parse(limit);
       skip = JSON.parse(skip);
       const result = await model
       .find({})
       .limit(limit)
       .skip(skip);
-      console.log(result);
+      console.debug(resource, 'get many ', result.length);
       ctx.body = result;
     });
 
     router.post(`/${resource}`, async ctx => {
       const body = ctx.request.body;
+      console.log({body});
       try {
         ctx.status = 201;
         ctx.body = await model.create(body);
+      } catch (err) {
+        console.error(err);
+        ctx.status = 500;
+      }
+    });
+
+    router.post(`/${resource}/query`, async ctx => {
+      const body = ctx.request.body;
+      console.log('query', { body });
+      try {
+        ctx.status = 200;
+        ctx.body = await model.find(body);
       } catch (err) {
         console.error(err);
         ctx.status = 500;
@@ -55,9 +66,10 @@ module.exports = resources => {
       }
     });
 
-    router.delete(`${resource}/:id`, async ctx => {
-      const _id = ctx.params.id;
-
+    router.delete(`/${resource}`, async ctx => {
+      const { _id } = ctx.request.body;
+      console.debug('resource', 'delete', _id);
+      if (!_id) return;
       try {
         ctx.body = await model.deleteOne({_id });
       } catch (err) {
@@ -68,6 +80,7 @@ module.exports = resources => {
 
     router.put(`/${resource}/:id`, async ctx => {
       const body = ctx.request.body;
+      console.debug('resource', 'put', body);
       const _id = ctx.params.id;
       try {
         ctx.body = await model.findOneAndUpdate({ _id }, body, { upsert: true });

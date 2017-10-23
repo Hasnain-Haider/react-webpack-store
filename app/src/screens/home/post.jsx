@@ -17,11 +17,26 @@ export default class Post extends Component {
   }
 
   componentWillReceiveProps(props){
-    const { expanded, title, subtitle, text, price, imgSrc } = props;
-    this.setState({ expanded, title, subtitle, text, price, imgSrc });
+    const {
+      expanded,
+      title,
+      subtitle,
+      text,
+      price,
+      imgSrc
+    } = props;
+
+    this.setState({
+      expanded,
+      title,
+      subtitle,
+      text,
+      price,
+      imgSrc
+    });
   }
 
-  expandChange = (expanded) => { this.setState({ expanded }) }
+  expandChange = expanded => { this.setState({ expanded }) }
 
   render() {
     return (
@@ -41,7 +56,7 @@ export default class Post extends Component {
           </CardText>
           <CardMedia
             expandable={true}
-            overlay={<CardTitle title={ this.state.title } subtitle="Overlay subtitle" />}
+            overlay={<CardTitle title={ this.state.title } subtitle={this.state.subtitle}/>}
           >
             <img src={ this.state.imgSrc } />
           </CardMedia>

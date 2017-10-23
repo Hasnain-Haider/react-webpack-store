@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Drawer, MenuItem, Divider } from 'material-ui';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import routes from '../routes'
 
 export default class SideBar extends Component {
   constructor(props) {
@@ -10,10 +9,11 @@ export default class SideBar extends Component {
     this.state = {
       open: props.open
     };
+    console.log('SideBar', props.stew);
   }
 
   renderLinks = () =>{
-    return routes.map((link, idx) => (
+    return this.props.stew.routes.map((link, idx) => (
         <MenuItem
           primaryText={ link.text }
           key={ link.path }

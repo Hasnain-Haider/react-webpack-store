@@ -1,7 +1,7 @@
 {
     "title": {
       "type": "String",
-      "required": false
+      "required": true
     },
     "description": {
       "type": "String",
@@ -17,11 +17,11 @@
     },
     "created": {
       "type": "Date",
-      "required": false
+      "required": true
     },
     "owner": {
       "type": "ObjectId",
-      "required": false
+      "required": true
     },
     "category": {
       "type": "[String]",

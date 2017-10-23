@@ -7,7 +7,9 @@ import {
   FlatButton,
   RaisedButton,
   SelectField,
-   MenuItem
+  CircularProgress,
+
+  MenuItem
 } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
@@ -16,7 +18,7 @@ import PropTypes from 'prop-types'
 import authRedux from 'lib/reduxes/auth';
 import Screen from '../screen';
 
-const apiUrl = `http://${config.api.host}:${config.api.port}`;
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 export default class CreatePost extends Screen {
   constructor(props) {
@@ -43,6 +45,26 @@ export default class CreatePost extends Screen {
     for (var key in this.refs) {
       body[key] = this.refs[key].getValue();
     }
+    console.log({
+      ...body,
+       owner: authRedux.getState()._id,
+       created: Date.now()
+     });
+    request
+    .post(`${apiUrl}/post`)
+    .send({
+      ...body,
+       owner: authRedux.getState()._id,
+       created: Date.now()
+     })
+    .end((err, res) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log({res});
+        this.props.history.push('/account/posts')
+      }
+    })
   }
 
   selectionRenderer = vals => {
@@ -85,7 +107,7 @@ export default class CreatePost extends Screen {
             name={ 'category' }
             value={ this.state.categories }
             selectionRenderer={ this.selectionRenderer }
-            onChange={ this.handleSelect }
+            onChange={ this.handleSelect.bind(this) }
             multiple
           >
             { this.renderMenuItems(this.stew.categories) }

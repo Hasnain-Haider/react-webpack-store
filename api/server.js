@@ -27,8 +27,17 @@ mongoose.connection.on('connected', async () => {
 });
 
 const mountRoutes = app => app.use( mount('/api', require('./routes/')(resources)) )
-
 const useAuthentication = app =>  require('./routes/auth.js')(app)
+
+const testMongo = async () => {
+  if (DEBUG) {
+    for (const model in mongoose.models) {
+      const mod = await mongoose.models[model].findOne();
+      console.debug('routinefindone', model, { mod });
+    }
+  }
+};
+
 const start = async app => {
   try {
     await createModels(resources.filter(el => el !== 'user'));
@@ -40,14 +49,6 @@ const start = async app => {
   return app;
 };
 
-const testMongo = async () => {
-  if (DEBUG) {
-    for (const model in mongoose.models) {
-      const mod = await mongoose.models[model].findOne();
-      console.debug(model, { mod });
-    }
-  }
-};
 
 if (require.main === module) {
   const app = new Koa();
@@ -58,11 +59,13 @@ if (require.main === module) {
     .use(cors(corsOptions))
     .use(koaBody())
     .use(session(app));
-  useAuthentication(app);
 
+  useAuthentication(app);
   start(app);
   console.debug(`listening on ${port}`);
   app.listen(port);
 }
+
+
 
 export default start;

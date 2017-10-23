@@ -21,7 +21,7 @@ const centerStyle = {
   textAlign: 'center'
 }
 
-export default class SignUp extends Screen {
+export default class Auth extends Screen {
   constructor(props) {
     super(props);
     const user = {
@@ -32,7 +32,10 @@ export default class SignUp extends Screen {
     this.state = {
       submitOk: false,
       loading: false,
-      userCreatedSnackBarOpen: false,
+      snackOpen: false,
+      badPasswordText: null,
+      badEmailText: null,
+      badUsernameText: null,
       user
     };
   }
@@ -47,12 +50,11 @@ export default class SignUp extends Screen {
     });
   }
 
-  closeSnackbar = _ => {
+  closeSnackbar = () => {
     this.setState({
-      userCreatedSnackBarOpen: false
+      snackOpen: false
     });
   }
-
 
   validate = () => {
     const { email, password, username } = this.state.user;
@@ -63,25 +65,6 @@ export default class SignUp extends Screen {
       return false;
     }
   }
-
-  submit = (e) => {
-    request
-    .post(`${apiUrl}/api/signup`)
-    .send({ ...this.state.user })
-    .withCredentials()
-    .end((err, res) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(res);
-        this.setState({
-          userCreatedSnackBarOpen: true
-        });
-      }
-    });
-  }
-
-  // define state.badEmail && badUsername
 
   render = () =>
   <div>
@@ -100,25 +83,24 @@ export default class SignUp extends Screen {
                 style={ centerStyle }
                 name={ 'email' }
                 value={ this.state.email }
-                errorText={ this.state.badEmail }
+                errorText={ this.state.badEmailText }
                 onChange={ this.handleChange.bind(this, 'email') }
                 />
             </Row>
             <Row>
-
               <TextField
                 placeholder={ 'Username' }
                 style={ centerStyle }
                 name={ 'username' }
                 value={ this.state.username }
-                errorText={ this.state.badUsername }
+                errorText={ this.state.badUsernameText }
                 onChange={ this.handleChange.bind(this, 'username') }
                 />
             </Row>
             <Row>
               <TextField
                 placeholder={ "Password" }
-                errorText={this.state.badPassword}
+                errorText={ this.state.badPasswordText }
                 name={ 'password' }
                 style={ centerStyle }
                 value={ this.state.password }
@@ -127,11 +109,11 @@ export default class SignUp extends Screen {
                 />
             </Row>
             <RaisedButton
-              style={ {  width : 60, ...centerStyle } }
+              style={ {  width: 60, ...centerStyle } }
               label={ 'login' }
               id={ 'login-btn' }
               disabled={ !this.validate() }
-              onTouchTap={ this.submit }
+              onTouchTap={ this.props.submit(this.state.user) }
               secondary
               />
           </div>
@@ -139,10 +121,16 @@ export default class SignUp extends Screen {
       </Col>
     </Paper>
     <Snackbar
-      open={ this.state.userCreatedSnackBarOpen }
+      open={ this.state.snackOpen }
       onRequestClose={ this.handleRequestClose }
       transition={ Fade }
-      message={"hidden hills"}
-      />
+      message={this.props.snackbarMessage}
+    />
   </div>
 }
+
+Auth.propTypes = {
+  title: PropTypes.string.isRequired,
+  submit: PropTypes.func.isRequired,
+  snackbarMessage: PropTypes.string.isRequired
+};
