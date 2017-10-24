@@ -51,7 +51,7 @@ export default class Head extends Component {
     )
   }
 
-  renderButton = () => {
+  renderButton() {
     let text = '';
     let Button;
     let labelStyle = {
@@ -83,7 +83,7 @@ export default class Head extends Component {
     )
   }
 
-  logout = () => {
+  logout () {
     const self = this;
     request
     .get(`${apiUrl}/logout`)
@@ -99,7 +99,8 @@ export default class Head extends Component {
     });
   }
 
-  render = () => (
+  render() {
+    return(
       <AppBar
         title={ this.props.title }
         style={ this.props.style }
@@ -107,7 +108,8 @@ export default class Head extends Component {
         iconElementRight={ this.renderButton() }
         className={ 'head' }
       />
-    )
+      )
+    }
   }
 
 Head.propTypes = {

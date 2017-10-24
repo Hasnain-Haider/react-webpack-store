@@ -22,7 +22,7 @@ export default class Post extends Component {
     });
   }
 
-  expandChange = expanded => { this.setState({ expanded }) }
+  expandChange(expanded) { return this.setState({ expanded }) }
 
   render() {
     return (

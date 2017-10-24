@@ -38,12 +38,7 @@ export default class Auth extends Screen {
       snackBarOpen: false
     }
   }
-
-  validUsername = () => this.state.user.username.length;
-  validPassword = () => this.state.user.password.length >= 3;
-  validValues   = () => this.validUsername() && this.validPassword();
-
-  handleChange = (fieldName, event) => {
+  handleChange (fieldName, event) {
     const user = {
       ...this.state.user,
       [fieldName]: event.target.value
@@ -51,13 +46,13 @@ export default class Auth extends Screen {
     this.setState({ user });
   }
 
-  submit = () => {
+  submit () {
     const { username, password, email } = this.state.user;
     const user = { username, password, email };
     this.props.submit(user)
   }
 
-  validate = () => {
+  validate () {
     const { email, password, username } = this.state.user;
     try {
       return every([email, password, username], x => x.length > 4);
@@ -67,7 +62,7 @@ export default class Auth extends Screen {
     }
   }
 
-  renderForm = () => {
+  renderForm () {
 
     return(
       <div style={{margin : 'auto'}}>
@@ -116,25 +111,28 @@ export default class Auth extends Screen {
   }
 
 
-  render = () =>
-  <div>
-    <Paper>
-      <Col md={ 8 } lg={ 6 } style={{ padding: "10%"}}>
-        <h1 style={ centerStyle }>{ this.props.hTitle }</h1>
-        <Paper style={ {
-            padding: "10%",
-            ...centerStyle
-          } }
-          >
-          {this.renderForm()}
+  render(){
+    return (
+        <div>
+        <Paper>
+          <Col md={ 8 } lg={ 6 } style={{ padding: "10%"}}>
+            <h1 style={ centerStyle }>{ this.props.hTitle }</h1>
+            <Paper style={ {
+                padding: "10%",
+                ...centerStyle
+              } }
+              >
+              {this.renderForm()}
+            </Paper>
+          </Col>
         </Paper>
-      </Col>
-    </Paper>
-    <Snackbar
-      open={ this.state.snackBarOpen }
-      onRequestClose={ this.handleRequestClose }
-      transition={ Fade }
-      message={ this.props.snackbarMsg }
-    />
-  </div>
+        <Snackbar
+          open={ this.state.snackBarOpen }
+          onRequestClose={ this.handleRequestClose }
+          transition={ Fade }
+          message={ this.props.snackbarMsg }
+        />
+      </div>
+  )
+}
 }

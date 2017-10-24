@@ -24,11 +24,11 @@ export default class Home extends Screen {
     });
   }
 
-  componentWillMount = async () => {
+  async componentWillMount () {
     var posts = await this.fetchPosts();
   }
 
-  fetchPosts = async (skip = 0) => {
+  async fetchPosts(skip=0) {
 
     var res = await request
     .get(`${apiUrl}/post?limit=5&skip=${skip}`)
@@ -42,7 +42,7 @@ export default class Home extends Screen {
     return res.body;
   }
 
-  changePage = async back => {
+  async changePage(back) {
     this.setState(prevstate => {
       let { skip } = prevstate;
       const increment = back ? -5 : 5;
@@ -57,7 +57,7 @@ export default class Home extends Screen {
     });
   }
 
-  renderPosts = () => {
+  renderPosts () {
     return this.state.posts.map((post, idx) => (
         <Col sm={ 12 } md={ 6 } lg={ 4 } key={ idx }>
         <Paper key={ idx } style={ { margin: 10 } }>

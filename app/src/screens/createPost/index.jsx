@@ -29,18 +29,13 @@ export default class CreatePost extends Screen {
     }
   }
 
-  componentWillMount = () => {  }
-  isString = (str) => typeof str === 'string'
-  isNumber = (num) => typeof num === 'number'
-  isType = (val, type) => typeof val === type
-
-  validate = () => {
+  validate () {
     for (let key in fields) {
 
     }
   }
 
-  submit = event => {
+  submit(event) {
     const body ={};
     for (var key in this.refs) {
       body[key] = this.refs[key].getValue();
@@ -67,7 +62,7 @@ export default class CreatePost extends Screen {
     })
   }
 
-  selectionRenderer = vals => {
+  selectionRenderer(vals) {
     switch (vals.length) {
       case 0:
         return 'Select Category(s)';
@@ -75,16 +70,18 @@ export default class CreatePost extends Screen {
         return vals[0];
       default:
         return `${vals.length} selected`;
-    }}
+    }
+  }
 
-  handleSelect = (event, index, value) => {
+  handleSelect (event, index, value)  {
     console.log(value, index);
     this.setState({
       categories: value
     });
   }
 
-  renderTextFields = fields => fields.map(field => (
+  renderTextFields (fields)  {
+    return fields.map(field => (
     <Row>
       <TextField
         name={ field }
@@ -93,11 +90,15 @@ export default class CreatePost extends Screen {
       />
     </Row>
   ))
+  }
 
-  renderMenuItems = categories => categories.map(x => <MenuItem >{x}</MenuItem>);
+  renderMenuItems (categories) {
+    return categories.map(x => <MenuItem >{x}</MenuItem>);
+  }
 
-  renderForm = () => (
-    <div>
+  renderForm(){
+return (
+  <div>
       <Paper style={ {
           padding: 40,
         } }>
@@ -119,8 +120,10 @@ export default class CreatePost extends Screen {
       </Paper>
     </div>
   )
+  }
 
-  render = () => (
+  render () {
+    return(
     <div>
       <Paper zDepth={ 2 } style={ {
           textAlign: 'center',
@@ -139,4 +142,5 @@ export default class CreatePost extends Screen {
       </Paper>
     </div>
   )
+}
 }

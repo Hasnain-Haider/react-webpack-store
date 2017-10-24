@@ -13,8 +13,8 @@ export default class SignUp extends Screen {
     this.submit = this.submit.bind(this);
   }
 
-  submit = (user) => {
-    request
+  submit (user) {
+    return request
     .post(`${apiUrl}/api/signup`)
     .send(user)
     .withCredentials()
@@ -28,12 +28,15 @@ export default class SignUp extends Screen {
     });
   }
 
-  render = () =>
-    <div>
-      <Auth
-        hTitle={ 'signup' }
-        submit={ this.submit }
-        btnLabel={ 'signup' }
-      />
-    </div>
+  render () {
+    return (
+      <div>
+        <Auth
+          hTitle={ 'signup' }
+          submit={ this.submit }
+          btnLabel={ 'signup' }
+        />
+      </div>
+    )
+  }
 }

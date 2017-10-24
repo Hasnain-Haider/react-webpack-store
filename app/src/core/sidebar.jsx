@@ -9,10 +9,9 @@ export default class SideBar extends Component {
     this.state = {
       open: props.open
     };
-    console.log('SideBar', props.stew);
   }
 
-  renderLinks = () => {
+  renderLinks () {
     return this.props.stew.routes.map((link, idx) => (
         <MenuItem
           primaryText={ link.text }
@@ -26,16 +25,19 @@ export default class SideBar extends Component {
     )
   }
 
-  render = () =>
-    <Drawer
-      open={ this.props.open }
-      width={ 210 }
-      onRequestChange={ this.props.onRequestChange }
-      docked={ false }
-      className={ 'sidebar' }
-    >
-      { this.renderLinks() }
-    </Drawer>
+  render () {
+    return (
+      <Drawer
+        open={ this.props.open }
+        width={ 210 }
+        onRequestChange={ this.props.onRequestChange }
+        docked={ false }
+        className={ 'sidebar' }
+      >
+        { this.renderLinks() }
+      </Drawer>
+    );
+  }
 }
 
 SideBar.propTypes = {

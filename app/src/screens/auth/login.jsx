@@ -24,8 +24,8 @@ export default class Login extends Screen {
   }
 
 
-  submit = loginBody => {
-    request
+  submit(loginBody)  {
+    return request
     .post(`${apiUrl}/login`)
     .send(loginBody)
     .withCredentials()
@@ -42,12 +42,15 @@ export default class Login extends Screen {
     });
   }
 
-  render = () =>
-    <div>
-      <Auth
-        hTitle={ 'Login' }
-        submit={ this.submit }
-        btnLabel={ 'login' }
-      />
-    </div>
+  render () {
+    return(
+      <div>
+        <Auth
+          hTitle={ 'Login' }
+          submit={ this.submit }
+          btnLabel={ 'login' }
+        />
+      </div>
+    )
+  }
 }

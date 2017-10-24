@@ -56,7 +56,7 @@ export default class Core extends Component {
     }));
   }
 
-  render = () => {
+  render () {
     const { history, routes, children } = this.props;
     const { sidebarOpen } = this.state;
     return(
@@ -82,5 +82,6 @@ export default class Core extends Component {
           message={ this.state.message }
         />
       </div>
-    )}
+    )
+  }
 }

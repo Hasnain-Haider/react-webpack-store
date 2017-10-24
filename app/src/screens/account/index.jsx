@@ -36,7 +36,7 @@ export default class Account extends Screen {
     this.fetchPosts();
   }
 
-  handleChange = (fieldName, event) => {
+  handleChange (fieldName, event) {
     const user = {
       ...this.state.user,
       [fieldName]: event.target.value
@@ -44,13 +44,7 @@ export default class Account extends Screen {
     this.setState({ user });
   }
 
-  tSnackbar = t => {
-    this.setState({
-      snackOpen: t
-    });
-  }
-
-  fetchPosts = async fn => {
+  async fetchPosts () {
     const uid = this.getUser()._id;
     const postings = await request
            .post(`${apiUrl}/post/query`)
@@ -61,13 +55,13 @@ export default class Account extends Screen {
     });
   }
 
-  deletePost = async postId => {
+  async deletePost(postId) {
     console.log(event, event.target);
     const deletion = await request.delete(`${apiUrl}/post`).send({_id: postId});
     console.log(deletion);
   }
 
-  renderUserPosts = () => {
+  renderUserPosts () {
     return this.state.posts.map((post, idx) => (
             <Col sm={ 12 } md={ 6 } lg={ 4 } key={ idx }>
             <Paper key={ idx } style={ { margin: 50, padding: 30 } }>
@@ -89,7 +83,8 @@ export default class Account extends Screen {
         ));
   }
 
-  render = () => (
+  render () {
+    return(
     <div>
       <Paper zDepth={ 2 } style={ {
           textAlign: 'center',
@@ -107,6 +102,7 @@ export default class Account extends Screen {
       </Paper>
     </div>
     )
+  }
 
 }
 

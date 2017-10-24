@@ -16,7 +16,7 @@ export default class SearchBar extends Component {
     };
   }
 
-  toggleMenu = () => {
+  toggleMenu() {
     this.setState((prevState) => {
       return {
         menuOpen: !prevState.menuOpen
@@ -24,19 +24,17 @@ export default class SearchBar extends Component {
     });
   }
 
-  changeSearchTerm = (event) => {
+  changeSearchTerm(event)  {
     this.setState({
       term: event.target.value
     });
   }
 
-  validTerm = () => {
+  validTerm () {
     return !this.state.term;
   }
 
-  submit() {
-
-  }
+  submit() {}
 
   render() {
     return (
