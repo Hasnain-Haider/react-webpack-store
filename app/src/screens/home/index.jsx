@@ -28,20 +28,23 @@ export default class Home extends Screen {
     var posts = await this.fetchPosts();
   }
 
-  fetchPosts = async (skip=0) => {
-    var postings = await request
-    .get(`${apiUrl}/post?limit=5&skip=${skip}`)
-    .withCredentials();
+  fetchPosts = async (skip = 0) => {
 
-    this.setState({ posts: postings.body });
-    return postings.body;
+    var res = await request
+    .get(`${apiUrl}/post?limit=5&skip=${skip}`)
+    .withCredentials()
+    .catch(e => console.error(e));
+
+    this.setState({
+      posts: res.body
+    });
+
+    return res.body;
   }
 
   changePage = async back => {
     this.setState(prevstate => {
       let { skip } = prevstate;
-      console.log('this.state.posts === []', this.state.posts.length === 0);
-
       const increment = back ? -5 : 5;
       skip += increment;
       if (skip <  0) {

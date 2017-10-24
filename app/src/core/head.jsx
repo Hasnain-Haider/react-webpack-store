@@ -23,7 +23,9 @@ export default class Head extends Component {
     this.state = {
       drawerOpen: false
     };
+
   }
+
 
   getUsername() {
     let username = authRedux.getState().username;
@@ -31,23 +33,22 @@ export default class Head extends Component {
       fontWeight: 'bold',
       fontSize: 16,
       borderRadius: '5px',
-      border: 'dashed 1px black',
+      border: 'solid 1px black',
       padding: 8,
       color: 'black'
     }
 
-      return (
-        <FlatButton
-          label={ username || 'Not Signed in' }
-          labelStyle={ labelStyle }
-          color={ 'orange' }
-          onTouchTap={ ()=> {
-            username ?
-            this.props.navigateTo('/account') :
-            null
-          } }
-        />
-      )
+    return (
+      <FlatButton
+        label={ username || 'Not Signed in' }
+        labelStyle={ labelStyle }
+        color={ 'orange' }
+        onTouchTap={ ()=> {
+          username ?
+          this.props.navigateTo('/account') : null
+        } }
+      />
+    )
   }
 
   renderButton = () => {
@@ -93,7 +94,7 @@ export default class Head extends Component {
       } else {
         console.debug('logout');
         authRedux.dispatch({type: 'LOGOUT'});
-        this.props.history.push('/home');
+        this.props.navigateTo('/home');
       }
     });
   }

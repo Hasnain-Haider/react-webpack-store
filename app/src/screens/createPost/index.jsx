@@ -62,7 +62,7 @@ export default class CreatePost extends Screen {
         console.error(err);
       } else {
         console.log({res});
-        this.props.history.push('/account/posts')
+        this.props.history.push('/account')
       }
     })
   }

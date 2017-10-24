@@ -6,7 +6,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import screens from './screens/';
 import Core from './core/';
 import stew from './appStew';
-import routes from './routes'
 import { toLower, each, keys } from 'lodash';
 import {
   BrowserRouter as Router,
@@ -28,7 +27,8 @@ export default class App extends Component {
     this.stew = props.stew;
   }
 
-  createRoutes = x => keys(this.stew.screens).map(sName => {
+  createRoutes() {
+    return keys(this.stew.screens).map(sName => {
     const Screen = withRouter(screens[sName]);
     console.log(sName, `/${toLower(sName)}`);
     return(
@@ -39,22 +39,25 @@ export default class App extends Component {
       />
     );
   });
+}
 
-  render = () => (
-    <MuiThemeProvider>
-      <Router>
-        <Switch>
-          <div>
-            <Redirect exact from='/' to='/home'/>
-            <Route component={ () =>
-                <Corex stew={ this.stew.Core } routes={ routes } />
-              } />
-              { this.createRoutes() }
-            </div>
-          </Switch>
-        </Router>
-      </MuiThemeProvider>
-    )
+  render () {
+    return(
+      <MuiThemeProvider>
+        <Router>
+          <Switch>
+            <div>
+              <Redirect exact from='/' to='/home'/>
+              <Route component={ () =>
+                  <Corex stew={ this.stew.Core } />
+                } />
+                { this.createRoutes() }
+              </div>
+            </Switch>
+          </Router>
+        </MuiThemeProvider>
+      );
+    }
   }
 
   ReactDOM.render(

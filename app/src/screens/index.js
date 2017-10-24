@@ -1,8 +1,8 @@
 import Home from './home/'
 import CreatePost from './createPost/'
-import Login from './login/login';
-import SignUp from './signup/signup'
 import Account from './account/';
+import Login from './auth/login';
+import SignUp from './auth/signup';
 export default {
   Home,
   CreatePost,

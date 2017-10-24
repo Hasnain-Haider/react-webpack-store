@@ -1,0 +1,16 @@
+{
+    "title": "Shovel",
+    "description": "the greatest shovel you ever did see",
+    "imgSrc": "https://mobileimages.lowes.com/product/converted/049206/049206040335.jpg",
+    "price": 35.5,
+    "created": "",
+    "owner": null
+},
+{
+     "title": "bag",
+     "description": "a bag shaped item",
+     "imgSrc": "https://cdn.pixabay.com/photo/2014/04/02/16/16/bag-306740_960_720.png",
+     "price": 109,
+     "created": "",
+     "owner": null 
+}

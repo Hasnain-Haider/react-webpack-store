@@ -12,7 +12,7 @@ export default class SideBar extends Component {
     console.log('SideBar', props.stew);
   }
 
-  renderLinks = () =>{
+  renderLinks = () => {
     return this.props.stew.routes.map((link, idx) => (
         <MenuItem
           primaryText={ link.text }

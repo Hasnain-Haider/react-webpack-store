@@ -16,7 +16,6 @@ import request from 'superagent';
 import Screen from '../screen';
 import Post from '../home/post';
 import config from 'config';
-import authRedux from 'lib/reduxes/auth';
 
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 const centerStyle = {
