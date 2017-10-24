@@ -62,6 +62,7 @@ if (require.main === module) {
 
   useAuthentication(app);
   start(app);
+
   console.debug(`listening on ${port}`);
   app.listen(port);
 }

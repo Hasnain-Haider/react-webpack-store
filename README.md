@@ -4,16 +4,16 @@ This app demonstrates ability to use various JavaScript libraries to build a wor
 
 ### Installation
 1. Obtain a config.json and put it in the root level
-2. npm install
-3. npm run dev-server
-4. npm run dev-web
-5. npm run dev-watch
+  * if you do not have a config, rename config_template.json to config.json
+2. Run mongoDB on port 27017. Create a db named 'react-store' with no password
+3. `npm install`
+4. `npm run server`
+5. `npm run dev-web`
 
 ### Frontend
 * React.js
+* react-bootstrap for layout
 * material-ui
-
-### Middleware
 * Redux
 
 ### Backend

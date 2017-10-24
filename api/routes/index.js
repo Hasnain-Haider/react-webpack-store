@@ -20,7 +20,6 @@ module.exports = resources => {
       const query =  ctx.query || {};
       let limit = query.limit || 10;
       let skip = query.skip || 0;
-      console.debug(query);
       limit = JSON.parse(limit);
       skip = JSON.parse(skip);
       const result = await model
@@ -58,6 +57,7 @@ module.exports = resources => {
     router.patch(`/${resource}/:id`, async ctx => {
       const body = ctx.request.body;
       const _id = ctx.params.id;
+      console.log('patch', resource);
       try {
         ctx.body = await model.findOneAndUpdate({ _id }, body);
       } catch (err) {

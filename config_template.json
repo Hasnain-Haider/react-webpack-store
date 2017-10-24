@@ -1,0 +1,15 @@
+{
+  "api": {
+    "host": "localhost",
+    "port": 4501
+  },
+  "app": {
+    "host": "localhost",
+    "port": 4500
+  },
+  "db": {
+    "url": "mongodb://localhost/react-store"
+  },
+  "sessionSecret": ["appkey"],
+  "resources": ["post", "user"]
+}
