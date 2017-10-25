@@ -11,21 +11,21 @@ export default class SideBar extends Component {
     };
   }
 
-  renderLinks () {
+  renderLinks() {
     return this.props.stew.routes.map((link, idx) => (
-        <MenuItem
-          primaryText={ link.text }
-          key={ link.path }
-          name={ link.path }
-          onTouchTap={()=>this.props.navigateTo(link.path)}
-        >
-          <Link to={ link.path } />
-        </MenuItem>
-      )
+      <MenuItem
+        primaryText={ link.text }
+        key={ link.path }
+        name={ link.path }
+        onTouchTap={ () => this.props.navigateTo(link.path) }
+      >
+        <Link to={ link.path } />
+      </MenuItem>
     )
+    );
   }
 
-  render () {
+  render() {
     return (
       <Drawer
         open={ this.props.open }

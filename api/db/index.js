@@ -1,11 +1,9 @@
 import mongoose, { Schema } from 'mongoose';
-import fs from 'fs';
-import path from 'path';
 
 const ObjectId = Schema.Types.ObjectId;
 const schemaDir = './JSONschemas';
 
-const genMongooseSchema = name => {
+const genMongooseSchema = (name) => {
   console.debug(`making schem for ${name}`);
   const schema = require(`${schemaDir}/${name}`);
   const schemaObj = { };
@@ -43,8 +41,7 @@ const genMongooseSchema = name => {
   return new Schema(schemaObj);
 };
 
-const genMongooseModels = async resources => {
-
+const genMongooseModels = async (resources) => {
   await resources.forEach(async resource =>
     mongoose.model(resource, genMongooseSchema(resource))
   );

@@ -1,18 +1,22 @@
 {
   "screens": {
     "Account": {
-
+      "needsAuth" : true
     },
     "Home": {
+      "needsAuth": false,
       "name": "Home"
     },
     "SignUp": {
+      "needsAuth": false,
       "name": "SignUp"
     },
     "Login": {
+      "needsAuth": false,
       "name": "Login"
     },
     "CreatePost": {
+      "needsAuth": true,
       "textFields": [
         "title",
         "description",

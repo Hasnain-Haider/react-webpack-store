@@ -1,8 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
+const config = require('./config');
 
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'app', 'build');
-const config = require('./config');
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
   entry: [
@@ -17,10 +19,17 @@ module.exports = {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
       config: path.resolve(ROOT_PATH, 'config.json'),
-      lib: path.resolve(ROOT_PATH, 'app', 'lib'),
+      lib: path.resolve(ROOT_PATH, 'app', 'lib')
     },
     enforceExtension: false,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      HOST: JSON.stringify(process.env.XMPP_HOST || config.api.host),
+      PORT: JSON.stringify(process.env.XMPP_PORT || config.api.port),
+      apiUrl: JSON.stringify(apiUrl)
+    })
+  ],
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
@@ -31,8 +40,8 @@ module.exports = {
     {
       test: /.json$/,
       use: ['json-loader'],
-    }],
-  },
+    }
+    ] },
   devServer: {
     hot: true,
     historyApiFallback: true,
@@ -40,7 +49,7 @@ module.exports = {
     port: config.app.port,
   },
   node: {
-   fs: 'empty',
-   console: true
+    fs: 'empty',
+    console: true
   }
 };

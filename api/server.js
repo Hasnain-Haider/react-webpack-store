@@ -1,13 +1,10 @@
 import Koa from 'koa';
-import koaRouter from 'koa-router';
 import koaBody from 'koa-bodyparser';
 import mount from 'koa-mount';
 import session from 'koa-session';
-import passport from 'koa-passport';
 import mongoose from 'mongoose';
 import cors from 'koa-cors';
 import bluebird from 'bluebird';
-import fs from 'fs';
 import createModels from './db/';
 import config, { resources } from '../config';
 
@@ -26,19 +23,19 @@ mongoose.connection.on('connected', async () => {
   console.log('Mongoose has connected to the db');
 });
 
-const mountRoutes = app => app.use( mount('/api', require('./routes/')(resources)) )
-const useAuthentication = app =>  require('./routes/auth.js')(app)
+const mountRoutes = app => app.use(mount('/api', require('./routes/')(resources)));
+const useAuthentication = app => require('./routes/auth.js')(app);
 
 const testMongo = async () => {
   if (DEBUG) {
     for (const model in mongoose.models) {
       const mod = await mongoose.models[model].findOne();
-      console.debug('routinefindone', model, { mod });
+      console.debug('routine findone', model, { mod });
     }
   }
 };
 
-const start = async app => {
+const start = async (app) => {
   try {
     await createModels(resources.filter(el => el !== 'user'));
     await testMongo();
@@ -66,7 +63,6 @@ if (require.main === module) {
   console.debug(`listening on ${port}`);
   app.listen(port);
 }
-
 
 
 export default start;

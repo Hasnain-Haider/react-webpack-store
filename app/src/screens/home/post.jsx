@@ -14,39 +14,41 @@ export default class Post extends Component {
       imgSrc: props.imgSrc,
       price: props.price
     };
+
+    this.expandChange = this.expandChange.bind(this);
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps(props) {
     this.setState({
       ...props
     });
   }
 
-  expandChange(expanded) { return this.setState({ expanded }) }
+  expandChange(expanded) { return this.setState({ expanded }); }
 
   render() {
     return (
-        <Card
-          expandable={ false }
-          onExpandChange={ this.expandChange }
-          expanded={ this.state.expanded }
-          >
-          <CardHeader
-            title={ this.state.title }
-            subtitle={ this.state.subtitle }
-            actAsExpander={ true }
-            showExpandableButton={ true }
-          />
-          <CardText>
-            { this.state.text }
-          </CardText>
-          <CardMedia
-            expandable={true}
-            overlay={<CardTitle title={ this.state.title } subtitle={this.state.subtitle}/>}
-          >
-            <img src={ this.state.imgSrc } />
-          </CardMedia>
-        </Card>
+      <Card
+        expandable={ false }
+        onExpandChange={ this.expandChange }
+        expanded={ this.state.expanded }
+      >
+        <CardHeader
+          title={ this.state.title }
+          subtitle={ this.state.subtitle }
+          actAsExpander
+          showExpandableButton
+        />
+        <CardText>
+          { this.state.text }
+        </CardText>
+        <CardMedia
+          expandable
+          overlay={ <CardTitle title={ this.state.title } subtitle={ this.state.subtitle } /> }
+        >
+          <img src={ this.state.imgSrc } />
+        </CardMedia>
+      </Card>
     );
   }
 }

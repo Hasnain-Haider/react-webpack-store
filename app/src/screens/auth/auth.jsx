@@ -1,27 +1,23 @@
 // Modules
-import React, { Component } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import request from 'superagent';
-import PropTypes from 'prop-types';
-import config from 'config';
-import { every } from 'lodash';
-import authRedux from 'lib/reduxes/auth';
-import Screen from '../screen';
 import {
   Paper,
   TextField,
   FlatButton,
   RaisedButton,
-  Snackbar,
   CircularProgress
 } from 'material-ui';
-
-const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { every } from 'lodash';
+import PropTypes from 'prop-types';
+import config from 'config';
+import authRedux from 'lib/reduxes/auth';
+import Screen from '../screen';
 
 const centerStyle = {
-  margin: 'auto',
   margin: 20,
-}
+  textAlign: 'center'
+};
 
 export default class Auth extends Screen {
   constructor(props) {
@@ -30,42 +26,43 @@ export default class Auth extends Screen {
       email: '',
       password: '',
       username: ''
-    }
+    };
     this.state = {
       user,
       submitOk: false,
       loading: false,
-      snackBarOpen: false
-    }
+    };
+    this.submit = this.submit.bind(this);
   }
-  handleChange (fieldName, event) {
+
+  handleChange(fieldName, event) {
     const user = {
       ...this.state.user,
       [fieldName]: event.target.value
-    }
+    };
     this.setState({ user });
+    console.debug(user);
   }
 
-  submit () {
+  submit() {
     const { username, password, email } = this.state.user;
     const user = { username, password, email };
-    this.props.submit(user)
+    this.props.submit(user);
   }
 
-  validate () {
+  validate() {
     const { email, password, username } = this.state.user;
     try {
-      return every([email, password, username], x => x.length > 4);
+      return every([email, password, username], x => x.length >= 3);
     } catch (e) {
       console.error(e);
       return false;
     }
   }
 
-  renderForm () {
-
-    return(
-      <div style={{margin : 'auto'}}>
+  renderForm() {
+    return (
+      <div style={ { margin: 'auto' } }>
         <Row>
           <TextField
             placeholder={ 'Email' }
@@ -74,7 +71,7 @@ export default class Auth extends Screen {
             value={ this.state.email }
             errorText={ this.state.badEmail }
             onChange={ this.handleChange.bind(this, 'email') }
-            />
+          />
         </Row>
         <Row>
 
@@ -85,54 +82,52 @@ export default class Auth extends Screen {
             value={ this.state.username }
             errorText={ this.state.badUsername }
             onChange={ this.handleChange.bind(this, 'username') }
-            />
+          />
         </Row>
         <Row>
           <TextField
             placeholder={ "Password" }
-            errorText={this.state.badPassword}
+            errorText={ this.state.badPassword }
             name={ 'password' }
             style={ centerStyle }
             value={ this.state.password }
             onChange={ this.handleChange.bind(this, 'password') }
             type={ "password" }
-            />
+          />
         </Row>
         <RaisedButton
-          style={ {  width : 60, ...centerStyle } }
+          style={ { width: 60, ...centerStyle } }
           label={ this.props.btnLabel }
           className={ 'btn' }
           disabled={ !this.validate() }
           onTouchTap={ this.submit }
           secondary
-          />
+        />
       </div>
-    )
+    );
   }
 
 
-  render(){
+  render() {
     return (
-        <div>
+      <div>
         <Paper>
-          <Col md={ 8 } lg={ 6 } style={{ padding: "10%"}}>
+          <Col md={ 8 } lg={ 6 } style={ { padding: "10%" } }>
             <h1 style={ centerStyle }>{ this.props.hTitle }</h1>
             <Paper style={ {
-                padding: "10%",
-                ...centerStyle
-              } }
-              >
+              padding: "10%",
+              ...centerStyle
+            } }
+            >
               {this.renderForm()}
             </Paper>
           </Col>
         </Paper>
-        <Snackbar
-          open={ this.state.snackBarOpen }
-          onRequestClose={ this.handleRequestClose }
-          transition={ Fade }
-          message={ this.props.snackbarMsg }
-        />
       </div>
-  )
+    );
+  }
 }
-}
+
+Auth.propTypes = {
+
+};

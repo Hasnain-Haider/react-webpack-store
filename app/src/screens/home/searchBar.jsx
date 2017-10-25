@@ -24,13 +24,13 @@ export default class SearchBar extends Component {
     });
   }
 
-  changeSearchTerm(event)  {
+  changeSearchTerm(event) {
     this.setState({
       term: event.target.value
     });
   }
 
-  validTerm () {
+  validTerm() {
     return !this.state.term;
   }
 
@@ -43,21 +43,21 @@ export default class SearchBar extends Component {
           style={ {
             padding: 10
           } }
-          >
+        >
           <Row>
             <TextField
-              style={{
+              style={ {
                 width: '80%'
-              }}
+              } }
               hintText={ 'Search' }
               onChange={ this.changeSearchTerm }
-              onKeyPress={ event => {
+              onKeyPress={ (event) => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
                   this.submit();
                 }
-              }}
-              />
+              } }
+            />
 
             <IconButton disabled={ this.validTerm() } tooltip={ 'Search' } >
               <SearchIcon />
@@ -68,6 +68,6 @@ export default class SearchBar extends Component {
           </Row>
         </Paper>
       </div>
-    )
+    );
   }
 }

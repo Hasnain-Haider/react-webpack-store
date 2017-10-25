@@ -11,7 +11,7 @@ export default class Screen extends Component {
     return authRedux.getState() !== {};
   }
 
-  getUser(){
+  getUser() {
     return authRedux.getState();
   }
 
@@ -21,7 +21,7 @@ export default class Screen extends Component {
 
   setStateAsync(state) {
     return new Promise((resolve) => {
-      this.setState(state, resolve)
+      this.setState(state, resolve);
     });
   }
 }

@@ -1,12 +1,12 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
-import config from '../../config';
 import User from '../db/user';
+
 const Strategy = require('passport-local').Strategy;
 
 const router = new Router();
 
-module.exports = app => {
+module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   passport.serializeUser((user, done) => {
@@ -40,7 +40,7 @@ module.exports = app => {
     });
   }));
 
-  router.get('/api/logout', async ctx => {
+  router.get('/api/logout', async (ctx) => {
     ctx.logout();
     ctx.status = 200;
   });
@@ -60,12 +60,19 @@ module.exports = app => {
         username: user.username,
         email: user.email,
       });
+      ctx.status = 201;
+      ctx.body = result;
+      console.log('User Created');
     } catch (err) {
-      console.error(err);
+      const { message } = err;
+      if (message.indexOf('username') !== -1) {
+        result = 'user';
+      } else if (message.indexOf('email') !== -1) {
+        result = 'email';
+      }
+      ctx.status = 500;
+      ctx.body = { result };
     }
-    console.log('User Created');
-    ctx.status = 201;
-    ctx.body = result;
     await next();
   });
 
@@ -78,13 +85,13 @@ module.exports = app => {
     }
   });
 
-  router.get('/api/validPass', async ctx => {
+  router.get('/api/validPass', async (ctx) => {
     console.log('ctx user ', ctx.state.user);
     ctx.status = 200;
     ctx.body = ctx.state.user;
   });
 
-  router.get('/api/badPass', async ctx => {
+  router.get('/api/badPass', async (ctx) => {
     ctx.status = 500;
   });
 
