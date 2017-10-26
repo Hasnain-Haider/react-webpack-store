@@ -2,13 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const config = require('./config');
 
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'app', 'build');
 const PORT = process.env.PORT || config.api.port;
 const apiUrl = `http://localhost:${PORT}/api`;
 
 module.exports = {
-  devtool: 'source-map'
+  devtool: 'source-map',
   entry: [
     path.resolve(ROOT_PATH, 'app', 'src', 'app.jsx'),
   ],
@@ -29,16 +30,10 @@ module.exports = {
     new webpack.DefinePlugin({
       apiUrl: JSON.stringify(apiUrl),
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    })
+    new UglifyJSPlugin()
   ],
   module: {
     loaders: [{
