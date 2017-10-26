@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "description": "My project!",
   "scripts": {
-    "dev-watch": "./node_modules/.bin/webpack --watch",
-    "dev-server": "nodemon api/server.js --exec babel-node --presets env",
-    "dev-web": "./node_modules/.bin/webpack-dev-server --inline --progress --hot --watch",
-    "build": "./node_modules/.bin/webpack",
-    "lint-fix": "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
-    "server": "./node_modules/.bin/babel-node api/server.js"
+    "dev-watch":   "./node_modules/.bin/webpack --watch --config webpack.config.dev.js",
+    "dev-web":     "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --inline --progress --watch",
+    "prod-build":  "NODE_ENV=production ./node_modules/.bin/webpack -p --config webpack.config.prod.js",
+    "lint-fix":    "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
+    "server":      "MONGO_URL=mongodb://localhost/react-store ./node_modules/.bin/babel-node api/server.js",
+    "prod-server": "NODE_ENV=production ./node_modules/.bin/babel-node api/server.js"
   },
   "keywords": [
     "awesome",
