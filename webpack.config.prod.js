@@ -20,7 +20,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
-      lib: path.resolve(ROOT_PATH, 'app', 'lib')
+      lib: path.resolve(ROOT_PATH, 'app', 'lib'),
     },
     enforceExtension: false,
   },
@@ -34,8 +34,8 @@ module.exports = {
     new UglifyJSPlugin(),
     new CopyWebpackPlugin([{
       from: path.resolve(ROOT_PATH, 'index.prod.html'),
-      to: path.resolve(BUILD_PATH, 'index.html')
-    }])
+      to: path.resolve(BUILD_PATH, 'index.html'),
+    }]),
   ],
   module: {
     loaders: [{
@@ -47,6 +47,6 @@ module.exports = {
     {
       test: /.json$/,
       use: ['json-loader'],
-    }]
-  }
+    }],
+  },
 };

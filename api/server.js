@@ -19,7 +19,7 @@ const DEBUG = process.env.DEBUG || true;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
 
-const origin = `http://localhost:${PORT}`;
+const origin = `https://localhost:${PORT}`;
 const corsOptions = {
   origin,
   credentials: true,
@@ -53,6 +53,7 @@ const start = async (app) => {
 
 
 if (require.main === module) {
+  console.log(PORT);
   const app = new Koa();
   app.keys = ["nv3y349ncqt3hi4;o;h4o;hue"];
   app
