@@ -10,7 +10,7 @@
     "lint-fix": "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
     "dev-server": "./node_modules/.bin/babel-node api/server.js",
     "prod-server": "NODE_ENV=production PORT=4501 ./node_modules/.bin/babel-node api/server.js",
-    "start": "npm run prod-build && npm run prod-server"
+    "start": "npm install && npm run prod-build && npm run prod-server"
   },
   "keywords": [
     "awesome",
