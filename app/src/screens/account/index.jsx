@@ -14,7 +14,6 @@ import { Col, Row } from 'react-bootstrap';
 import request from 'superagent';
 import Screen from '../screen';
 import Post from '../home/post';
-import config from 'config';
 
 const centerStyle = {
   margin: "3%",

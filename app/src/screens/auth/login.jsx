@@ -4,7 +4,7 @@ import request from 'superagent';
 import PropTypes from 'prop-types';
 // Internal
 import authRedux from 'lib/reduxes/auth';
-import config from 'config';
+
 import Screen from '../screen';
 import Auth from './auth';
 

@@ -10,7 +10,6 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { every } from 'lodash';
 import PropTypes from 'prop-types';
-import config from 'config';
 import authRedux from 'lib/reduxes/auth';
 import Screen from '../screen';
 

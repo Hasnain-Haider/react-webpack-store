@@ -11,8 +11,8 @@ import Router from 'koa-router';
 import createModels from './db/';
 import authenticate from './routes/auth';
 import createRouter from './routes/';
-import config, { resources } from '../config';
 
+const resources = ["post", "user"];
 const PORT = process.env.PORT || 4501;
 const DEBUG = process.env.DEBUG || true;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -53,7 +53,7 @@ const start = async (app) => {
 
 if (require.main === module) {
   const app = new Koa();
-  app.keys = config.sessionSecret;
+  app.keys = ["nv3y349ncqt3hi4;o;h4o;hue"];
   app
     .use(cors(corsOptions))
     .use(koaBody())

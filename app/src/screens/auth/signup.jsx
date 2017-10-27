@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Screen from '../screen';
 import request from 'superagent';
-import config from 'config';
+
 import Auth from './auth';
 import authRedux from 'lib/reduxes/auth';
 import alertRedux from 'lib/reduxes/alert';

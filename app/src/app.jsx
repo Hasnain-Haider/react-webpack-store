@@ -10,7 +10,7 @@ import { MuiThemeProvider } from 'material-ui';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { toLower, entries } from 'lodash';
-import config from 'config';
+
 import authRedux from 'lib/reduxes/auth';
 import screens from './screens/';
 import Core from './core/';
@@ -34,7 +34,7 @@ export default class App extends Component {
       console.debug(sName, `/${toLower(sName)}`);
       const user = authRedux.getState();
       if (true) {
-        
+
       }
       const Screen = withRouter(screens[sName]);
 

@@ -10,7 +10,6 @@ import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
 import PropTypes from 'prop-types';
 
-import config from 'config';
 import authRedux from 'lib/reduxes/auth';
 import Screen from '../screen';
 

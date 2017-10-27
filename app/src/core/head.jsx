@@ -10,8 +10,6 @@ import PropTypes from 'prop-types';
 import request from 'superagent';
 
 import authRedux from 'lib/reduxes/auth';
-import config from 'config';
-
 export default class Head extends Component {
   constructor(props) {
     super(props);

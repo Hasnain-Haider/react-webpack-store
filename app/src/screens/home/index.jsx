@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Paper, TextField, Chip, Dialog, Divider, IconButton, GridList, GridTile, RaisedButton } from 'material-ui';
 import { Row, Col } from 'react-bootstrap';
 import request from 'superagent';
-import config from 'config';
 import SearchBar from './searchBar';
 import Post from './post';
 import Screen from '../screen';

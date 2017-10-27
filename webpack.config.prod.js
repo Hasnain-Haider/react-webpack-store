@@ -1,11 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const config = require('./config');
-
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'app', 'build');
-const PORT = process.env.PORT || config.api.port;
+const PORT = process.env.PORT || 4501;
 const apiUrl = `http://localhost:${PORT}/api`;
 
 module.exports = {
@@ -21,7 +20,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
-      config: path.resolve(ROOT_PATH, 'config.json'),
       lib: path.resolve(ROOT_PATH, 'app', 'lib')
     },
     enforceExtension: false,
@@ -46,15 +44,5 @@ module.exports = {
       test: /.json$/,
       use: ['json-loader'],
     }
-    ] },
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    host: config.app.host,
-    port: config.app.port,
-  },
-  node: {
-    fs: 'empty',
-    console: true
-  }
+    ] }
 };
