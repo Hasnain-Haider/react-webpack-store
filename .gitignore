@@ -2,4 +2,3 @@ app/build
 node_modules
 bundle.js
 config.json
-package-lock.json

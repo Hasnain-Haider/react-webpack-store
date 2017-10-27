@@ -18,6 +18,10 @@
     "app",
     "!"
   ],
+  "engines":{
+    "node": "8.5.x",
+    "npm": "5.x"
+  },
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
