@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'api', 'build');
 const PORT = process.env.PORT || 4501;
-const apiUrl = `http://localhost:${PORT}/api`;
+const apiUrl = `https://localhost:${PORT}/api`;
 
 module.exports = {
   devtool: 'source-map',
@@ -47,6 +47,6 @@ module.exports = {
     {
       test: /.json$/,
       use: ['json-loader'],
-    }
-    ] }
+    }]
+  }
 };
