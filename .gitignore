@@ -1,4 +1,4 @@
-app/build
+api/build
 node_modules
 bundle.js
 config.json

@@ -7,7 +7,8 @@ import cors from 'koa-cors';
 import bluebird from 'bluebird';
 import send from 'koa-send';
 import Router from 'koa-router';
-
+import serve from 'koa-static';
+import path from 'path';
 import createModels from './db/';
 import authenticate from './routes/auth';
 import createRouter from './routes/';
@@ -57,12 +58,18 @@ if (require.main === module) {
   app
     .use(cors(corsOptions))
     .use(koaBody())
+    .use(serve(path.resolve(__dirname, 'build')))
     .use(session(app));
   if (NODE_ENV === 'production') {
     const router = new Router();
-    router.get('*', () => {
+    // app.use(serve('../app/build'));
+    router.get('*', async (ctx, next) => {
       console.log('sending bundle.js now');
-      send(this, '../app/build/bundle.js');
+      await send(ctx, ctx.path, { root: path.resolve(__dirname, 'build', 'index.html')});
+    });
+    router.get('/', async(ctx, next) => {
+      ctx.redirect('/', 'index.html');
+      await next();
     });
     app.use(router.allowedMethods());
     app.use(router.routes());
