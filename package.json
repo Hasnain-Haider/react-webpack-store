@@ -6,11 +6,11 @@
   "scripts": {
     "dev-watch": "./node_modules/.bin/webpack --watch --config webpack.config.dev.js",
     "dev-web": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --inline --progress --watch",
-    "prod-build": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "prod-build": "NODE_ENV=production npx webpack --config webpack.config.prod.js",
     "lint-fix": "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
     "dev-server": "./node_modules/.bin/babel-node api/server.js",
     "prod-server": "NODE_ENV=production PORT=4501 ./node_modules/.bin/babel-node api/server.js",
-    "start": "npm install && npm run prod-build && npm run prod-server"
+    "start": "npm install --dev && npm run prod-build && npm run prod-server"
   },
   "keywords": [
     "awesome",
