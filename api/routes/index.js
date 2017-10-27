@@ -19,6 +19,7 @@ module.exports = (resources) => {
       const query = ctx.query || {};
       let limit = query.limit || 10;
       let skip = query.skip || 0;
+      console.log('getting resource');
       limit = JSON.parse(limit);
       skip = JSON.parse(skip);
       const result = await model

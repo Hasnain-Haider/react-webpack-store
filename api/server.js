@@ -61,22 +61,11 @@ if (require.main === module) {
     .use(koaBody())
     .use(serve(path.resolve(__dirname, 'build')))
     .use(session(app));
-  if (NODE_ENV === 'production') {
-    const router = new Router();
-    // app.use(serve('../app/build'));
-    router.get('*', async (ctx, next) => {
-      console.log('sending bundle.js now');
-      await send(ctx, ctx.path, { root: path.resolve(__dirname, 'build', 'index.html')});
-    });
-    router.get('/', async(ctx, next) => {
-      ctx.redirect('/', 'index.html');
-      await next();
-    });
-    app.use(router.allowedMethods());
-    app.use(router.routes());
-  }
   authenticate(app);
   start(app);
+  if (NODE_ENV === 'production') {
+    require('./routes/static')(app);
+  }
   console.debug(`listening on ${PORT}`);
   app.listen(PORT);
 }
