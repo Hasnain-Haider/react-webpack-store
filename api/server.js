@@ -7,11 +7,10 @@ import cors from 'koa-cors';
 import bluebird from 'bluebird';
 import send from 'koa-send';
 import Router from 'koa-router';
-import serve from 'koa-static';
 import path from 'path';
+
 import createModels from './db/';
-import authenticate from './routes/auth';
-import createRouter from './routes/';
+import createRoutes from './routes/';
 
 const resources = ["post", "user"];
 const PORT = process.env.PORT || 4501;
@@ -19,7 +18,7 @@ const DEBUG = process.env.DEBUG || true;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
 
-const origin = `https://localhost:${PORT}`;
+const origin = `http://localhost:${PORT}`;
 const corsOptions = {
   origin,
   credentials: true,
@@ -36,46 +35,25 @@ mongoose.connection.on('connected', async () => {
 const testMongo = async () => {
   for (const model in mongoose.models) {
     const mod = await mongoose.models[model].findOne();
-    console.debug('routine findone', model, { mod });
+    console.debug('routine findOne()', model, { mod });
   }
 };
 
 const start = async (app) => {
-  try {
-    await createModels(resources.filter(el => el !== 'user'));
-    await testMongo();
-    app.use(mount('/api', createRouter(resources)));
-  } catch (err) {
-    console.error(err);
-  }
+  await createModels(resources.filter(el => el !== 'user'));
+  await testMongo();
+  await createRoutes(app);
   return app;
 };
 
 
 if (require.main === module) {
-  console.log(PORT);
   const app = new Koa();
   app.keys = ["nv3y349ncqt3hi4;o;h4o;hue"];
   app
     .use(cors(corsOptions))
     .use(koaBody())
-    .use(serve(path.resolve(__dirname, 'build')))
     .use(session(app));
-  if (NODE_ENV === 'production') {
-    const router = new Router();
-    // app.use(serve('../app/build'));
-    router.get('*', async (ctx, next) => {
-      console.log('sending bundle.js now');
-      await send(ctx, ctx.path, { root: path.resolve(__dirname, 'build', 'index.html')});
-    });
-    router.get('/', async(ctx, next) => {
-      ctx.redirect('/', 'index.html');
-      await next();
-    });
-    app.use(router.allowedMethods());
-    app.use(router.routes());
-  }
-  authenticate(app);
   start(app);
   console.debug(`listening on ${PORT}`);
   app.listen(PORT);

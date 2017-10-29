@@ -1,12 +1,10 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
 import User from '../db/user';
-
 const Strategy = require('passport-local').Strategy;
-
 const router = new Router();
 
-module.exports = (app) => {
+export default function authenticate(app) {
   app.use(passport.initialize());
   app.use(passport.session());
   passport.serializeUser((user, done) => {
@@ -97,4 +95,5 @@ module.exports = (app) => {
 
   app.use(router.allowedMethods());
   app.use(router.routes());
+  return app;
 };

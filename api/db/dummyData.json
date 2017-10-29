@@ -1,4 +1,4 @@
-{
+[{
     "title": "Shovel",
     "description": "the greatest shovel you ever did see",
     "imgSrc": "https://mobileimages.lowes.com/product/converted/049206/049206040335.jpg",
@@ -12,5 +12,5 @@
      "imgSrc": "https://cdn.pixabay.com/photo/2014/04/02/16/16/bag-306740_960_720.png",
      "price": 109,
      "created": "",
-     "owner": null 
-}
+     "owner": null
+}]
