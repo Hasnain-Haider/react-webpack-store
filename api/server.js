@@ -14,11 +14,12 @@ import createRoutes from './routes/';
 
 const resources = ["post", "user"];
 const PORT = process.env.PORT || 4501;
+const APP_PORT = process.env.APP_PORT || 4500;
 const DEBUG = process.env.DEBUG || true;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
 
-const origin = `http://localhost:${PORT}`;
+const origin = `http://localhost:${APP_PORT}`;
 const corsOptions = {
   origin,
   credentials: true,

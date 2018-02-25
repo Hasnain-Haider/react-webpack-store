@@ -20,7 +20,6 @@ export default class CreatePost extends Screen {
     this.state = {
       categories: []
     };
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   validate() {

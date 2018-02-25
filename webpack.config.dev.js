@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const config = require('./config');
+
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'app', 'build');
-
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
   entry: [
