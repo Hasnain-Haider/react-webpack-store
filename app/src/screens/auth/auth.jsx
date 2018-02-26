@@ -61,13 +61,14 @@ export default class Auth extends Screen {
 
   renderForm() {
     return (
-      <div style={ { margin: 'auto' } }>
+      <div id={ 'auth' } style={ { margin: 'auto' } }>
         <Row>
           <TextField
             placeholder={ 'Email' }
             style={ centerStyle }
             name={ 'email' }
             value={ this.state.email }
+            id={ 'email-field' }
             errorText={ this.state.badEmail }
             onChange={ this.handleChange.bind(this, 'email') }
           />
@@ -79,6 +80,7 @@ export default class Auth extends Screen {
             style={ centerStyle }
             name={ 'username' }
             value={ this.state.username }
+            id={ 'user-field' }
             errorText={ this.state.badUsername }
             onChange={ this.handleChange.bind(this, 'username') }
           />
@@ -90,6 +92,7 @@ export default class Auth extends Screen {
             name={ 'password' }
             style={ centerStyle }
             value={ this.state.password }
+            id={ 'pass-field' }
             onChange={ this.handleChange.bind(this, 'password') }
             type={ "password" }
           />

@@ -5,6 +5,7 @@ import request from 'superagent';
 import SearchBar from './searchBar';
 import Post from './post';
 import Screen from '../screen';
+import '../../../public/styles/Home/home.scss';
 
 export default class Home extends Screen {
   constructor(props) {
@@ -58,6 +59,7 @@ export default class Home extends Screen {
       <Col sm={ 12 } md={ 6 } lg={ 4 } key={ idx }>
         <Paper key={ idx } style={ { margin: 10 } }>
           <Post
+            className={ 'post' }
             title={ post.title }
             imgSrc={ post.imgSrc }
             description={ post.description }
@@ -72,7 +74,7 @@ export default class Home extends Screen {
   render() {
     return (
       <div>
-        <SearchBar style={ { textAlign: 'center', margin: 10 } } />
+        <SearchBar className={ 'search-bar' } style={ { textAlign: 'center', margin: 10 } } />
         <Row>
           { this.renderPosts() }
         </Row>
@@ -81,12 +83,14 @@ export default class Home extends Screen {
             secondary
             name={ 'prev' }
             label={ 'prev page' }
+            className={ 'prev-btn' }
             onTouchTap={ () => { this.changePage(true); } }
           />
           <RaisedButton
             secondary
             name={ 'next' }
             label={ 'next page' }
+            className={ 'prev-btn' }
             onTouchTap={ () => { this.changePage(false); } }
           />
         </Row>

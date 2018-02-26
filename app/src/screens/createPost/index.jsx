@@ -35,14 +35,14 @@ export default class CreatePost extends Screen {
     });
     console.log({
       ...body,
-      owner: this.getUser()._id,
+      owner: Screen.getUser()._id,
       created: Date.now()
     });
     request
       .post(`${apiUrl}/post`)
       .send({
         ...body,
-        owner: authRedux.getState()._id,
+        owner: Screen.getUser()._id,
         created: Date.now()
       })
       .end((err, res) => {
@@ -50,7 +50,8 @@ export default class CreatePost extends Screen {
           console.error(err);
         } else {
           console.log({ res });
-          this.props.history.push('/account');
+          // this.props.history.push('/account');
+          this.navigateTo('account');
         }
         if (cb) {
           cb(res);

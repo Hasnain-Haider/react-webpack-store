@@ -19,7 +19,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
       config: path.resolve(ROOT_PATH, 'config.json'),
-      lib: path.resolve(ROOT_PATH, 'app', 'lib')
+      lib: path.resolve(ROOT_PATH, 'app', 'lib'),
+      styles: path.resolve(ROOT_PATH, 'app', 'public', 'styles'),
     },
     enforceExtension: false,
   },
@@ -48,9 +49,5 @@ module.exports = {
     historyApiFallback: true,
     host: config.app.host,
     port: config.app.port,
-  },
-  node: {
-    fs: 'empty',
-    console: true
   }
 };

@@ -42,7 +42,7 @@ export default class Account extends Screen {
   }
 
   async fetchPosts() {
-    const uid = this.getUser()._id;
+    const uid = Screen.getUser()._id;
     const postings = await request
       .post(`${apiUrl}/post/query`)
       .send({ owner: uid });
@@ -54,7 +54,12 @@ export default class Account extends Screen {
 
   async deletePost(postId) {
     console.log(event, event.target);
-    const deletion = await request.delete(`${apiUrl}/post`).send({ _id: postId });
+    let deletion;
+    try {
+      deletion = await request.delete(`${apiUrl}/post`).send({ _id: postId });
+    } catch (e) {
+      console.error(e);
+    }
     console.log(deletion);
   }
 

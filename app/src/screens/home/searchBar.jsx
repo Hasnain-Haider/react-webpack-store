@@ -46,10 +46,8 @@ export default class SearchBar extends Component {
         >
           <Row>
             <TextField
-              style={ {
-                width: '80%'
-              } }
               hintText={ 'Search' }
+              id={ 'search-box' }
               onChange={ this.changeSearchTerm }
               onKeyPress={ (event) => {
                 if (event.key === 'Enter') {
@@ -59,11 +57,19 @@ export default class SearchBar extends Component {
               } }
             />
 
-            <IconButton disabled={ this.validTerm() } tooltip={ 'Search' } >
+            <IconButton
+              disabled={ this.validTerm() }
+              tooltip={ 'Search' }
+              id={ 'magnifying-glass' }
+            >
               <SearchIcon />
             </IconButton>
-            <IconButton onTouchTap={ this.toggleMenu }>
-              { this.state.menuOpen ? <ArrowUpIcon /> : <ArrowDownIcon /> }
+            <IconButton onTouchTap={ this.toggleMenu } className={ 'arrow' }>
+              {
+                this.state.menuOpen ?
+                  <ArrowUpIcon   id={ 'up-arrow' } /> :
+                  <ArrowDownIcon id={ 'down-arrow' } />
+              }
             </IconButton>
           </Row>
         </Paper>

@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'api', 'build');
 const PORT = process.env.PORT || 4501;
-const apiUrl = `https://localhost:${PORT}/api`;
+const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
   devtool: 'source-map',
@@ -21,6 +21,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
       lib: path.resolve(ROOT_PATH, 'app', 'lib'),
+      config: path.resolve(ROOT_PATH, 'config.json'),
+      styles: path.resolve(ROOT_PATH, 'app', 'public', 'styles'),
     },
     enforceExtension: false,
   },

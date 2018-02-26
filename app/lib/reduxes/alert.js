@@ -4,9 +4,9 @@ const alertReducer = (state = {}, action) => {
   const { body, type } = action;
   switch (action.type) {
   case 'SNACKBAR':
-    return { ...state, ...action, snack: true };
+    return {  message: state.message, ...action, snack: true };
   case 'DIALOG':
-    return { ...state, ...action, dialog: true };
+    return {  message: state.message, ...action, dialog: true };
   default:
     return {};
   }

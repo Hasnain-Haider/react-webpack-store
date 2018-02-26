@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authRedux from 'lib/reduxes/auth';
+import alertRedux from 'lib/reduxes/alert';
 
 export default class Screen extends Component {
   constructor(props) {
@@ -7,22 +8,26 @@ export default class Screen extends Component {
     this.stew = props.stew;
   }
 
-  isSignedIn() {
+  static isSignedIn() {
     return authRedux.getState() !== {};
   }
 
-  getUser() {
+  static getUser() {
     return authRedux.getState();
   }
 
-  navigateTo(dest) {
-    return this.props.history.push(dest);
+  static dispatchAlert(type, message) {
+    alertRedux.dispatch({ type, message });
   }
 
   setStateAsync(state) {
     return new Promise((resolve) => {
       this.setState(state, resolve);
     });
+  }
+
+  navigateTo(dest) {
+    return this.props.history.push(dest);
   }
 }
 
