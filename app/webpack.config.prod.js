@@ -2,17 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, 'api', 'build');
-const PORT = process.env.PORT || 4501;
+// const PORT = process.env.PORT || 4501;
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
   devtool: 'source-map',
   entry: [
-    path.resolve(ROOT_PATH, 'app', 'src', 'app.jsx'),
+    path.resolve(ROOT_PATH, 'src', 'app.jsx'),
   ],
-  context: path.resolve(ROOT_PATH, 'app'),
+  context: path.resolve(ROOT_PATH),
   output: {
     path: BUILD_PATH,
     filename: 'bundle.js',
@@ -20,9 +21,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss', '.json'],
     alias: {
-      lib: path.resolve(ROOT_PATH, 'app', 'lib'),
+      lib: path.resolve(ROOT_PATH, 'lib'),
       config: path.resolve(ROOT_PATH, 'config.json'),
-      styles: path.resolve(ROOT_PATH, 'app', 'public', 'styles'),
+      styles: path.resolve(ROOT_PATH, 'public', 'styles'),
     },
     enforceExtension: false,
   },
@@ -43,7 +44,7 @@ module.exports = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: [/node_modules/, BUILD_PATH],
-      include: path.resolve(ROOT_PATH, 'app'),
+      include: path.resolve(ROOT_PATH),
       loader: 'babel-loader',
     },
     {

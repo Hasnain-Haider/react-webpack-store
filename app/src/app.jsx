@@ -33,9 +33,6 @@ export default class App extends Component {
     return entries(this.stew.screens).map(([sName, screenStew]) => {
       console.debug(sName, `/${toLower(sName)}`);
       const user = authRedux.getState();
-      if (true) {
-
-      }
       const Screen = withRouter(screens[sName]);
 
       return (

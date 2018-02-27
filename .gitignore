@@ -1,4 +1,5 @@
 api/build
+app/public/build
 node_modules
 bundle.js
 config.json
