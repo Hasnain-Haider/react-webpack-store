@@ -79,7 +79,7 @@ export default class Core extends Component {
     return (
       <Dialog
         actions={ actions }
-        modal={false}
+        modal={ false }
         open={ this.state.dialogOpen }
         onRequestClose={ this.closeDialog }
       >
@@ -88,7 +88,8 @@ export default class Core extends Component {
           size: 16,
           textAlign: 'center',
           color: 'blue'
-        } }>
+        } }
+        >
           { aState.message }
         </span>
       </Dialog>
@@ -104,7 +105,7 @@ export default class Core extends Component {
           title={ "Hasnains React Store" }
           stew={ stew.Head }
           onLeftIconButtonTouchTap={ this.toggleDrawer }
-          style={ { margin: 10 } }
+          style={ { margin: 10, width: 'auto' } }
           navigateTo={ this.navigateTo }
         />
         { children }

@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('./config');
 
@@ -10,7 +9,7 @@ const BUILD_PATH = path.resolve(ROOT_PATH, '..', 'api', 'build');
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
-  devtool: 'source-map',
+  mode: 'production',
   entry: [
     path.resolve(ROOT_PATH, 'src', 'app.jsx'),
   ],
@@ -35,22 +34,29 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new UglifyJSPlugin(),
     new CopyWebpackPlugin([{
       from: path.resolve(ROOT_PATH, 'index.prod.html'),
       to: path.resolve(BUILD_PATH, 'index.html'),
     }]),
   ],
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: [/node_modules/, BUILD_PATH],
-      include: path.resolve(ROOT_PATH),
-      loader: 'babel-loader',
-    },
-    {
-      test: /.json$/,
-      use: ['json-loader'],
-    }],
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/, BUILD_PATH],
+        include: path.resolve(ROOT_PATH),
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader" // creates style nodes from JS strings
+        }, {
+          loader: "css-loader" // translates CSS into CommonJS
+        }, {
+          loader: "sass-loader" // compiles Sass to CSS
+        }]
+      }
+    ],
   },
 };

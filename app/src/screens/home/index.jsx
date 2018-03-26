@@ -5,7 +5,7 @@ import request from 'superagent';
 import SearchBar from './searchBar';
 import Post from './post';
 import Screen from '../screen';
-import '../../../public/styles/Home/home.scss';
+// import 'styles/Home/home.scss';
 
 export default class Home extends Screen {
   constructor(props) {
@@ -78,22 +78,22 @@ export default class Home extends Screen {
         <Row>
           { this.renderPosts() }
         </Row>
-        <Row>
+        <div className={ 'btn-row' }>
           <RaisedButton
             secondary
             name={ 'prev' }
             label={ 'prev page' }
-            className={ 'prev-btn' }
+            className={ 'prev-btn page-btn' }
             onTouchTap={ () => { this.changePage(true); } }
           />
           <RaisedButton
             secondary
             name={ 'next' }
             label={ 'next page' }
-            className={ 'prev-btn' }
+            className={ 'next-btn page-btn' }
             onTouchTap={ () => { this.changePage(false); } }
           />
-        </Row>
+      </div>
       </div>
     );
   }
