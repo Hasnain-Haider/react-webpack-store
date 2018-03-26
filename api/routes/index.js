@@ -12,7 +12,7 @@ const postRouter = resourceRouter('post')
 export default function createRoutes(app) {
   if (process.env.NODE_ENV === 'production') {
     app
-      .use(serve(path.resolve(__dirname, 'build')))
+      .use(serve(path.resolve(__dirname,'..', 'build')))
       .use(bundleRouter.routes())
       .use(bundleRouter.allowedMethods())
   }

@@ -2,9 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const config = require('./config');
 
 const ROOT_PATH = path.resolve(__dirname);
-const BUILD_PATH = path.resolve(ROOT_PATH, 'api', 'build');
+const BUILD_PATH = path.resolve(ROOT_PATH, '..', 'api', 'build');
 // const PORT = process.env.PORT || 4501;
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
