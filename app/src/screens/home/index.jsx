@@ -5,7 +5,7 @@ import request from 'superagent';
 import SearchBar from './searchBar';
 import Post from './post';
 import Screen from '../screen';
-// import 'styles/Home/home.scss';
+import 'styles/Home/home.scss';
 
 export default class Home extends Screen {
   constructor(props) {

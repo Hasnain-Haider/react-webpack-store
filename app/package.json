@@ -6,7 +6,7 @@
   "scripts": {
     "dev-watch": "./node_modules/.bin/webpack --watch --config webpack.config.dev.js",
     "dev-web": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --inline --progress --watch",
-    "prod-build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "prod-build": "./node_modules/.bin/webpack -p --config webpack.config.prod.js",
     "lint-fix": "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
     "start": "npm install --dev && npm run prod-build && npm run prod-server"
   },
@@ -25,13 +25,13 @@
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
-    "material-ui": "^0.18.3",
-    "prop-types": "^15.6.0",
-    "react": "^15.6.1",
-    "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.6.1",
+    "material-ui": "^0.20.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0",
     "react-router-dom": "^4.1.1",
-    "react-tap-event-plugin": "^2.0.1",
+    "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.0",
     "superagent": "^3.5.2"
   },

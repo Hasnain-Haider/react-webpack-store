@@ -12,11 +12,7 @@ import { every } from 'lodash';
 import PropTypes from 'prop-types';
 import authRedux from 'lib/reduxes/auth';
 import Screen from '../screen';
-
-const centerStyle = {
-  margin: 20,
-  textAlign: 'center'
-};
+import 'styles/auth';
 
 export default class Auth extends Screen {
   constructor(props) {
@@ -65,7 +61,7 @@ export default class Auth extends Screen {
         <Row>
           <TextField
             placeholder={ 'Email' }
-            style={ centerStyle }
+            className={ 'center' }
             name={ 'email' }
             value={ this.state.email }
             id={ 'email-field' }
@@ -74,10 +70,9 @@ export default class Auth extends Screen {
           />
         </Row>
         <Row>
-
           <TextField
+            className={ 'center' }
             placeholder={ 'Username' }
-            style={ centerStyle }
             name={ 'username' }
             value={ this.state.username }
             id={ 'user-field' }
@@ -87,10 +82,10 @@ export default class Auth extends Screen {
         </Row>
         <Row>
           <TextField
+            className={ 'center' }
             placeholder={ "Password" }
             errorText={ this.state.badPassword }
             name={ 'password' }
-            style={ centerStyle }
             value={ this.state.password }
             id={ 'pass-field' }
             onChange={ this.handleChange.bind(this, 'password') }
@@ -98,9 +93,9 @@ export default class Auth extends Screen {
           />
         </Row>
         <RaisedButton
-          style={ { width: 60, ...centerStyle } }
           label={ this.props.btnLabel }
-          className={ 'btn' }
+          id={ 'submit-btn' }
+          className={ 'center' }
           disabled={ !this.validate() }
           onTouchTap={ this.submit }
           secondary
@@ -115,11 +110,12 @@ export default class Auth extends Screen {
       <div>
         <Paper>
           <Col md={ 8 } lg={ 6 } style={ { padding: "10%" } }>
-            <h1 style={ centerStyle }>{ this.props.hTitle }</h1>
-            <Paper style={ {
-              padding: "10%",
-              ...centerStyle
-            } }
+            <h1 className={ 'center' }>{ this.props.hTitle }</h1>
+            <Paper
+              style={ {
+                padding: "10%",
+              } }
+              className={ 'center' }
             >
               {this.renderForm()}
             </Paper>

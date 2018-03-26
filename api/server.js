@@ -19,7 +19,13 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
 const DEBUG = true;
 
-const origin = `http://localhost:${APP_PORT}`;
+let origin;
+if (NODE_ENV === 'production') {
+  origin = `http://localhost:${PORT}`;
+} else {
+  origin = `http://localhost:${APP_PORT}`;
+}
+
 const corsOptions = {
   origin,
   credentials: true,

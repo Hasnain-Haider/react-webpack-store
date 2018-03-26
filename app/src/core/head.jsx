@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import request from 'superagent';
 
 import authRedux from 'lib/reduxes/auth';
+import 'styles/core/header';
 export default class Head extends Component {
   constructor(props) {
     super(props);
@@ -20,19 +21,10 @@ export default class Head extends Component {
 
   getUsername() {
     const username = authRedux.getState().username;
-    const labelStyle = {
-      fontWeight: 'bold',
-      fontSize: 16,
-      borderRadius: '5px',
-      border: 'solid 1px black',
-      padding: 8,
-      color: 'black'
-    };
-
     return (
       <FlatButton
         label={ username || 'Not Signed in' }
-        labelStyle={ labelStyle }
+        className={ 'username-btn' }
         color={ 'orange' }
         onTouchTap={ () => {
           username ? this.props.navigateTo('/account') : null;
@@ -59,26 +51,19 @@ export default class Head extends Component {
   }
 
   renderButton() {
-    const text = '';
     let Button;
-    const labelStyle = {
-      fontWeight: 'bold',
-      borderRadius: '5px',
-      fontSize: 16,
-      color: 'white'
-    };
     if (authRedux.getState().username) {
       Button = (<RaisedButton
+        className={ 'log-btn logout-btn' }
         label={ 'logout' }
         secondary
-        labelStyle={ labelStyle }
         onTouchTap={ this.logout }
       />);
     } else {
       Button = (<RaisedButton
-        label={ 'login' }
+        className={ 'log-btn login-btn' }
+        label={ 'logout' }
         secondary
-        labelStyle={ labelStyle }
         onTouchTap={ () => this.props.navigateTo('/login') }
       />);
     }
@@ -97,7 +82,7 @@ export default class Head extends Component {
         style={ this.props.style }
         onLeftIconButtonTouchTap={ this.props.onLeftIconButtonTouchTap }
         iconElementRight={ this.renderButton() }
-        className={ 'head' }
+        className={ 'header' }
       />
     );
   }

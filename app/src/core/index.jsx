@@ -56,6 +56,7 @@ export default class Core extends Component {
   }
 
   toggleDrawer() {
+    console.log('toggleDrawer() ', this.state);
     this.setState(prevState => ({
       sidebarOpen: !prevState.sidebarOpen
     }));
@@ -83,12 +84,14 @@ export default class Core extends Component {
         open={ this.state.dialogOpen }
         onRequestClose={ this.closeDialog }
       >
-        <span style={ {
-          fontWeight: 'bold',
-          size: 16,
-          textAlign: 'center',
-          color: 'blue'
-        } }
+        <span
+          className={ 'alert-message' }
+          style={ {
+            fontWeight: 'bold',
+            size: 16,
+            textAlign: 'center',
+            color: 'blue'
+          } }
         >
           { aState.message }
         </span>

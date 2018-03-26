@@ -3,10 +3,11 @@ const webpack = require('webpack');
 const config = require('./config');
 
 const ROOT_PATH = path.resolve(__dirname);
-const BUILD_PATH = path.resolve(ROOT_PATH, 'public', 'build');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 const apiUrl = `http://${config.api.host}:${config.api.port}/api`;
 
 module.exports = {
+  mode: 'development',
   entry: [
     path.resolve(ROOT_PATH, 'src', 'app.jsx'),
   ],
@@ -33,17 +34,25 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: [/node_modules/, BUILD_PATH],
-      include: path.resolve(ROOT_PATH),
-      loader: 'babel-loader',
-    },
-    {
-      test: /.json$/,
-      use: ['json-loader'],
-    }
-    ] },
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/, BUILD_PATH],
+        include: path.resolve(ROOT_PATH),
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader" // creates style nodes from JS strings
+        }, {
+          loader: "css-loader" // translates CSS into CommonJS
+        }, {
+          loader: "sass-loader" // compiles Sass to CSS
+        }]
+      }
+    ],
+  },
   devServer: {
     hot: true,
     historyApiFallback: true,
