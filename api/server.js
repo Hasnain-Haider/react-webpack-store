@@ -15,9 +15,9 @@ import createRoutes from './routes/';
 const resources = ["post", "user"];
 const PORT = process.env.PORT || 4501;
 const APP_PORT = process.env.APP_PORT || 4500;
-const DEBUG = process.env.DEBUG || true;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
+const DEBUG = true;
 
 const origin = `http://localhost:${APP_PORT}`;
 const corsOptions = {
@@ -28,7 +28,7 @@ const corsOptions = {
 console.debug = (...args) => (DEBUG ? console.log(...args) : null);
 
 mongoose.Promise = bluebird;
-mongoose.connect(MONGO_URL, { useMongoClient: true });
+mongoose.connect(MONGO_URL);
 mongoose.connection.on('connected', async () => {
   console.log('Mongoose has connected to the db');
 });

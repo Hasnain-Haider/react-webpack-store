@@ -8,8 +8,6 @@
     "dev-web": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --inline --progress --watch",
     "prod-build": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
     "lint-fix": "./node_modules/.bin/eslint --ext .js,.jsx . --fix",
-    "dev-server": "../api/node_modules/.bin/babel-node ../api/server.js",
-    "prod-server": "NODE_ENV=production ../api/node_modules/.bin/babel-node ../api/server.js",
     "start": "npm install --dev && npm run prod-build && npm run prod-server"
   },
   "keywords": [

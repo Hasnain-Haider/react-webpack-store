@@ -1,4 +1,6 @@
 import Router from 'koa-router';
+import send from 'koa-send';
+import path from 'path';
 const router = new Router();
 
 router.get('*', async (ctx, next) => {

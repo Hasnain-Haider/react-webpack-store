@@ -4,7 +4,7 @@ const ObjectId = Schema.Types.ObjectId;
 const schemaDir = './JSONschemas';
 
 const genMongooseSchema = (name) => {
-  console.debug(`making schem for ${name}`);
+  console.debug(`making schema for ${name}`);
   const schema = require(`${schemaDir}/${name}`);
   const schemaObj = { };
   for (const field in schema) {
