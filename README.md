@@ -17,13 +17,15 @@ This app uses several JavaScript libraries to build a working application. It is
 
 ### Frontend
 * React.js
-* SASS
-* react-bootstrap for layout
 * material-ui
+* SASS
+* react-bootstrap
+* Webpack 4
 
 ### Backend
 * Koa.js
 * Autogenerates Mongoose schema based on JSON
 * MongoDB
 * REST API
+
 

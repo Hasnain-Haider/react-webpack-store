@@ -1,4 +1,4 @@
-api/build
+api/build/bundle.js
 app/public/build
 node_modules
 bundle.js

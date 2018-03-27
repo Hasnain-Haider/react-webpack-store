@@ -1,0 +1,8 @@
+**.git
+**node_modules
+README.md
+api/build/bundle.js
+app/build/bundle.js
+.eslintrc
+.eslintignore
+.gitignore
