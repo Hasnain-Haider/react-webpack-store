@@ -1,31 +1,29 @@
-## This is a React/Node.js ecommerce site under developement
+## This is a React/Node.js app under development
 
-This app uses several JavaScript libraries to build a working application. It is mostly a react with redux showcase. ES7 with async/await
+This app uses several JavaScript libraries to build a real working application.
 
-### Installation
-1. Obtain a config.json and put it in the root level
-  * if you do not have a config, rename config_template.json to config.json
-2. Run mongoDB on port 27017. Create a db named 'react-store' with no password
-3. In api/ run `npm install` then return to the root level
-4. In app/ run `npm install` 
-5. `npm run dev-server`
-6. `npm run dev-web`
+*Requires docker-compose version 2*
+### Running the app
+1. Clone the repository
+2. In the root of the repository, build the application image with `docker build -t <tag> .`
+3. Run the container with `docker-compose up`
+4. Navigate to http://localhost:4501
 
-#### Production run 
-1. go to app/ and build the bundle.js with `npm run prod-build`
-2. go to api/ and start the production server with `npm run prod-server`
-
-### Frontend
-* React.js
+-----
+#### Frontend
+* React
 * material-ui
 * SASS
 * react-bootstrap
-* Webpack 4
 
-### Backend
+#### Backend
 * Koa.js
-* Autogenerates Mongoose schema based on JSON
+* Auto-generates Mongoose schema based on JSON
 * MongoDB
 * REST API
 
-
+#### Other
+* Webpack 4
+* docker docker-compose
+* ES7 w/ async/await
+* Redux
