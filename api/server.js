@@ -31,8 +31,6 @@ const corsOptions = {
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS']
 };
-console.debug = (...args) => (DEBUG ? console.log(...args) : null);
-
 mongoose.Promise = bluebird;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('connected', async () => {
@@ -41,8 +39,7 @@ mongoose.connection.on('connected', async () => {
 
 const testMongo = async () => {
   for (const model in mongoose.models) {
-    const mod = await mongoose.models[model].findOne();
-    console.debug('routine findOne()', model, { mod });
+    await mongoose.models[model].findOne();
   }
 };
 
@@ -62,7 +59,6 @@ if (require.main === module) {
     .use(koaBody())
     .use(session(app));
   start(app);
-  console.debug(`listening on ${PORT}`);
   app.listen(PORT);
 }
 

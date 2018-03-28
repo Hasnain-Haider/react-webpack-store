@@ -29,7 +29,6 @@ export default class Core extends Component {
 
   listenAlert() {
     const aState = alertRedux.getState();
-    console.log(aState);
     if (aState !== {}) {
       this.setState({
         message: aState.message,

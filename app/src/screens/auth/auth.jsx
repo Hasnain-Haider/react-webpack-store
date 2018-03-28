@@ -36,7 +36,6 @@ export default class Auth extends Screen {
       [fieldName]: event.target.value
     };
     this.setState({ user });
-    console.debug(user);
   }
 
   submit() {

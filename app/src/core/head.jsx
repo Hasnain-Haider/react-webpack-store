@@ -43,7 +43,7 @@ export default class Head extends Component {
         if (err) {
           console.error(err);
         } else {
-          console.debug('logout');
+          console.log('logout');
           authRedux.dispatch({ type: 'LOGOUT' });
           this.props.navigateTo('/home');
         }

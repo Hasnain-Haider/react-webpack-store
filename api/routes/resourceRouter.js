@@ -25,14 +25,12 @@ export default function resourceRouter (resource) {
         .find({})
         .limit(limit)
         .skip(skip);
-      console.debug(resource, 'get many ', result.length);
       ctx.body = result;
     });
 
     router.post(`/${resource}`, async (ctx) => {
       const model = getModel(resource);
       const body = ctx.request.body;
-      console.log({ body });
       try {
         ctx.status = 201;
         ctx.body = await model.create(body);
@@ -45,7 +43,6 @@ export default function resourceRouter (resource) {
     router.post(`/${resource}/query`, async (ctx) => {
       const model = getModel(resource);
       const body = ctx.request.body;
-      console.log('query', { body });
       try {
         ctx.status = 200;
         ctx.body = await model.find(body);
@@ -59,7 +56,6 @@ export default function resourceRouter (resource) {
       const model = getModel(resource);
       const body = ctx.request.body;
       const _id = ctx.params.id;
-      console.log('patch', resource);
       try {
         ctx.body = await model.findOneAndUpdate({ _id }, body);
       } catch (err) {
@@ -70,7 +66,6 @@ export default function resourceRouter (resource) {
 
     router.delete(`/${resource}`, async (ctx) => {
       const { _id } = ctx.request.body;
-      console.debug('resource', 'delete', _id);
       if (!_id) return;
       try {
         ctx.body = await model.deleteOne({ _id });
@@ -83,7 +78,6 @@ export default function resourceRouter (resource) {
     router.put(`/${resource}/:id`, async (ctx) => {
       const model = getModel(resource);
       const body = ctx.request.body;
-      console.debug('resource', 'put', body);
       const _id = ctx.params.id;
       try {
         ctx.body = await model.findOneAndUpdate({ _id }, body, { upsert: true });

@@ -13,14 +13,13 @@ import { toLower, entries } from 'lodash';
 
 import authRedux from 'lib/reduxes/auth';
 import screens from './screens/';
-import Core from './core/';
+import CoreComponent from './core/';
 import stew from './appStew';
 
 require("babel-polyfill");
 
-const Corex = withRouter(Core);
+const Core = withRouter(CoreComponent);
 const DEBUG = true;
-console.debug = (...args) => (DEBUG ? console.log(...args) : null);
 injectTapEventPlugin();
 
 export default class App extends Component {
@@ -31,7 +30,7 @@ export default class App extends Component {
 
   createRoutes() {
     return entries(this.stew.screens).map(([sName, screenStew]) => {
-      console.debug(sName, `/${toLower(sName)}`);
+      console.log(sName, `/${toLower(sName)}`);
       const user = authRedux.getState();
       const Screen = withRouter(screens[sName]);
 
@@ -53,7 +52,7 @@ export default class App extends Component {
             <div>
               <Redirect exact from="/" to="/home" />
               <Route component={ () =>
-                <Corex stew={ this.stew.Core } />
+                <Core stew={ this.stew.Core } />
               }
               />
               { this.createRoutes() }

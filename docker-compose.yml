@@ -1,21 +1,23 @@
 version: '2'
 services:
-  api:
-    build: ./api
-    container_name: api
+  app:
+    build: .
+    container_name: app
     ports:
-      - 4501:4501
+      - "4501:4501"
     depends_on:
       - mongodb
     volumes:
-      - ./api:/api
+      - .:/usr/rws
+    environment:
+      - MONGO_URL=mongodb://mongodb/react-store
+    links:
+      - mongodb
 
   mongodb:
     image: mongo:latest
     container_name: mongodb
     volumes:
       - ./data/db:/data/db
-    ports:
-      - 27017:27017
     environment:
       - MONGO_INITDB_DATABASE=react-store

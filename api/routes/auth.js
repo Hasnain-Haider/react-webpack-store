@@ -30,10 +30,8 @@ export default function authenticate(app) {
         return done(null, false);
       }
       if (!user.validPassword(password)) {
-        console.debug('pass invalid');
         return done(null, false);
       }
-      console.debug('pass valid, user =>', user, err);
       return done(null, user);
     });
   }));
