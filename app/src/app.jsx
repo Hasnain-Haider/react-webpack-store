@@ -10,13 +10,13 @@ import { MuiThemeProvider } from 'material-ui';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { toLower, entries } from 'lodash';
+require("babel-polyfill");
 
 import authRedux from 'lib/reduxes/auth';
 import screens from './screens/';
 import CoreComponent from './core/';
 import stew from './appStew';
 
-require("babel-polyfill");
 
 const Core = withRouter(CoreComponent);
 const DEBUG = true;
@@ -30,7 +30,6 @@ export default class App extends Component {
 
   createRoutes() {
     return entries(this.stew.screens).map(([sName, screenStew]) => {
-      console.log(sName, `/${toLower(sName)}`);
       const user = authRedux.getState();
       const Screen = withRouter(screens[sName]);
 

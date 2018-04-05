@@ -18,6 +18,7 @@ const APP_PORT = process.env.APP_PORT || 4500;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/react-store';
 const DEBUG = true;
+mongoose.Promise = bluebird;
 
 let origin;
 if (NODE_ENV === 'production') {
@@ -31,25 +32,16 @@ const corsOptions = {
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS']
 };
-mongoose.Promise = bluebird;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('connected', async () => {
   console.log('Mongoose has connected to the db');
 });
 
-const testMongo = async () => {
-  for (const model in mongoose.models) {
-    await mongoose.models[model].findOne();
-  }
-};
-
 const start = async (app) => {
   await createModels(resources.filter(el => el !== 'user'));
-  await testMongo();
   await createRoutes(app);
   return app;
 };
-
 
 if (require.main === module) {
   const app = new Koa();
@@ -61,6 +53,5 @@ if (require.main === module) {
   start(app);
   app.listen(PORT);
 }
-
 
 export default start;

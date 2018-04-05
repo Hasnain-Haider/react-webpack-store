@@ -2,23 +2,23 @@
 
 This app uses several JavaScript libraries to build a real working application.
 
-*Requires docker-compose version 2*
+*Requires npm and node v9*
+
 ### Running the app
 1. Clone the repository
-2. In the root of the repository, build the application image with `docker build -t <tag> .`
-3. Run the container with `docker-compose up`
+2. In app/ build the Webpack bundle with `npm run prod-build`
+3. In api/ start the koa server to serve the bundle with `npm run prod-server`
 4. Navigate to http://localhost:4501
 
 -----
 #### Frontend
 * React
-* material-ui
+* material-ui (A react UI-toolkit)
 * SASS
 * react-bootstrap
 
 #### Backend
 * Koa.js
-* Auto-generates Mongoose schema based on JSON
 * MongoDB
 * REST API
 
