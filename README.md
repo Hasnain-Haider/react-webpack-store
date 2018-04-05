@@ -2,13 +2,14 @@
 
 This app uses several JavaScript libraries to build a real working application.
 
-*Requires npm and node v9*
+*Requires npm v5 and node v9*
 
 ### Running the app
 1. Clone the repository
-2. In app/ build the Webpack bundle with `npm run prod-build`
-3. In api/ start the koa server to serve the bundle with `npm run prod-server`
-4. Navigate to http://localhost:4501
+2. Run an instance of mongodb on port 27017 and create a db named react-store
+3. In app/, install dependencies with `npm install` then build the Webpack bundle with `npm run prod-build`
+4. In api/, install dependencies with `npm install` then start the koa server to serve the bundle with `npm run prod-server`
+5. Navigate to http://localhost:4501
 
 -----
 #### Frontend

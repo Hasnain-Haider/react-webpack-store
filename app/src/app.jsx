@@ -17,9 +17,7 @@ import screens from './screens/';
 import CoreComponent from './core/';
 import stew from './appStew';
 
-
 const Core = withRouter(CoreComponent);
-const DEBUG = true;
 injectTapEventPlugin();
 
 export default class App extends Component {

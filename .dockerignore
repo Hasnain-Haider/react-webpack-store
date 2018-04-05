@@ -1,5 +1,7 @@
 **.git
-**node_modules
+node_modules
+api/node_modules
+app/node_modules
 README.md
 api/build/bundle.js
 app/build/bundle.js
